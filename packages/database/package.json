@@ -1,0 +1,33 @@
+{
+  "name": "database",
+  "version": "1.0.0",
+  "description": "WinMarket V2 Database Layer with Drizzle ORM",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "bun build src/index.ts --outdir=dist --target=node",
+    "generate": "drizzle-kit generate",
+    "migrate": "drizzle-kit migrate",
+    "seed": "bun run src/seed.ts",
+    "studio": "drizzle-kit studio",
+    "type-check": "tsc --noEmit",
+    "clean": "rm -rf dist node_modules"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.30.0",
+    "postgres": "^3.4.0",
+    "zod": "^3.22.0",
+    "bcryptjs": "^2.4.3",
+    "@faker-js/faker": "^8.4.0"
+  },
+  "devDependencies": {
+    "drizzle-kit": "^0.20.0",
+    "@types/node": "^20.0.0",
+    "@types/bcryptjs": "^2.4.0",
+    "typescript": "^5.0.0"
+  },
+  "exports": {
+    ".": "./dist/index.js",
+    "./schema": "./dist/schema/index.js",
+    "./types": "./dist/types.js"
+  }
+}

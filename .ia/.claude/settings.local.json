@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "Read(//Users/djanzou120/Documents/Projects/winmarket-v2/**)",
+      "Bash(tree -d -L 3)",
+      "Bash(bun add -d drizzle-kit @types/pg)",
+      "Bash(bun install)",
+      "Bash(chmod +x scripts/update-services-to-drizzle.js)",
+      "Bash(bun scripts/update-services-to-drizzle.js)",
+      "Bash(bun scripts/generate-services.js)",
+      "Bash(tree -L 3 /Users/djanzou120/Documents/Projects/winmarket-v2)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

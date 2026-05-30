@@ -1,0 +1,45 @@
+{
+  "name": "winmarket-v2",
+  "private": true,
+  "version": "1.0.0",
+  "description": "WinMarket V2 - Multi-platform Marketplace",
+  "packageManager": "bun@1.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "bun run dev:api & bun run dev:web & bun run dev:admin",
+    "dev:api": "bun run --filter=api dev",
+    "dev:web": "bun run --filter=web dev",
+    "dev:mobile": "bun run --filter=mobile start",
+    "dev:admin": "bun run --filter=admin dev",
+    "build": "bun run build:packages && bun run build:apps",
+    "build:packages": "bun run --filter='./packages/*' build",
+    "build:apps": "bun run --filter='./apps/*' build",
+    "test": "bun test",
+    "test:unit": "bun run --filter='*' test",
+    "test:e2e": "bun run --filter=e2e test",
+    "lint": "bun run --filter='*' lint",
+    "type-check": "bun run --filter='*' type-check",
+    "db:generate": "bun run --filter=database generate",
+    "db:migrate": "bun run --filter=database migrate",
+    "db:seed": "bun run --filter=database seed",
+    "db:studio": "bun run --filter=database studio",
+    "clean": "bun run --filter='*' clean && rm -rf node_modules",
+    "reset": "bun run clean && bun install"
+  },
+  "devDependencies": {
+    "@types/bun": "latest",
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0",
+    "eslint": "^8.0.0",
+    "prettier": "^3.0.0",
+    "turbo": "^1.13.0",
+    "concurrently": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "bun": ">=1.1.0"
+  }
+}

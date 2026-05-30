@@ -1,0 +1,29 @@
+{
+  "name": "@winmarket/shared-types",
+  "version": "1.0.0",
+  "description": "Shared TypeScript types and interfaces for WinMarket V2",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "drizzle-orm": "^0.30.10",
+    "pg": "^8.11.5",
+    "graphql": "^16.8.1"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.11.5",
+    "typescript": "^5.3.3"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "require": "./dist/index.js"
+    }
+  }
+}
