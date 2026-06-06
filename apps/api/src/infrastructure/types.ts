@@ -1,8 +1,8 @@
 // Types d'infrastructure pour les resolvers
 export interface Resolvers {
-  Query?: any;
-  Mutation?: any;
-  Subscription?: any;
+  Query?: Record<string, (...args: any[]) => any>;
+  Mutation?: Record<string, (...args: any[]) => any>;
+  Subscription?: Record<string, (...args: any[]) => any>;
   [key: string]: any;
 }
 
