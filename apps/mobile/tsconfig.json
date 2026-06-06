@@ -4,7 +4,11 @@
     "allowJs": true,
     "esModuleInterop": true,
     "jsx": "react-jsx",
-    "lib": ["dom", "dom.iterable", "es6"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "es6"
+    ],
     "moduleResolution": "node",
     "noEmit": true,
     "resolveJsonModule": true,
@@ -12,20 +16,32 @@
     "strict": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "@/components/*": ["./src/components/*"],
-      "@/lib/*": ["./src/lib/*"],
-      "@/screens/*": ["./src/screens/*"],
-      "@winmarket/shared-types": ["../../packages/shared-types/src"],
-      "@winmarket/ui": ["../../packages/ui/src"],
-      "@winmarket/config": ["../../packages/config/src"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@/components/*": [
+        "./src/components/*"
+      ],
+      "@/lib/*": [
+        "./src/lib/*"
+      ],
+      "@/screens/*": [
+        "./src/screens/*"
+      ],
+      "@winmarket/shared-types": [
+        "../../packages/shared-types/src"
+      ],
+      "@winmarket/ui": [
+        "../../packages/ui/src"
+      ],
+      "@winmarket/config": [
+        "../../packages/config/src"
+      ]
     }
   },
   "include": [
     "**/*.ts",
-    "**/*.tsx",
-    ".expo/types/**/*.ts",
-    "expo-env.d.ts"
+    "**/*.tsx"
   ],
   "exclude": [
     "node_modules"

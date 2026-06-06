@@ -1,0 +1,139 @@
+# WinMarket V2 - Production Docker Compose
+version: '3.8'
+
+services:
+  # API Application
+  api:
+    build:
+      context: ./apps/api
+      dockerfile: Dockerfile
+    container_name: winmarket-api-prod
+    restart: unless-stopped
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: postgresql://postgres:${POSTGRES_PASSWORD:-password}@postgres:5432/winmarket_v2
+      REDIS_HOST: redis
+      MINIO_ENDPOINT: http://minio:9000
+    env_file:
+      - ./apps/api/.env.production
+    ports:
+      - "4000:4000"
+      - "4001:4001"  # Health endpoint
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4001/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    networks:
+      - winmarket-prod
+    volumes:
+      - ./logs:/app/logs
+
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: winmarket-postgres-prod
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: winmarket_v2
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-password}
+      POSTGRES_INITDB_ARGS: "--auth-host=scram-sha-256"
+    volumes:
+      - postgres_prod_data:/var/lib/postgresql/data
+      - ./scripts/init-user.sql:/docker-entrypoint-initdb.d/init-user.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d winmarket_v2"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    networks:
+      - winmarket-prod
+    # Don't expose port in production unless needed
+    # ports:
+    #   - "5432:5432"
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: winmarket-redis-prod
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD:-redis-password} --maxmemory 256mb --maxmemory-policy allkeys-lru
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:-redis-password}
+    volumes:
+      - redis_prod_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "--no-auth-warning", "-a", "${REDIS_PASSWORD:-redis-password}", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 10s
+    networks:
+      - winmarket-prod
+    # Don't expose port in production unless needed
+    # ports:
+    #   - "6379:6379"
+
+  # MinIO Object Storage
+  minio:
+    image: minio/minio:latest
+    container_name: winmarket-minio-prod
+    restart: unless-stopped
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ACCESS_KEY:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_SECRET_KEY:-minioadmin}
+    command: server /data --console-address ":9001"
+    volumes:
+      - minio_prod_data:/data
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    networks:
+      - winmarket-prod
+    # Expose only if needed for external access
+    ports:
+      - "9000:9000"   # API
+      - "9001:9001"   # Console
+
+  # Nginx Reverse Proxy (Optional)
+  nginx:
+    image: nginx:alpine
+    container_name: winmarket-nginx-prod
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - api
+    networks:
+      - winmarket-prod
+    profiles: ["with-nginx"]
+
+volumes:
+  postgres_prod_data:
+    driver: local
+  redis_prod_data:
+    driver: local
+  minio_prod_data:
+    driver: local
+
+networks:
+  winmarket-prod:
+    driver: bridge
+    name: winmarket-prod-network

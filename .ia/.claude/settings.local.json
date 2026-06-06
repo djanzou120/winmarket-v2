@@ -16,7 +16,8 @@
       "Bash(docker exec winmarket-postgres cat /var/lib/postgresql/data/pg_hba.conf)",
       "Bash(grep -v '^$')",
       "Bash(docker exec -it winmarket-postgres psql -d postgres)",
-      "Bash(make status)"
+      "Bash(make status)",
+      "Bash(make test-all)"
     ],
     "deny": [],
     "ask": []

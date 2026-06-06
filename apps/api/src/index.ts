@@ -6,26 +6,24 @@ import * as dotenv from 'dotenv';
 // Load environment variables first
 dotenv.config();
 
-import { typeDefs } from './graphql/schema';
-import { resolvers } from './graphql/resolvers';
+// Import from new DDD architecture
+import { allTypeDefs, allResolvers } from './domains';
 import { createContext } from './infrastructure/context';
 import { logger } from './infrastructure/logger';
-import { env } from './infrastructure/env-validation';
-import { initializeMonitoring, performHealthCheck } from './infrastructure/health';
-import { runMigrations } from './infrastructure/database/migrations';
+import { config } from './infrastructure/config';
+import { AppInitializer } from './infrastructure/app-initializer';
 import { closeDatabaseConnection } from './infrastructure/database/connection';
-import { cache } from './infrastructure/cache';
 
-// Create executable schema
+// Create executable schema from DDD architecture
 const schema = makeExecutableSchema({
-  typeDefs,
-  resolvers,
+  typeDefs: allTypeDefs,
+  resolvers: allResolvers,
 });
 
 // Create Apollo Server
 const server = new ApolloServer({
   schema,
-  introspection: env.GRAPHQL_INTROSPECTION,
+  introspection: config.graphql.introspection,
   plugins: [
     // Custom logging plugin
     {
@@ -54,50 +52,37 @@ const server = new ApolloServer({
 
 // Initialize infrastructure and start server
 async function startServer() {
+  const appInitializer = new AppInitializer();
+
   try {
     logger.info('🚀 Starting WinMarket V2 API...');
 
-    // Initialize monitoring first
-    const monitoringInitialized = await initializeMonitoring();
-    if (!monitoringInitialized) {
-      logger.error('❌ Failed to initialize monitoring');
+    // Initialize all infrastructure services
+    const initResult = await appInitializer.initialize();
+
+    if (!initResult.success) {
+      logger.error('❌ Application initialization failed:', initResult.errors);
       process.exit(1);
-    }
-
-    // Initial health check
-    const healthReport = await performHealthCheck();
-
-    // Run database migrations only if database is available
-    if (env.NODE_ENV !== 'test') {
-      const dbHealthy = healthReport.services.find(s => s.service === 'database')?.status === 'healthy';
-
-      if (dbHealthy) {
-        await runMigrations();
-        logger.info('✅ Database migrations completed');
-      } else {
-        logger.warn('⚠️ Skipping migrations - database not available');
-      }
-    }
-    if (healthReport.status === 'unhealthy') {
-      logger.error('❌ Initial health check failed - aborting startup');
-      process.exit(1);
-    }
-
-    if (healthReport.status === 'degraded') {
-      logger.warn('⚠️ Some services are unhealthy, but continuing startup...');
     }
 
     // Start Apollo Server
     const { url } = await startStandaloneServer(server, {
-      listen: { port: env.PORT },
+      listen: { port: config.server.port },
       context: createContext,
     });
 
+    // Success logging
     logger.info(`✅ WinMarket V2 GraphQL API ready at ${url}`);
-    if (env.GRAPHQL_PLAYGROUND_ENABLED) {
-      logger.info(`📊 GraphQL Playground available at ${url}graphql`);
+    if (config.graphql.playground) {
+      logger.info(`📊 GraphQL Playground available at ${url}`);
     }
-    logger.info(`🔍 Health check endpoint: ${url}health`);
+    logger.info(`🔍 Health check endpoint: http://localhost:${appInitializer.getHealthEndpointPort()}/health`);
+
+    // Seed development data if needed
+    await appInitializer.seedDevelopmentData();
+
+    // Store initializer for cleanup
+    (global as any).__appInitializer = appInitializer;
 
   } catch (error) {
     logger.error('❌ Failed to start server:', error);
@@ -111,10 +96,12 @@ async function cleanup() {
   logger.info('🧹 Cleaning up resources...');
 
   try {
+    const appInitializer = (global as any).__appInitializer;
+
     await Promise.all([
       server.stop(),
+      appInitializer?.shutdown(),
       closeDatabaseConnection(),
-      cache.disconnect(),
     ]);
     logger.info('✅ Cleanup completed');
   } catch (error) {

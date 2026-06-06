@@ -100035,9 +100035,9 @@ Source:
       }
       return result;
     }
-    function timesLimit(count2, limit, iteratee, callback) {
+    function timesLimit(count5, limit, iteratee, callback) {
       var _iteratee = wrapAsync(iteratee);
-      return mapLimit$1(range(count2), limit, _iteratee, callback);
+      return mapLimit$1(range(count5), limit, _iteratee, callback);
     }
     function times(n, iteratee, callback) {
       return timesLimit(n, Infinity, iteratee, callback);
@@ -101881,7 +101881,7 @@ var require_lodash3 = __commonJS((exports, module) => {
           return value;
         }
         if (value == null) {
-          return identity2;
+          return identity;
         }
         if (typeof value == "object") {
           return isArray(value) ? baseMatchesProperty(value[0], value[1]) : baseMatches(value);
@@ -102019,7 +102019,7 @@ var require_lodash3 = __commonJS((exports, module) => {
             return iteratee2;
           });
         } else {
-          iteratees = [identity2];
+          iteratees = [identity];
         }
         var index = -1;
         iteratees = arrayMap(iteratees, baseUnary(getIteratee()));
@@ -102115,7 +102115,7 @@ var require_lodash3 = __commonJS((exports, module) => {
         return result2;
       }
       function baseRest(func, start) {
-        return setToString(overRest(func, start, identity2), func + "");
+        return setToString(overRest(func, start, identity), func + "");
       }
       function baseSample(collection) {
         return arraySample(values2(collection));
@@ -102147,11 +102147,11 @@ var require_lodash3 = __commonJS((exports, module) => {
         }
         return object2;
       }
-      var baseSetData = !metaMap ? identity2 : function(func, data) {
+      var baseSetData = !metaMap ? identity : function(func, data) {
         metaMap.set(func, data);
         return func;
       };
-      var baseSetToString = !defineProperty ? identity2 : function(func, string6) {
+      var baseSetToString = !defineProperty ? identity : function(func, string6) {
         return defineProperty(func, "toString", {
           configurable: true,
           enumerable: false,
@@ -102200,7 +102200,7 @@ var require_lodash3 = __commonJS((exports, module) => {
           }
           return high;
         }
-        return baseSortedIndexBy(array3, value, identity2, retHighest);
+        return baseSortedIndexBy(array3, value, identity, retHighest);
       }
       function baseSortedIndexBy(array3, value, iteratee2, retHighest) {
         var low = 0, high = array3 == null ? 0 : array3.length;
@@ -102368,7 +102368,7 @@ var require_lodash3 = __commonJS((exports, module) => {
         return isArrayLikeObject(value) ? value : [];
       }
       function castFunction(value) {
-        return typeof value == "function" ? value : identity2;
+        return typeof value == "function" ? value : identity;
       }
       function castPath(value, object2) {
         if (isArray(value)) {
@@ -103421,16 +103421,16 @@ var require_lodash3 = __commonJS((exports, module) => {
         return setToString(wrapper, insertWrapDetails(source, updateWrapDetails(getWrapDetails(source), bitmask)));
       }
       function shortOut(func) {
-        var count2 = 0, lastCalled = 0;
+        var count5 = 0, lastCalled = 0;
         return function() {
           var stamp = nativeNow(), remaining = HOT_SPAN - (stamp - lastCalled);
           lastCalled = stamp;
           if (remaining > 0) {
-            if (++count2 >= HOT_COUNT) {
+            if (++count5 >= HOT_COUNT) {
               return arguments[0];
             }
           } else {
-            count2 = 0;
+            count5 = 0;
           }
           return func.apply(undefined2, arguments);
         };
@@ -104401,7 +104401,7 @@ var require_lodash3 = __commonJS((exports, module) => {
         return value === other || value !== value && other !== other;
       }
       var gt2 = createRelationalOperation(baseGt);
-      var gte2 = createRelationalOperation(function(value, other) {
+      var gte5 = createRelationalOperation(function(value, other) {
         return value >= other;
       });
       var isArguments = baseIsArguments(function() {
@@ -104543,7 +104543,7 @@ var require_lodash3 = __commonJS((exports, module) => {
         return isObjectLike4(value) && baseGetTag(value) == weakSetTag;
       }
       var lt2 = createRelationalOperation(baseLt);
-      var lte2 = createRelationalOperation(function(value, other) {
+      var lte5 = createRelationalOperation(function(value, other) {
         return value <= other;
       });
       function toArray(value) {
@@ -104695,7 +104695,7 @@ var require_lodash3 = __commonJS((exports, module) => {
           value = nativeObjectToString.call(value);
         }
         result2[value] = key;
-      }, constant(identity2));
+      }, constant(identity));
       var invertBy = createInverter(function(result2, value, key) {
         if (value != null && typeof value.toString != "function") {
           value = nativeObjectToString.call(value);
@@ -105217,7 +105217,7 @@ __p += '`;
       }
       var flow = createFlow();
       var flowRight = createFlow(true);
-      function identity2(value) {
+      function identity(value) {
         return value;
       }
       function iteratee(func) {
@@ -105340,19 +105340,19 @@ __p += '`;
       }, 1);
       var floor = createRound("floor");
       function max(array3) {
-        return array3 && array3.length ? baseExtremum(array3, identity2, baseGt) : undefined2;
+        return array3 && array3.length ? baseExtremum(array3, identity, baseGt) : undefined2;
       }
       function maxBy(array3, iteratee2) {
         return array3 && array3.length ? baseExtremum(array3, getIteratee(iteratee2, 2), baseGt) : undefined2;
       }
       function mean(array3) {
-        return baseMean(array3, identity2);
+        return baseMean(array3, identity);
       }
       function meanBy(array3, iteratee2) {
         return baseMean(array3, getIteratee(iteratee2, 2));
       }
       function min(array3) {
-        return array3 && array3.length ? baseExtremum(array3, identity2, baseLt) : undefined2;
+        return array3 && array3.length ? baseExtremum(array3, identity, baseLt) : undefined2;
       }
       function minBy(array3, iteratee2) {
         return array3 && array3.length ? baseExtremum(array3, getIteratee(iteratee2, 2), baseLt) : undefined2;
@@ -105365,7 +105365,7 @@ __p += '`;
         return minuend - subtrahend;
       }, 0);
       function sum(array3) {
-        return array3 && array3.length ? baseSum(array3, identity2) : 0;
+        return array3 && array3.length ? baseSum(array3, identity) : 0;
       }
       function sumBy(array3, iteratee2) {
         return array3 && array3.length ? baseSum(array3, getIteratee(iteratee2, 2)) : 0;
@@ -105558,11 +105558,11 @@ __p += '`;
       lodash.forOwnRight = forOwnRight;
       lodash.get = get;
       lodash.gt = gt2;
-      lodash.gte = gte2;
+      lodash.gte = gte5;
       lodash.has = has;
       lodash.hasIn = hasIn;
       lodash.head = head;
-      lodash.identity = identity2;
+      lodash.identity = identity;
       lodash.includes = includes;
       lodash.indexOf = indexOf;
       lodash.inRange = inRange;
@@ -105611,7 +105611,7 @@ __p += '`;
       lodash.lowerCase = lowerCase;
       lodash.lowerFirst = lowerFirst;
       lodash.lt = lt2;
-      lodash.lte = lte2;
+      lodash.lte = lte5;
       lodash.max = max;
       lodash.maxBy = maxBy;
       lodash.mean = mean;
@@ -105732,7 +105732,7 @@ __p += '`;
         };
       });
       LazyWrapper.prototype.compact = function() {
-        return this.filter(identity2);
+        return this.filter(identity);
       };
       LazyWrapper.prototype.find = function(predicate) {
         return this.filter(predicate).head();
@@ -106718,7 +106718,7 @@ var require_XMLCharacterData = __commonJS((exports, module) => {
       XMLCharacterData2.prototype.clone = function() {
         return Object.create(this);
       };
-      XMLCharacterData2.prototype.substringData = function(offset, count2) {
+      XMLCharacterData2.prototype.substringData = function(offset, count5) {
         throw new Error("This DOM method is not implemented." + this.debugInfo());
       };
       XMLCharacterData2.prototype.appendData = function(arg) {
@@ -106727,10 +106727,10 @@ var require_XMLCharacterData = __commonJS((exports, module) => {
       XMLCharacterData2.prototype.insertData = function(offset, arg) {
         throw new Error("This DOM method is not implemented." + this.debugInfo());
       };
-      XMLCharacterData2.prototype.deleteData = function(offset, count2) {
+      XMLCharacterData2.prototype.deleteData = function(offset, count5) {
         throw new Error("This DOM method is not implemented." + this.debugInfo());
       };
-      XMLCharacterData2.prototype.replaceData = function(offset, count2, arg) {
+      XMLCharacterData2.prototype.replaceData = function(offset, count5, arg) {
         throw new Error("This DOM method is not implemented." + this.debugInfo());
       };
       XMLCharacterData2.prototype.isEqualNode = function(node) {
@@ -181127,6 +181127,9 @@ function requireRole(context, roles) {
 function requireAdmin(context) {
   return requireRole(context, ["ADMIN"]);
 }
+function requireSeller(context) {
+  return requireRole(context, ["SELLER", "ADMIN"]);
+}
 
 // src/domains/auth/resolvers/auth.resolvers.ts
 var authResolvers = {
@@ -181909,6 +181912,291 @@ var productsTypeDefs = `#graphql
     toggleProductFavorite(id: ID!): Product!
   }
 `;
+// src/domains/products/resolvers/products.resolvers.ts
+var productsResolvers = {
+  Query: {
+    product: async (_parent, { id: id2 }, context) => {
+      return await context.db.query.products.findFirst({
+        where: (products3, { eq: eq2 }) => eq2(products3.id, id2)
+      });
+    },
+    productBySlug: async (_parent, { slug }, context) => {
+      return await context.db.query.products.findFirst({
+        where: (products3, { eq: eq2 }) => eq2(products3.slug, slug)
+      });
+    },
+    products: async (_parent, args, context) => {
+      const { filter = {}, pagination = { limit: 20, offset: 0 } } = args;
+      const whereConditions = [];
+      if (filter.categoryId)
+        whereConditions.push(["categoryId", filter.categoryId]);
+      if (filter.sellerId)
+        whereConditions.push(["sellerId", filter.sellerId]);
+      if (filter.status)
+        whereConditions.push(["status", filter.status]);
+      if (filter.condition)
+        whereConditions.push(["condition", filter.condition]);
+      if (filter.inStock)
+        whereConditions.push(["stock", ">", 0]);
+      if (filter.isDigital !== undefined)
+        whereConditions.push(["isDigital", filter.isDigital]);
+      const products3 = await context.db.query.products.findMany({
+        where: (products4, { eq: eq2, and: and3, like: like3, gte: gte3, lte: lte3, gt: gt2 }) => {
+          const conditions = whereConditions.map(([field, operator, value]) => {
+            if (operator === ">")
+              return gt2(products4[field], value);
+            return eq2(products4[field], operator === ">" ? value : field === "status" ? value : operator);
+          });
+          if (filter.priceMin)
+            conditions.push(gte3(products4.price, filter.priceMin));
+          if (filter.priceMax)
+            conditions.push(lte3(products4.price, filter.priceMax));
+          if (filter.search) {
+            conditions.push(like3(products4.title, `%${filter.search}%`));
+          }
+          if (conditions.length === 0)
+            return;
+          if (conditions.length === 1)
+            return conditions[0];
+          return and3(...conditions);
+        },
+        limit: pagination.limit,
+        offset: pagination.offset,
+        orderBy: (products4, { desc: desc3 }) => desc3(products4.createdAt)
+      });
+      const totalCount = products3.length;
+      const hasNextPage = products3.length === pagination.limit;
+      return {
+        edges: products3.map((product, index) => ({
+          node: product,
+          cursor: Buffer.from(`${pagination.offset + index}`).toString("base64")
+        })),
+        pageInfo: {
+          hasNextPage,
+          hasPreviousPage: pagination.offset > 0,
+          startCursor: products3.length > 0 ? Buffer.from(`${pagination.offset}`).toString("base64") : null,
+          endCursor: products3.length > 0 ? Buffer.from(`${pagination.offset + products3.length - 1}`).toString("base64") : null
+        },
+        totalCount
+      };
+    },
+    category: async (_parent, { id: id2 }, context) => {
+      return await context.db.query.categories.findFirst({
+        where: (categories2, { eq: eq2 }) => eq2(categories2.id, id2)
+      });
+    },
+    categoryBySlug: async (_parent, { slug }, context) => {
+      return await context.db.query.categories.findFirst({
+        where: (categories2, { eq: eq2 }) => eq2(categories2.slug, slug)
+      });
+    },
+    categories: async (_parent, args, context) => {
+      const { filter = {}, pagination = { limit: 50, offset: 0 } } = args;
+      const whereConditions = [];
+      if (filter.parentId !== undefined) {
+        whereConditions.push(["parentId", filter.parentId]);
+      }
+      if (filter.isActive !== undefined) {
+        whereConditions.push(["isActive", filter.isActive]);
+      }
+      const categories2 = await context.db.query.categories.findMany({
+        where: (categories3, { eq: eq2, and: and3, like: like3 }) => {
+          const conditions = whereConditions.map(([field, value]) => value === null ? eq2(categories3[field], null) : eq2(categories3[field], value));
+          if (filter.search) {
+            conditions.push(like3(categories3.name, `%${filter.search}%`));
+          }
+          if (conditions.length === 0)
+            return;
+          if (conditions.length === 1)
+            return conditions[0];
+          return and3(...conditions);
+        },
+        limit: pagination.limit,
+        offset: pagination.offset,
+        orderBy: (categories3, { asc: asc3 }) => [asc3(categories3.sortOrder), asc3(categories3.name)]
+      });
+      return {
+        edges: categories2.map((category, index) => ({
+          node: category,
+          cursor: Buffer.from(`${pagination.offset + index}`).toString("base64")
+        })),
+        pageInfo: {
+          hasNextPage: categories2.length === pagination.limit,
+          hasPreviousPage: pagination.offset > 0,
+          startCursor: categories2.length > 0 ? Buffer.from(`${pagination.offset}`).toString("base64") : null,
+          endCursor: categories2.length > 0 ? Buffer.from(`${pagination.offset + categories2.length - 1}`).toString("base64") : null
+        },
+        totalCount: categories2.length
+      };
+    },
+    productStats: async (_parent, _args, context) => {
+      requireAdmin(context);
+      const allProducts = await context.db.query.products.findMany();
+      const stats = {
+        totalProducts: allProducts.length,
+        activeProducts: allProducts.filter((p) => p.status === "ACTIVE").length,
+        draftProducts: allProducts.filter((p) => p.status === "DRAFT").length,
+        inactiveProducts: allProducts.filter((p) => p.status === "INACTIVE").length,
+        archivedProducts: allProducts.filter((p) => p.status === "ARCHIVED").length,
+        averagePrice: allProducts.reduce((sum, p) => sum + parseFloat(p.price || "0"), 0) / allProducts.length || 0,
+        totalViews: allProducts.reduce((sum, p) => sum + (p.viewCount || 0), 0),
+        totalSales: allProducts.reduce((sum, p) => sum + (p.soldCount || 0), 0),
+        productsByCategory: []
+      };
+      return stats;
+    },
+    searchProducts: async (_parent, { query, limit = 10 }, context) => {
+      return await context.db.query.products.findMany({
+        where: (products3, { like: like3, and: and3, eq: eq2 }) => and3(like3(products3.title, `%${query}%`), eq2(products3.status, "ACTIVE")),
+        limit,
+        orderBy: (products3, { desc: desc3 }) => desc3(products3.viewCount)
+      });
+    },
+    featuredProducts: async (_parent, { limit = 10 }, context) => {
+      return await context.db.query.products.findMany({
+        where: (products3, { eq: eq2, and: and3 }) => and3(eq2(products3.status, "ACTIVE"), eq2(products3.isFeatured, true)),
+        limit,
+        orderBy: (products3, { desc: desc3 }) => desc3(products3.averageRating)
+      });
+    },
+    popularProducts: async (_parent, { limit = 10 }, context) => {
+      return await context.db.query.products.findMany({
+        where: (products3, { eq: eq2 }) => eq2(products3.status, "ACTIVE"),
+        limit,
+        orderBy: (products3, { desc: desc3 }) => [desc3(products3.viewCount), desc3(products3.soldCount)]
+      });
+    },
+    relatedProducts: async (_parent, { productId, limit = 5 }, context) => {
+      const product = await context.db.query.products.findFirst({
+        where: (products3, { eq: eq2 }) => eq2(products3.id, productId)
+      });
+      if (!product)
+        return [];
+      return await context.db.query.products.findMany({
+        where: (products3, { eq: eq2, ne: ne2, and: and3 }) => and3(eq2(products3.categoryId, product.categoryId), ne2(products3.id, productId), eq2(products3.status, "ACTIVE")),
+        limit,
+        orderBy: (products3, { desc: desc3 }) => desc3(products3.averageRating)
+      });
+    }
+  },
+  Mutation: {
+    createProduct: async (_parent, { input }, context) => {
+      const user = requireSeller(context);
+      const { randomUUID: randomUUID9 } = await import("crypto");
+      const [newProduct] = await context.db.insert(context.schema.products).values({
+        id: randomUUID9(),
+        sellerId: user.id,
+        ...input
+      }).returning();
+      return newProduct;
+    },
+    updateProduct: async (_parent, { id: id2, input }, context) => {
+      const user = requireAuth(context);
+      const product = await context.db.query.products.findFirst({
+        where: (products3, { eq: eq2 }) => eq2(products3.id, id2)
+      });
+      if (!product)
+        throw new Error("Product not found");
+      if (product.sellerId !== user.id && user.userType !== "ADMIN") {
+        throw new Error("Unauthorized to update this product");
+      }
+      const [updatedProduct] = await context.db.update(context.schema.products).set({
+        ...input,
+        updatedAt: new Date
+      }).where(eq(context.schema.products.id, id2)).returning();
+      return updatedProduct;
+    },
+    deleteProduct: async (_parent, { id: id2 }, context) => {
+      const user = requireAuth(context);
+      const product = await context.db.query.products.findFirst({
+        where: (products3, { eq: eq2 }) => eq2(products3.id, id2)
+      });
+      if (!product)
+        throw new Error("Product not found");
+      if (product.sellerId !== user.id && user.userType !== "ADMIN") {
+        throw new Error("Unauthorized to delete this product");
+      }
+      await context.db.delete(context.schema.products).where(eq(context.schema.products.id, id2));
+      return true;
+    },
+    publishProduct: async (_parent, { id: id2 }, context) => {
+      const user = requireAuth(context);
+      const [publishedProduct] = await context.db.update(context.schema.products).set({
+        status: "ACTIVE",
+        publishedAt: new Date,
+        updatedAt: new Date
+      }).where(eq(context.schema.products.id, id2)).returning();
+      return publishedProduct;
+    },
+    createCategory: async (_parent, { input }, context) => {
+      requireAdmin(context);
+      const { randomUUID: randomUUID9 } = await import("crypto");
+      const [newCategory] = await context.db.insert(context.schema.categories).values({
+        id: randomUUID9(),
+        ...input
+      }).returning();
+      return newCategory;
+    },
+    updateCategory: async (_parent, { id: id2, input }, context) => {
+      requireAdmin(context);
+      const [updatedCategory] = await context.db.update(context.schema.categories).set({
+        ...input,
+        updatedAt: new Date
+      }).where(eq(context.schema.categories.id, id2)).returning();
+      return updatedCategory;
+    },
+    incrementProductView: async (_parent, { id: id2 }, context) => {
+      await context.db.update(context.schema.products).set({
+        viewCount: context.db.query.products.findFirst({
+          where: (products3, { eq: eq2 }) => eq2(products3.id, id2)
+        }).then((p) => (p?.viewCount || 0) + 1),
+        updatedAt: new Date
+      }).where(eq(context.schema.products.id, id2));
+      return await context.db.query.products.findFirst({
+        where: (products3, { eq: eq2 }) => eq2(products3.id, id2)
+      });
+    }
+  },
+  Product: {
+    seller: async (parent, _args, context) => {
+      return context.db.query.users.findFirst({
+        where: (users6, { eq: eq2 }) => eq2(users6.id, parent.sellerId)
+      });
+    },
+    category: async (parent, _args, context) => {
+      return context.db.query.categories.findFirst({
+        where: (categories2, { eq: eq2 }) => eq2(categories2.id, parent.categoryId)
+      });
+    },
+    variants: async (parent, _args, context) => {
+      return context.db.query.productVariants.findMany({
+        where: (variants, { eq: eq2 }) => eq2(variants.productId, parent.id),
+        orderBy: (variants, { asc: asc3 }) => asc3(variants.sortOrder)
+      });
+    }
+  },
+  Category: {
+    parent: async (parent, _args, context) => {
+      if (!parent.parentId)
+        return null;
+      return context.db.query.categories.findFirst({
+        where: (categories2, { eq: eq2 }) => eq2(categories2.id, parent.parentId)
+      });
+    },
+    children: async (parent, _args, context) => {
+      return context.db.query.categories.findMany({
+        where: (categories2, { eq: eq2 }) => eq2(categories2.parentId, parent.id),
+        orderBy: (categories2, { asc: asc3 }) => asc3(categories2.sortOrder)
+      });
+    },
+    productCount: async (parent, _args, context) => {
+      const products3 = await context.db.query.products.findMany({
+        where: (products4, { eq: eq2 }) => eq2(products4.categoryId, parent.id)
+      });
+      return products3.length;
+    }
+  }
+};
 // src/domains/products/schema/products.schema.ts
 import { randomUUID as randomUUID9 } from "crypto";
 var productStatusEnum2 = pgEnum("product_status", ["DRAFT", "ACTIVE", "INACTIVE", "ARCHIVED"]);
@@ -182255,6 +182543,428 @@ var ordersTypeDefs = `#graphql
     buyNow(input: CreateOrderInput!): Order!
   }
 `;
+// src/domains/orders/resolvers/orders.resolvers.ts
+var ordersResolvers = {
+  Query: {
+    order: async (_parent, { id: id2 }, context) => {
+      const user = requireAuth(context);
+      const order = await context.db.query.orders.findFirst({
+        where: (orders3, { eq: eq2 }) => eq2(orders3.id, id2)
+      });
+      if (!order)
+        throw new Error("Order not found");
+      if (order.buyerId !== user.id && order.sellerId !== user.id && user.userType !== "ADMIN") {
+        throw new Error("Unauthorized to view this order");
+      }
+      return order;
+    },
+    orderByNumber: async (_parent, { orderNumber }, context) => {
+      const user = requireAuth(context);
+      const order = await context.db.query.orders.findFirst({
+        where: (orders3, { eq: eq2 }) => eq2(orders3.orderNumber, orderNumber)
+      });
+      if (!order)
+        throw new Error("Order not found");
+      if (order.buyerId !== user.id && order.sellerId !== user.id && user.userType !== "ADMIN") {
+        throw new Error("Unauthorized to view this order");
+      }
+      return order;
+    },
+    orders: async (_parent, args, context) => {
+      requireAdmin(context);
+      const { filter = {}, pagination = { limit: 20, offset: 0 } } = args;
+      const whereConditions = [];
+      if (filter.status)
+        whereConditions.push(["status", filter.status]);
+      if (filter.paymentStatus)
+        whereConditions.push(["paymentStatus", filter.paymentStatus]);
+      if (filter.paymentMethod)
+        whereConditions.push(["paymentMethod", filter.paymentMethod]);
+      if (filter.buyerId)
+        whereConditions.push(["buyerId", filter.buyerId]);
+      if (filter.sellerId)
+        whereConditions.push(["sellerId", filter.sellerId]);
+      const orders3 = await context.db.query.orders.findMany({
+        where: (orders4, { eq: eq2, and: and3, gte: gte4, lte: lte4 }) => {
+          const conditions = whereConditions.map(([field, value]) => eq2(orders4[field], value));
+          if (filter.dateFrom)
+            conditions.push(gte4(orders4.createdAt, new Date(filter.dateFrom)));
+          if (filter.dateTo)
+            conditions.push(lte4(orders4.createdAt, new Date(filter.dateTo)));
+          if (filter.minAmount)
+            conditions.push(gte4(orders4.totalAmount, filter.minAmount));
+          if (filter.maxAmount)
+            conditions.push(lte4(orders4.totalAmount, filter.maxAmount));
+          if (conditions.length === 0)
+            return;
+          if (conditions.length === 1)
+            return conditions[0];
+          return and3(...conditions);
+        },
+        limit: pagination.limit,
+        offset: pagination.offset,
+        orderBy: (orders4, { desc: desc4 }) => desc4(orders4.createdAt)
+      });
+      return {
+        edges: orders3.map((order, index) => ({
+          node: order,
+          cursor: Buffer.from(`${pagination.offset + index}`).toString("base64")
+        })),
+        pageInfo: {
+          hasNextPage: orders3.length === pagination.limit,
+          hasPreviousPage: pagination.offset > 0,
+          startCursor: orders3.length > 0 ? Buffer.from(`${pagination.offset}`).toString("base64") : null,
+          endCursor: orders3.length > 0 ? Buffer.from(`${pagination.offset + orders3.length - 1}`).toString("base64") : null
+        },
+        totalCount: orders3.length
+      };
+    },
+    myOrders: async (_parent, args, context) => {
+      const user = requireAuth(context);
+      const { pagination = { limit: 20, offset: 0 } } = args;
+      const orders3 = await context.db.query.orders.findMany({
+        where: (orders4, { eq: eq2, or: or2 }) => or2(eq2(orders4.buyerId, user.id), eq2(orders4.sellerId, user.id)),
+        limit: pagination.limit,
+        offset: pagination.offset,
+        orderBy: (orders4, { desc: desc4 }) => desc4(orders4.createdAt)
+      });
+      return {
+        edges: orders3.map((order, index) => ({
+          node: order,
+          cursor: Buffer.from(`${pagination.offset + index}`).toString("base64")
+        })),
+        pageInfo: {
+          hasNextPage: orders3.length === pagination.limit,
+          hasPreviousPage: pagination.offset > 0,
+          startCursor: orders3.length > 0 ? Buffer.from(`${pagination.offset}`).toString("base64") : null,
+          endCursor: orders3.length > 0 ? Buffer.from(`${pagination.offset + orders3.length - 1}`).toString("base64") : null
+        },
+        totalCount: orders3.length
+      };
+    },
+    myPurchases: async (_parent, args, context) => {
+      const user = requireAuth(context);
+      const { pagination = { limit: 20, offset: 0 } } = args;
+      const orders3 = await context.db.query.orders.findMany({
+        where: (orders4, { eq: eq2 }) => eq2(orders4.buyerId, user.id),
+        limit: pagination.limit,
+        offset: pagination.offset,
+        orderBy: (orders4, { desc: desc4 }) => desc4(orders4.createdAt)
+      });
+      return {
+        edges: orders3.map((order, index) => ({
+          node: order,
+          cursor: Buffer.from(`${pagination.offset + index}`).toString("base64")
+        })),
+        pageInfo: {
+          hasNextPage: orders3.length === pagination.limit,
+          hasPreviousPage: pagination.offset > 0,
+          startCursor: orders3.length > 0 ? Buffer.from(`${pagination.offset}`).toString("base64") : null,
+          endCursor: orders3.length > 0 ? Buffer.from(`${pagination.offset + orders3.length - 1}`).toString("base64") : null
+        },
+        totalCount: orders3.length
+      };
+    },
+    mySales: async (_parent, args, context) => {
+      const user = requireAuth(context);
+      const { pagination = { limit: 20, offset: 0 } } = args;
+      const orders3 = await context.db.query.orders.findMany({
+        where: (orders4, { eq: eq2 }) => eq2(orders4.sellerId, user.id),
+        limit: pagination.limit,
+        offset: pagination.offset,
+        orderBy: (orders4, { desc: desc4 }) => desc4(orders4.createdAt)
+      });
+      return {
+        edges: orders3.map((order, index) => ({
+          node: order,
+          cursor: Buffer.from(`${pagination.offset + index}`).toString("base64")
+        })),
+        pageInfo: {
+          hasNextPage: orders3.length === pagination.limit,
+          hasPreviousPage: pagination.offset > 0,
+          startCursor: orders3.length > 0 ? Buffer.from(`${pagination.offset}`).toString("base64") : null,
+          endCursor: orders3.length > 0 ? Buffer.from(`${pagination.offset + orders3.length - 1}`).toString("base64") : null
+        },
+        totalCount: orders3.length
+      };
+    },
+    myCart: async (_parent, _args, context) => {
+      const user = requireAuth(context);
+      const cartItems = await context.db.query.cartItems.findMany({
+        where: (cartItems2, { eq: eq2 }) => eq2(cartItems2.userId, user.id),
+        orderBy: (cartItems2, { desc: desc4 }) => desc4(cartItems2.addedAt)
+      });
+      let subtotal = 0;
+      const itemsWithPricing = await Promise.all(cartItems.map(async (item) => {
+        const product = await context.db.query.products.findFirst({
+          where: (products5, { eq: eq2 }) => eq2(products5.id, item.productId)
+        });
+        const unitPrice = parseFloat(product?.price || "0");
+        const totalPrice = unitPrice * item.quantity;
+        subtotal += totalPrice;
+        return {
+          ...item,
+          unitPrice,
+          totalPrice
+        };
+      }));
+      return {
+        items: itemsWithPricing,
+        itemCount: cartItems.length,
+        subtotal,
+        currency: "XOF",
+        updatedAt: cartItems[0]?.updatedAt || new Date().toISOString()
+      };
+    },
+    orderStats: async (_parent, _args, context) => {
+      requireAdmin(context);
+      const allOrders = await context.db.query.orders.findMany();
+      const stats = {
+        totalOrders: allOrders.length,
+        pendingOrders: allOrders.filter((o) => o.status === "PENDING").length,
+        confirmedOrders: allOrders.filter((o) => o.status === "CONFIRMED").length,
+        shippedOrders: allOrders.filter((o) => o.status === "SHIPPED").length,
+        deliveredOrders: allOrders.filter((o) => o.status === "DELIVERED").length,
+        cancelledOrders: allOrders.filter((o) => o.status === "CANCELLED").length,
+        totalRevenue: allOrders.filter((o) => o.status === "DELIVERED").reduce((sum, o) => sum + parseFloat(o.totalAmount || "0"), 0),
+        averageOrderValue: allOrders.length > 0 ? allOrders.reduce((sum, o) => sum + parseFloat(o.totalAmount || "0"), 0) / allOrders.length : 0,
+        ordersByStatus: [
+          { status: "PENDING", count: allOrders.filter((o) => o.status === "PENDING").length },
+          { status: "CONFIRMED", count: allOrders.filter((o) => o.status === "CONFIRMED").length },
+          { status: "PROCESSING", count: allOrders.filter((o) => o.status === "PROCESSING").length },
+          { status: "SHIPPED", count: allOrders.filter((o) => o.status === "SHIPPED").length },
+          { status: "DELIVERED", count: allOrders.filter((o) => o.status === "DELIVERED").length },
+          { status: "CANCELLED", count: allOrders.filter((o) => o.status === "CANCELLED").length },
+          { status: "REFUNDED", count: allOrders.filter((o) => o.status === "REFUNDED").length }
+        ],
+        recentOrders: allOrders.sort((a, b2) => new Date(b2.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 10)
+      };
+      return stats;
+    },
+    myTransactions: async (_parent, args, context) => {
+      const user = requireAuth(context);
+      const { pagination = { limit: 20, offset: 0 } } = args;
+      const wallet = await context.db.query.userWallets.findFirst({
+        where: (wallets, { eq: eq2 }) => eq2(wallets.userId, user.id)
+      });
+      if (!wallet)
+        return [];
+      return await context.db.query.walletTransactions.findMany({
+        where: (transactions, { eq: eq2 }) => eq2(transactions.walletId, wallet.id),
+        limit: pagination.limit,
+        offset: pagination.offset,
+        orderBy: (transactions, { desc: desc4 }) => desc4(transactions.createdAt)
+      });
+    }
+  },
+  Mutation: {
+    createOrder: async (_parent, { input }, context) => {
+      const user = requireAuth(context);
+      const orderNumber = `ORD-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
+      const items = input.items;
+      let subtotal = 0;
+      for (const item of items) {
+        const product = await context.db.query.products.findFirst({
+          where: (products5, { eq: eq2 }) => eq2(products5.id, item.productId)
+        });
+        if (!product)
+          throw new Error(`Product ${item.productId} not found`);
+        if (product.stock < item.quantity)
+          throw new Error(`Insufficient stock for ${product.title}`);
+        subtotal += parseFloat(product.price) * item.quantity;
+      }
+      const taxAmount = subtotal * 0.18;
+      const shippingAmount = 1000;
+      const totalAmount = subtotal + taxAmount + shippingAmount;
+      const firstProduct = await context.db.query.products.findFirst({
+        where: (products5, { eq: eq2 }) => eq2(products5.id, items[0].productId)
+      });
+      const { randomUUID: randomUUID10 } = await import("crypto");
+      const [newOrder] = await context.db.insert(context.schema.orders).values({
+        id: randomUUID10(),
+        buyerId: user.id,
+        sellerId: firstProduct.sellerId,
+        orderNumber,
+        subtotal: subtotal.toString(),
+        taxAmount: taxAmount.toString(),
+        shippingAmount: shippingAmount.toString(),
+        totalAmount: totalAmount.toString(),
+        shippingAddress: JSON.stringify(input.shippingAddress),
+        billingAddress: JSON.stringify(input.billingAddress || input.shippingAddress),
+        paymentMethod: input.paymentMethod,
+        shippingMethod: input.shippingMethod,
+        notes: input.notes
+      }).returning();
+      for (const item of items) {
+        const product = await context.db.query.products.findFirst({
+          where: (products5, { eq: eq2 }) => eq2(products5.id, item.productId)
+        });
+        await context.db.insert(context.schema.orderItems).values({
+          id: randomUUID10(),
+          orderId: newOrder.id,
+          productId: item.productId,
+          productVariantId: item.productVariantId,
+          productName: product.title,
+          productImage: product.images?.[0] || "",
+          productSku: product.sku,
+          unitPrice: product.price,
+          quantity: item.quantity,
+          totalPrice: (parseFloat(product.price) * item.quantity).toString()
+        });
+        await context.db.update(context.schema.products).set({
+          stock: sql`${context.schema.products.stock} - ${item.quantity}`,
+          soldCount: sql`${context.schema.products.soldCount} + ${item.quantity}`,
+          updatedAt: new Date
+        }).where(eq(context.schema.products.id, item.productId));
+      }
+      return newOrder;
+    },
+    updateOrder: async (_parent, { id: id2, input }, context) => {
+      const user = requireAuth(context);
+      const order = await context.db.query.orders.findFirst({
+        where: (orders3, { eq: eq2 }) => eq2(orders3.id, id2)
+      });
+      if (!order)
+        throw new Error("Order not found");
+      if (order.sellerId !== user.id && user.userType !== "ADMIN") {
+        throw new Error("Unauthorized to update this order");
+      }
+      const [updatedOrder] = await context.db.update(context.schema.orders).set({
+        ...input,
+        updatedAt: new Date
+      }).where(eq(context.schema.orders.id, id2)).returning();
+      return updatedOrder;
+    },
+    cancelOrder: async (_parent, { id: id2, reason }, context) => {
+      const user = requireAuth(context);
+      const order = await context.db.query.orders.findFirst({
+        where: (orders3, { eq: eq2 }) => eq2(orders3.id, id2)
+      });
+      if (!order)
+        throw new Error("Order not found");
+      if (order.buyerId === user.id && !["PENDING", "CONFIRMED"].includes(order.status)) {
+        throw new Error("Order cannot be cancelled at this stage");
+      }
+      if (order.buyerId !== user.id && order.sellerId !== user.id && user.userType !== "ADMIN") {
+        throw new Error("Unauthorized to cancel this order");
+      }
+      const [cancelledOrder] = await context.db.update(context.schema.orders).set({
+        status: "CANCELLED",
+        cancelReason: reason,
+        cancelledAt: new Date,
+        updatedAt: new Date
+      }).where(eq(context.schema.orders.id, id2)).returning();
+      return cancelledOrder;
+    },
+    addToCart: async (_parent, { input }, context) => {
+      const user = requireAuth(context);
+      const existingItem = await context.db.query.cartItems.findFirst({
+        where: (cartItems, { eq: eq2, and: and3 }) => and3(eq2(cartItems.userId, user.id), eq2(cartItems.productId, input.productId), input.productVariantId ? eq2(cartItems.productVariantId, input.productVariantId) : eq2(cartItems.productVariantId, null))
+      });
+      if (existingItem) {
+        const [updatedItem] = await context.db.update(context.schema.cartItems).set({
+          quantity: existingItem.quantity + input.quantity,
+          updatedAt: new Date
+        }).where(eq(context.schema.cartItems.id, existingItem.id)).returning();
+        return updatedItem;
+      } else {
+        const { randomUUID: randomUUID10 } = await import("crypto");
+        const [newItem] = await context.db.insert(context.schema.cartItems).values({
+          id: randomUUID10(),
+          userId: user.id,
+          productId: input.productId,
+          productVariantId: input.productVariantId,
+          quantity: input.quantity
+        }).returning();
+        return newItem;
+      }
+    },
+    removeFromCart: async (_parent, { id: id2 }, context) => {
+      const user = requireAuth(context);
+      await context.db.delete(context.schema.cartItems).where(and(eq(context.schema.cartItems.id, id2), eq(context.schema.cartItems.userId, user.id)));
+      return true;
+    },
+    clearCart: async (_parent, _args, context) => {
+      const user = requireAuth(context);
+      await context.db.delete(context.schema.cartItems).where(eq(context.schema.cartItems.userId, user.id));
+      return true;
+    }
+  },
+  Order: {
+    buyer: async (parent, _args, context) => {
+      return context.db.query.users.findFirst({
+        where: (users6, { eq: eq2 }) => eq2(users6.id, parent.buyerId)
+      });
+    },
+    seller: async (parent, _args, context) => {
+      return context.db.query.users.findFirst({
+        where: (users6, { eq: eq2 }) => eq2(users6.id, parent.sellerId)
+      });
+    },
+    items: async (parent, _args, context) => {
+      return context.db.query.orderItems.findMany({
+        where: (orderItems2, { eq: eq2 }) => eq2(orderItems2.orderId, parent.id)
+      });
+    },
+    itemCount: async (parent, _args, context) => {
+      const items = await context.db.query.orderItems.findMany({
+        where: (orderItems2, { eq: eq2 }) => eq2(orderItems2.orderId, parent.id)
+      });
+      return items.length;
+    },
+    shippingAddress: (parent) => {
+      try {
+        return parent.shippingAddress ? JSON.parse(parent.shippingAddress) : null;
+      } catch {
+        return null;
+      }
+    },
+    billingAddress: (parent) => {
+      try {
+        return parent.billingAddress ? JSON.parse(parent.billingAddress) : null;
+      } catch {
+        return null;
+      }
+    }
+  },
+  OrderItem: {
+    product: async (parent, _args, context) => {
+      return context.db.query.products.findFirst({
+        where: (products5, { eq: eq2 }) => eq2(products5.id, parent.productId)
+      });
+    },
+    productVariant: async (parent, _args, context) => {
+      if (!parent.productVariantId)
+        return null;
+      return context.db.query.productVariants.findFirst({
+        where: (variants, { eq: eq2 }) => eq2(variants.id, parent.productVariantId)
+      });
+    }
+  },
+  CartItem: {
+    product: async (parent, _args, context) => {
+      return context.db.query.products.findFirst({
+        where: (products5, { eq: eq2 }) => eq2(products5.id, parent.productId)
+      });
+    },
+    productVariant: async (parent, _args, context) => {
+      if (!parent.productVariantId)
+        return null;
+      return context.db.query.productVariants.findFirst({
+        where: (variants, { eq: eq2 }) => eq2(variants.id, parent.productVariantId)
+      });
+    }
+  },
+  WalletTransaction: {
+    order: async (parent, _args, context) => {
+      if (!parent.orderId)
+        return null;
+      return context.db.query.orders.findFirst({
+        where: (orders3, { eq: eq2 }) => eq2(orders3.id, parent.orderId)
+      });
+    }
+  }
+};
 // src/domains/orders/schema/orders.schema.ts
 import { randomUUID as randomUUID10 } from "crypto";
 var orderStatusEnum2 = pgEnum("order_status", [
@@ -182635,6 +183345,372 @@ var reviewsTypeDefs = `#graphql
     rejectReview(id: ID!, reason: String!): Review!
   }
 `;
+// src/domains/reviews/resolvers/reviews.resolvers.ts
+var reviewsResolvers = {
+  Query: {
+    review: async (_parent, { id: id2 }, context) => {
+      return await context.db.query.reviews.findFirst({
+        where: (reviews3, { eq: eq2 }) => eq2(reviews3.id, id2)
+      });
+    },
+    reviews: async (_parent, args, context) => {
+      const { filter = {}, pagination = { limit: 20, offset: 0 } } = args;
+      const whereConditions = [];
+      if (filter.productId)
+        whereConditions.push(["productId", filter.productId]);
+      if (filter.userId)
+        whereConditions.push(["userId", filter.userId]);
+      if (filter.rating)
+        whereConditions.push(["rating", filter.rating]);
+      if (filter.status)
+        whereConditions.push(["status", filter.status]);
+      if (filter.isVerifiedPurchase !== undefined)
+        whereConditions.push(["isVerifiedPurchase", filter.isVerifiedPurchase]);
+      const reviews3 = await context.db.query.reviews.findMany({
+        where: (reviews4, { eq: eq2, and: and4, gte: gte4, lte: lte4 }) => {
+          const conditions = whereConditions.map(([field, value]) => eq2(reviews4[field], value));
+          if (filter.dateFrom)
+            conditions.push(gte4(reviews4.createdAt, new Date(filter.dateFrom)));
+          if (filter.dateTo)
+            conditions.push(lte4(reviews4.createdAt, new Date(filter.dateTo)));
+          if (conditions.length === 0)
+            return;
+          if (conditions.length === 1)
+            return conditions[0];
+          return and4(...conditions);
+        },
+        limit: pagination.limit,
+        offset: pagination.offset,
+        orderBy: (reviews4, { desc: desc5 }) => desc5(reviews4.createdAt)
+      });
+      return {
+        edges: reviews3.map((review, index) => ({
+          node: review,
+          cursor: Buffer.from(`${pagination.offset + index}`).toString("base64")
+        })),
+        pageInfo: {
+          hasNextPage: reviews3.length === pagination.limit,
+          hasPreviousPage: pagination.offset > 0,
+          startCursor: reviews3.length > 0 ? Buffer.from(`${pagination.offset}`).toString("base64") : null,
+          endCursor: reviews3.length > 0 ? Buffer.from(`${pagination.offset + reviews3.length - 1}`).toString("base64") : null
+        },
+        totalCount: reviews3.length
+      };
+    },
+    productReviews: async (_parent, { productId, pagination = { limit: 20, offset: 0 } }, context) => {
+      const reviews3 = await context.db.query.reviews.findMany({
+        where: (reviews4, { eq: eq2, and: and4 }) => and4(eq2(reviews4.productId, productId), eq2(reviews4.status, "APPROVED")),
+        limit: pagination.limit,
+        offset: pagination.offset,
+        orderBy: (reviews4, { desc: desc5 }) => [desc5(reviews4.helpfulVotes), desc5(reviews4.createdAt)]
+      });
+      return {
+        edges: reviews3.map((review, index) => ({
+          node: review,
+          cursor: Buffer.from(`${pagination.offset + index}`).toString("base64")
+        })),
+        pageInfo: {
+          hasNextPage: reviews3.length === pagination.limit,
+          hasPreviousPage: pagination.offset > 0,
+          startCursor: reviews3.length > 0 ? Buffer.from(`${pagination.offset}`).toString("base64") : null,
+          endCursor: reviews3.length > 0 ? Buffer.from(`${pagination.offset + reviews3.length - 1}`).toString("base64") : null
+        },
+        totalCount: reviews3.length
+      };
+    },
+    productReviewSummary: async (_parent, { productId }, context) => {
+      const allReviews = await context.db.query.reviews.findMany({
+        where: (reviews3, { eq: eq2, and: and4 }) => and4(eq2(reviews3.productId, productId), eq2(reviews3.status, "APPROVED"))
+      });
+      const totalReviews = allReviews.length;
+      const averageRating = totalReviews > 0 ? allReviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews : 0;
+      const ratingCounts = [1, 2, 3, 4, 5].map((rating) => {
+        const count4 = allReviews.filter((r) => r.rating === rating).length;
+        return {
+          rating,
+          count: count4,
+          percentage: totalReviews > 0 ? count4 / totalReviews * 100 : 0
+        };
+      });
+      const recentReviews = allReviews.sort((a, b2) => new Date(b2.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 5);
+      const topReviews = allReviews.sort((a, b2) => b2.helpfulVotes - a.helpfulVotes).slice(0, 5);
+      return {
+        productId,
+        totalReviews,
+        averageRating,
+        ratingDistribution: ratingCounts,
+        recentReviews,
+        topReviews
+      };
+    },
+    myReviews: async (_parent, { pagination = { limit: 20, offset: 0 } }, context) => {
+      const user = requireAuth(context);
+      const reviews3 = await context.db.query.reviews.findMany({
+        where: (reviews4, { eq: eq2 }) => eq2(reviews4.userId, user.id),
+        limit: pagination.limit,
+        offset: pagination.offset,
+        orderBy: (reviews4, { desc: desc5 }) => desc5(reviews4.createdAt)
+      });
+      return {
+        edges: reviews3.map((review, index) => ({
+          node: review,
+          cursor: Buffer.from(`${pagination.offset + index}`).toString("base64")
+        })),
+        pageInfo: {
+          hasNextPage: reviews3.length === pagination.limit,
+          hasPreviousPage: pagination.offset > 0,
+          startCursor: reviews3.length > 0 ? Buffer.from(`${pagination.offset}`).toString("base64") : null,
+          endCursor: reviews3.length > 0 ? Buffer.from(`${pagination.offset + reviews3.length - 1}`).toString("base64") : null
+        },
+        totalCount: reviews3.length
+      };
+    },
+    reviewStats: async (_parent, _args, context) => {
+      requireAdmin(context);
+      const allReviews = await context.db.query.reviews.findMany();
+      const totalReviews = allReviews.length;
+      const averageRating = totalReviews > 0 ? allReviews.reduce((sum, r) => sum + r.rating, 0) / totalReviews : 0;
+      const ratingDistribution = [1, 2, 3, 4, 5].map((rating) => {
+        const count4 = allReviews.filter((r) => r.rating === rating).length;
+        return {
+          rating,
+          count: count4,
+          percentage: totalReviews > 0 ? count4 / totalReviews * 100 : 0
+        };
+      });
+      const pendingReviews = allReviews.filter((r) => r.status === "PENDING").length;
+      const reportedReviews = allReviews.filter((r) => r.reports && r.reports.length > 0).length;
+      const verifiedPurchaseReviews = allReviews.filter((r) => r.isVerifiedPurchase).length;
+      return {
+        totalReviews,
+        averageRating,
+        ratingDistribution,
+        pendingReviews,
+        reportedReviews,
+        verifiedPurchaseReviews
+      };
+    },
+    canReviewProduct: async (_parent, { productId }, context) => {
+      const user = requireAuth(context);
+      const orderItems3 = await context.db.query.orderItems.findMany({
+        where: (orderItems4, { eq: eq2 }) => eq2(orderItems4.productId, productId)
+      });
+      const userOrders = await Promise.all(orderItems3.map(async (item) => {
+        return await context.db.query.orders.findFirst({
+          where: (orders5, { eq: eq2, and: and4 }) => and4(eq2(orders5.id, item.orderId), eq2(orders5.buyerId, user.id), eq2(orders5.status, "DELIVERED"))
+        });
+      }));
+      const hasPurchased = userOrders.some((order) => order !== null);
+      if (!hasPurchased)
+        return false;
+      const existingReview = await context.db.query.reviews.findFirst({
+        where: (reviews3, { eq: eq2, and: and4 }) => and4(eq2(reviews3.productId, productId), eq2(reviews3.userId, user.id))
+      });
+      return !existingReview;
+    }
+  },
+  Mutation: {
+    createReview: async (_parent, { input }, context) => {
+      const user = requireAuth(context);
+      const canReview = await context.db.query.reviews.findFirst({
+        where: (reviews3, { eq: eq2, and: and4 }) => and4(eq2(reviews3.productId, input.productId), eq2(reviews3.userId, user.id))
+      });
+      if (canReview) {
+        throw new Error("You have already reviewed this product");
+      }
+      let isVerifiedPurchase = false;
+      if (input.orderId) {
+        const order = await context.db.query.orders.findFirst({
+          where: (orders5, { eq: eq2, and: and4 }) => and4(eq2(orders5.id, input.orderId), eq2(orders5.buyerId, user.id), eq2(orders5.status, "DELIVERED"))
+        });
+        isVerifiedPurchase = !!order;
+      }
+      const { randomUUID: randomUUID11 } = await import("crypto");
+      const [newReview] = await context.db.insert(context.schema.reviews).values({
+        id: randomUUID11(),
+        userId: user.id,
+        productId: input.productId,
+        orderId: input.orderId,
+        orderItemId: input.orderItemId,
+        rating: input.rating,
+        title: input.title,
+        content: input.content,
+        images: JSON.stringify(input.images || []),
+        isAnonymous: input.isAnonymous || false,
+        isVerifiedPurchase,
+        status: "PENDING"
+      }).returning();
+      await updateProductRating(context, input.productId);
+      return newReview;
+    },
+    updateReview: async (_parent, { id: id2, input }, context) => {
+      const user = requireAuth(context);
+      const review = await context.db.query.reviews.findFirst({
+        where: (reviews3, { eq: eq2 }) => eq2(reviews3.id, id2)
+      });
+      if (!review)
+        throw new Error("Review not found");
+      if (review.userId !== user.id) {
+        throw new Error("Unauthorized to update this review");
+      }
+      const [updatedReview] = await context.db.update(context.schema.reviews).set({
+        ...input,
+        images: input.images ? JSON.stringify(input.images) : undefined,
+        updatedAt: new Date,
+        status: "PENDING"
+      }).where(eq(context.schema.reviews.id, id2)).returning();
+      await updateProductRating(context, review.productId);
+      return updatedReview;
+    },
+    deleteReview: async (_parent, { id: id2 }, context) => {
+      const user = requireAuth(context);
+      const review = await context.db.query.reviews.findFirst({
+        where: (reviews3, { eq: eq2 }) => eq2(reviews3.id, id2)
+      });
+      if (!review)
+        throw new Error("Review not found");
+      if (review.userId !== user.id && user.userType !== "ADMIN") {
+        throw new Error("Unauthorized to delete this review");
+      }
+      const productId = review.productId;
+      await context.db.delete(context.schema.reviews).where(eq(context.schema.reviews.id, id2));
+      await updateProductRating(context, productId);
+      return true;
+    },
+    voteOnReview: async (_parent, { input }, context) => {
+      const user = requireAuth(context);
+      const existingVote = await context.db.query.reviewVotes.findFirst({
+        where: (votes2, { eq: eq2, and: and4 }) => and4(eq2(votes2.reviewId, input.reviewId), eq2(votes2.userId, user.id))
+      });
+      const { randomUUID: randomUUID11 } = await import("crypto");
+      if (existingVote) {
+        await context.db.update(context.schema.reviewVotes).set({ voteType: input.voteType }).where(eq(context.schema.reviewVotes.id, existingVote.id));
+      } else {
+        await context.db.insert(context.schema.reviewVotes).values({
+          id: randomUUID11(),
+          reviewId: input.reviewId,
+          userId: user.id,
+          voteType: input.voteType
+        });
+      }
+      const votes = await context.db.query.reviewVotes.findMany({
+        where: (votes2, { eq: eq2 }) => eq2(votes2.reviewId, input.reviewId)
+      });
+      const helpfulVotes = votes.filter((v) => v.voteType === "HELPFUL").length;
+      const totalVotes = votes.length;
+      await context.db.update(context.schema.reviews).set({
+        helpfulVotes,
+        totalVotes,
+        updatedAt: new Date
+      }).where(eq(context.schema.reviews.id, input.reviewId));
+      return await context.db.query.reviews.findFirst({
+        where: (reviews3, { eq: eq2 }) => eq2(reviews3.id, input.reviewId)
+      });
+    },
+    reportReview: async (_parent, { input }, context) => {
+      const user = requireAuth(context);
+      const { randomUUID: randomUUID11 } = await import("crypto");
+      const [report] = await context.db.insert(context.schema.reviewReports).values({
+        id: randomUUID11(),
+        reviewId: input.reviewId,
+        reporterId: user.id,
+        reason: input.reason,
+        description: input.description
+      }).returning();
+      return report;
+    },
+    moderateReview: async (_parent, { id: id2, input }, context) => {
+      const user = requireAdmin(context);
+      const [moderatedReview] = await context.db.update(context.schema.reviews).set({
+        status: input.status,
+        moderatedBy: user.id,
+        moderatedAt: new Date,
+        moderationReason: input.reason,
+        updatedAt: new Date
+      }).where(eq(context.schema.reviews.id, id2)).returning();
+      return moderatedReview;
+    },
+    approveReview: async (_parent, { id: id2 }, context) => {
+      const user = requireAdmin(context);
+      const [approvedReview] = await context.db.update(context.schema.reviews).set({
+        status: "APPROVED",
+        moderatedBy: user.id,
+        moderatedAt: new Date,
+        updatedAt: new Date
+      }).where(eq(context.schema.reviews.id, id2)).returning();
+      return approvedReview;
+    }
+  },
+  Review: {
+    product: async (parent, _args, context) => {
+      return context.db.query.products.findFirst({
+        where: (products5, { eq: eq2 }) => eq2(products5.id, parent.productId)
+      });
+    },
+    user: async (parent, _args, context) => {
+      if (parent.isAnonymous)
+        return null;
+      return context.db.query.users.findFirst({
+        where: (users6, { eq: eq2 }) => eq2(users6.id, parent.userId)
+      });
+    },
+    order: async (parent, _args, context) => {
+      if (!parent.orderId)
+        return null;
+      return context.db.query.orders.findFirst({
+        where: (orders5, { eq: eq2 }) => eq2(orders5.id, parent.orderId)
+      });
+    },
+    images: (parent) => {
+      try {
+        return parent.images ? JSON.parse(parent.images) : [];
+      } catch {
+        return [];
+      }
+    },
+    helpfulnessRatio: (parent) => {
+      if (parent.totalVotes === 0)
+        return 0;
+      return parent.helpfulVotes / parent.totalVotes * 100;
+    },
+    userVote: async (parent, _args, context) => {
+      if (!context.user)
+        return null;
+      const vote = await context.db.query.reviewVotes.findFirst({
+        where: (votes, { eq: eq2, and: and4 }) => and4(eq2(votes.reviewId, parent.id), eq2(votes.userId, context.user.id))
+      });
+      return vote?.voteType || null;
+    },
+    canEdit: (parent, _args, context) => {
+      if (!context.user)
+        return false;
+      return parent.userId === context.user.id || context.user.userType === "ADMIN";
+    },
+    canDelete: (parent, _args, context) => {
+      if (!context.user)
+        return false;
+      return parent.userId === context.user.id || context.user.userType === "ADMIN";
+    },
+    responses: async (parent, _args, context) => {
+      return context.db.query.reviewResponses.findMany({
+        where: (responses, { eq: eq2 }) => eq2(responses.reviewId, parent.id),
+        orderBy: (responses, { asc: asc4 }) => asc4(responses.createdAt)
+      });
+    }
+  }
+};
+async function updateProductRating(context, productId) {
+  const reviews3 = await context.db.query.reviews.findMany({
+    where: (reviews4, { eq: eq2, and: and4 }) => and4(eq2(reviews4.productId, productId), eq2(reviews4.status, "APPROVED"))
+  });
+  const reviewCount = reviews3.length;
+  const averageRating = reviewCount > 0 ? reviews3.reduce((sum, r) => sum + r.rating, 0) / reviewCount : 0;
+  await context.db.update(context.schema.products).set({
+    avgRating: averageRating.toFixed(2),
+    ratingCount: reviewCount,
+    updatedAt: new Date
+  }).where(eq(context.schema.products.id, productId));
+}
 // src/domains/reviews/schema/reviews.schema.ts
 import { randomUUID as randomUUID11 } from "crypto";
 var reviewStatusEnum2 = pgEnum("review_status", ["PENDING", "APPROVED", "REJECTED", "HIDDEN"]);
@@ -183108,6 +184184,347 @@ var deliveryTypeDefs = `#graphql
     markAsDelivered(trackingNumber: String!, deliveredAt: String): DeliveryTracking!
   }
 `;
+// src/domains/delivery/resolvers/delivery.resolvers.ts
+var deliveryResolvers = {
+  Query: {
+    deliveryProvider: async (_parent, { id: id2 }, context) => {
+      return await context.db.query.deliveryProviders.findFirst({
+        where: (providers, { eq: eq2 }) => eq2(providers.id, id2)
+      });
+    },
+    deliveryProviders: async (_parent, _args, context) => {
+      return await context.db.query.deliveryProviders.findMany({
+        where: (providers, { eq: eq2 }) => eq2(providers.isActive, true),
+        orderBy: (providers, { asc: asc4 }) => asc4(providers.name)
+      });
+    },
+    deliveryOption: async (_parent, { id: id2 }, context) => {
+      return await context.db.query.deliveryOptions.findFirst({
+        where: (options, { eq: eq2 }) => eq2(options.id, id2)
+      });
+    },
+    deliveryOptions: async (_parent, { providerId }, context) => {
+      const whereCondition = providerId ? (options, { eq: eq2, and: and5 }) => and5(eq2(options.providerId, providerId), eq2(options.isActive, true)) : (options, { eq: eq2 }) => eq2(options.isActive, true);
+      return await context.db.query.deliveryOptions.findMany({
+        where: whereCondition,
+        orderBy: (options, { asc: asc4 }) => [asc4(options.sortOrder), asc4(options.name)]
+      });
+    },
+    availableDeliveryOptions: async (_parent, { input }, context) => {
+      const options = await context.db.query.deliveryOptions.findMany({
+        where: (options2, { eq: eq2 }) => eq2(options2.isActive, true),
+        orderBy: (options2, { asc: asc4 }) => asc4(options2.basePrice)
+      });
+      const quotes = await Promise.all(options.map(async (option) => {
+        const provider = await context.db.query.deliveryProviders.findFirst({
+          where: (providers, { eq: eq2 }) => eq2(providers.id, option.providerId)
+        });
+        if (!provider || !provider.isActive) {
+          return null;
+        }
+        const isAvailable = checkOptionAvailability(option, input);
+        if (!isAvailable.available) {
+          return {
+            option,
+            price: 0,
+            estimatedDays: option.estimatedDays,
+            isAvailable: false,
+            restrictions: isAvailable.restrictions
+          };
+        }
+        const price = calculateDeliveryPrice(option, input);
+        return {
+          option,
+          price,
+          estimatedDays: option.estimatedDays,
+          isAvailable: true,
+          restrictions: []
+        };
+      }));
+      return quotes.filter((q) => q !== null);
+    },
+    deliveryZones: async (_parent, _args, context) => {
+      return await context.db.query.deliveryZones.findMany({
+        where: (zones, { eq: eq2 }) => eq2(zones.isActive, true),
+        orderBy: (zones, { asc: asc4 }) => asc4(zones.name)
+      });
+    },
+    trackDelivery: async (_parent, { trackingNumber }, context) => {
+      return await context.db.query.deliveryTracking.findFirst({
+        where: (tracking, { eq: eq2 }) => eq2(tracking.trackingNumber, trackingNumber)
+      });
+    },
+    orderTracking: async (_parent, { orderId }, context) => {
+      const user = requireAuth(context);
+      const order = await context.db.query.orders.findFirst({
+        where: (orders5, { eq: eq2 }) => eq2(orders5.id, orderId)
+      });
+      if (!order)
+        throw new Error("Order not found");
+      if (order.buyerId !== user.id && order.sellerId !== user.id && user.userType !== "ADMIN") {
+        throw new Error("Unauthorized to view tracking for this order");
+      }
+      return await context.db.query.deliveryTracking.findFirst({
+        where: (tracking, { eq: eq2 }) => eq2(tracking.orderId, orderId)
+      });
+    },
+    calculateShipping: async (_parent, { input }, context) => {
+      const options = await context.db.query.deliveryOptions.findMany({
+        where: (options2, { eq: eq2 }) => eq2(options2.isActive, true)
+      });
+      return options.map((option) => ({
+        option,
+        price: calculateDeliveryPrice(option, input),
+        estimatedDays: option.estimatedDays,
+        isAvailable: checkOptionAvailability(option, input).available,
+        restrictions: checkOptionAvailability(option, input).restrictions
+      }));
+    },
+    deliveryStats: async (_parent, _args, context) => {
+      requireAdmin(context);
+      const allTracking = await context.db.query.deliveryTracking.findMany();
+      const stats = {
+        totalDeliveries: allTracking.length,
+        pendingDeliveries: allTracking.filter((t) => t.status === "PENDING").length,
+        inTransitDeliveries: allTracking.filter((t) => ["IN_TRANSIT", "OUT_FOR_DELIVERY"].includes(t.status)).length,
+        deliveredToday: allTracking.filter((t) => t.status === "DELIVERED" && new Date(t.actualDelivery || "").toDateString() === new Date().toDateString()).length,
+        failedDeliveries: allTracking.filter((t) => t.status === "FAILED").length,
+        averageDeliveryTime: calculateAverageDeliveryTime(allTracking),
+        onTimeDeliveryRate: calculateOnTimeRate(allTracking)
+      };
+      return stats;
+    }
+  },
+  Mutation: {
+    createDeliveryProvider: async (_parent, { input }, context) => {
+      requireAdmin(context);
+      const { randomUUID: randomUUID12 } = await import("crypto");
+      const [newProvider] = await context.db.insert(context.schema.deliveryProviders).values({
+        id: randomUUID12(),
+        ...input,
+        coverageAreas: JSON.stringify(input.coverageAreas || [])
+      }).returning();
+      return newProvider;
+    },
+    updateDeliveryProvider: async (_parent, { id: id2, input }, context) => {
+      requireAdmin(context);
+      const [updatedProvider] = await context.db.update(context.schema.deliveryProviders).set({
+        ...input,
+        coverageAreas: input.coverageAreas ? JSON.stringify(input.coverageAreas) : undefined,
+        updatedAt: new Date
+      }).where(eq(context.schema.deliveryProviders.id, id2)).returning();
+      return updatedProvider;
+    },
+    createDeliveryOption: async (_parent, { input }, context) => {
+      requireAdmin(context);
+      const { randomUUID: randomUUID12 } = await import("crypto");
+      const [newOption] = await context.db.insert(context.schema.deliveryOptions).values({
+        id: randomUUID12(),
+        ...input
+      }).returning();
+      return newOption;
+    },
+    updateDeliveryOption: async (_parent, { id: id2, input }, context) => {
+      requireAdmin(context);
+      const [updatedOption] = await context.db.update(context.schema.deliveryOptions).set({
+        ...input,
+        updatedAt: new Date
+      }).where(eq(context.schema.deliveryOptions.id, id2)).returning();
+      return updatedOption;
+    },
+    createDeliveryZone: async (_parent, { input }, context) => {
+      requireAdmin(context);
+      const { randomUUID: randomUUID12 } = await import("crypto");
+      const [newZone] = await context.db.insert(context.schema.deliveryZones).values({
+        id: randomUUID12(),
+        ...input
+      }).returning();
+      return newZone;
+    },
+    createDeliveryTracking: async (_parent, { input }, context) => {
+      const user = requireAuth(context);
+      const order = await context.db.query.orders.findFirst({
+        where: (orders5, { eq: eq2 }) => eq2(orders5.id, input.orderId)
+      });
+      if (!order)
+        throw new Error("Order not found");
+      if (order.sellerId !== user.id && user.userType !== "ADMIN") {
+        throw new Error("Unauthorized to create tracking for this order");
+      }
+      const { randomUUID: randomUUID12 } = await import("crypto");
+      const [newTracking] = await context.db.insert(context.schema.deliveryTracking).values({
+        id: randomUUID12(),
+        ...input,
+        pickupAddress: input.pickupAddress ? JSON.stringify(input.pickupAddress) : null,
+        deliveryAddress: JSON.stringify(input.deliveryAddress),
+        trackingEvents: JSON.stringify([{
+          timestamp: new Date().toISOString(),
+          status: "PENDING",
+          description: "Shipment created",
+          location: "Origin"
+        }])
+      }).returning();
+      return newTracking;
+    },
+    updateDeliveryTracking: async (_parent, { id: id2, input }, context) => {
+      requireAuth(context);
+      const [updatedTracking] = await context.db.update(context.schema.deliveryTracking).set({
+        ...input,
+        updatedAt: new Date
+      }).where(eq(context.schema.deliveryTracking.id, id2)).returning();
+      return updatedTracking;
+    },
+    addTrackingEvent: async (_parent, { id: id2, event }, context) => {
+      requireAuth(context);
+      const tracking = await context.db.query.deliveryTracking.findFirst({
+        where: (tracking2, { eq: eq2 }) => eq2(tracking2.id, id2)
+      });
+      if (!tracking)
+        throw new Error("Tracking not found");
+      const existingEvents = tracking.trackingEvents ? JSON.parse(tracking.trackingEvents) : [];
+      const updatedEvents = [...existingEvents, event];
+      const [updatedTracking] = await context.db.update(context.schema.deliveryTracking).set({
+        trackingEvents: JSON.stringify(updatedEvents),
+        status: event.status,
+        updatedAt: new Date
+      }).where(eq(context.schema.deliveryTracking.id, id2)).returning();
+      return updatedTracking;
+    },
+    updateDeliveryStatus: async (_parent, { trackingNumber, status }, context) => {
+      requireAuth(context);
+      const [updatedTracking] = await context.db.update(context.schema.deliveryTracking).set({
+        status,
+        actualDelivery: status === "DELIVERED" ? new Date : undefined,
+        updatedAt: new Date
+      }).where(eq(context.schema.deliveryTracking.trackingNumber, trackingNumber)).returning();
+      return updatedTracking;
+    },
+    markAsDelivered: async (_parent, { trackingNumber, deliveredAt }, context) => {
+      requireAuth(context);
+      const deliveryDate = deliveredAt ? new Date(deliveredAt) : new Date;
+      const [updatedTracking] = await context.db.update(context.schema.deliveryTracking).set({
+        status: "DELIVERED",
+        actualDelivery: deliveryDate,
+        updatedAt: new Date
+      }).where(eq(context.schema.deliveryTracking.trackingNumber, trackingNumber)).returning();
+      if (updatedTracking) {
+        await context.db.update(context.schema.orders).set({
+          status: "DELIVERED",
+          deliveredAt: deliveryDate,
+          updatedAt: new Date
+        }).where(eq(context.schema.orders.id, updatedTracking.orderId));
+      }
+      return updatedTracking;
+    }
+  },
+  DeliveryProvider: {
+    options: async (parent, _args, context) => {
+      return context.db.query.deliveryOptions.findMany({
+        where: (options, { eq: eq2 }) => eq2(options.providerId, parent.id),
+        orderBy: (options, { asc: asc4 }) => asc4(options.sortOrder)
+      });
+    },
+    coverageAreas: (parent) => {
+      try {
+        return parent.coverageAreas ? JSON.parse(parent.coverageAreas) : [];
+      } catch {
+        return [];
+      }
+    }
+  },
+  DeliveryOption: {
+    provider: async (parent, _args, context) => {
+      return context.db.query.deliveryProviders.findFirst({
+        where: (providers, { eq: eq2 }) => eq2(providers.id, parent.providerId)
+      });
+    }
+  },
+  DeliveryTracking: {
+    provider: async (parent, _args, context) => {
+      return context.db.query.deliveryProviders.findFirst({
+        where: (providers, { eq: eq2 }) => eq2(providers.id, parent.providerId)
+      });
+    },
+    order: async (parent, _args, context) => {
+      return context.db.query.orders.findFirst({
+        where: (orders5, { eq: eq2 }) => eq2(orders5.id, parent.orderId)
+      });
+    },
+    pickupAddress: (parent) => {
+      try {
+        return parent.pickupAddress ? JSON.parse(parent.pickupAddress) : null;
+      } catch {
+        return null;
+      }
+    },
+    deliveryAddress: (parent) => {
+      try {
+        return parent.deliveryAddress ? JSON.parse(parent.deliveryAddress) : null;
+      } catch {
+        return null;
+      }
+    },
+    trackingEvents: (parent) => {
+      try {
+        return parent.trackingEvents ? JSON.parse(parent.trackingEvents) : [];
+      } catch {
+        return [];
+      }
+    },
+    trackingUrl: async (parent, _args, context) => {
+      const provider = await context.db.query.deliveryProviders.findFirst({
+        where: (providers, { eq: eq2 }) => eq2(providers.id, parent.providerId)
+      });
+      if (!provider?.trackingUrlPattern)
+        return null;
+      return provider.trackingUrlPattern.replace("{trackingNumber}", parent.trackingNumber);
+    }
+  }
+};
+function checkOptionAvailability(option, input) {
+  const restrictions = [];
+  if (option.maxWeight && input.weight && input.weight > option.maxWeight) {
+    restrictions.push(`Exceeds maximum weight of ${option.maxWeight}kg`);
+  }
+  if (option.maxDimensions && input.dimensions) {}
+  return {
+    available: restrictions.length === 0,
+    restrictions
+  };
+}
+function calculateDeliveryPrice(option, input) {
+  let price = parseFloat(option.basePrice || "0");
+  if (option.pricePerKg && input.weight) {
+    price += parseFloat(option.pricePerKg) * input.weight;
+  }
+  if (option.freeShippingThreshold && input.value && input.value >= option.freeShippingThreshold) {
+    price = 0;
+  }
+  return Math.max(0, price);
+}
+function calculateAverageDeliveryTime(trackingRecords) {
+  const delivered = trackingRecords.filter((t) => t.status === "DELIVERED" && t.actualDelivery && t.createdAt);
+  if (delivered.length === 0)
+    return 0;
+  const totalDays = delivered.reduce((sum, record2) => {
+    const start = new Date(record2.createdAt);
+    const end = new Date(record2.actualDelivery);
+    const days = (end.getTime() - start.getTime()) / 86400000;
+    return sum + days;
+  }, 0);
+  return totalDays / delivered.length;
+}
+function calculateOnTimeRate(trackingRecords) {
+  const delivered = trackingRecords.filter((t) => t.status === "DELIVERED" && t.actualDelivery && t.estimatedDelivery);
+  if (delivered.length === 0)
+    return 100;
+  const onTime = delivered.filter((record2) => {
+    const actual = new Date(record2.actualDelivery);
+    const estimated = new Date(record2.estimatedDelivery);
+    return actual <= estimated;
+  }).length;
+  return onTime / delivered.length * 100;
+}
 // src/domains/delivery/schema/delivery.schema.ts
 import { randomUUID as randomUUID12 } from "crypto";
 var deliveryProviderStatusEnum2 = pgEnum("delivery_provider_status", ["ACTIVE", "INACTIVE", "SUSPENDED"]);
@@ -183592,6 +185009,367 @@ var notificationsTypeDefs = `#graphql
     notificationUpdated(userId: ID!): Notification!
   }
 `;
+// src/domains/notifications/resolvers/notifications.resolvers.ts
+var notificationsResolvers = {
+  Query: {
+    myNotifications: async (_parent, args, context) => {
+      const user = requireAuth(context);
+      const { filter = {}, pagination = { limit: 20, offset: 0 } } = args;
+      const whereConditions = [];
+      whereConditions.push(["userId", user.id]);
+      if (filter.type)
+        whereConditions.push(["type", filter.type]);
+      if (filter.channel)
+        whereConditions.push(["channel", filter.channel]);
+      if (filter.priority)
+        whereConditions.push(["priority", filter.priority]);
+      if (filter.isRead !== undefined)
+        whereConditions.push(["isRead", filter.isRead]);
+      const notifications3 = await context.db.query.notifications.findMany({
+        where: (notifications4, { eq: eq2, and: and5, gte: gte5, lte: lte5 }) => {
+          const conditions = whereConditions.map(([field, value]) => eq2(notifications4[field], value));
+          if (filter.dateFrom)
+            conditions.push(gte5(notifications4.createdAt, new Date(filter.dateFrom)));
+          if (filter.dateTo)
+            conditions.push(lte5(notifications4.createdAt, new Date(filter.dateTo)));
+          if (conditions.length === 1)
+            return conditions[0];
+          return and5(...conditions);
+        },
+        limit: pagination.limit,
+        offset: pagination.offset,
+        orderBy: (notifications4, { desc: desc7 }) => desc7(notifications4.createdAt)
+      });
+      const unreadNotifications = await context.db.query.notifications.findMany({
+        where: (notifications4, { eq: eq2, and: and5 }) => and5(eq2(notifications4.userId, user.id), eq2(notifications4.isRead, false))
+      });
+      return {
+        edges: notifications3.map((notification, index) => ({
+          node: notification,
+          cursor: Buffer.from(`${pagination.offset + index}`).toString("base64")
+        })),
+        pageInfo: {
+          hasNextPage: notifications3.length === pagination.limit,
+          hasPreviousPage: pagination.offset > 0,
+          startCursor: notifications3.length > 0 ? Buffer.from(`${pagination.offset}`).toString("base64") : null,
+          endCursor: notifications3.length > 0 ? Buffer.from(`${pagination.offset + notifications3.length - 1}`).toString("base64") : null
+        },
+        totalCount: notifications3.length,
+        unreadCount: unreadNotifications.length
+      };
+    },
+    notification: async (_parent, { id: id2 }, context) => {
+      const user = requireAuth(context);
+      const notification = await context.db.query.notifications.findFirst({
+        where: (notifications3, { eq: eq2 }) => eq2(notifications3.id, id2)
+      });
+      if (!notification)
+        throw new Error("Notification not found");
+      if (notification.userId !== user.id && user.userType !== "ADMIN") {
+        throw new Error("Unauthorized to view this notification");
+      }
+      return notification;
+    },
+    myNotificationPreferences: async (_parent, _args, context) => {
+      const user = requireAuth(context);
+      let preferences = await context.db.query.notificationPreferences.findFirst({
+        where: (prefs, { eq: eq2 }) => eq2(prefs.userId, user.id)
+      });
+      if (!preferences) {
+        const { randomUUID: randomUUID13 } = await import("crypto");
+        const [newPreferences] = await context.db.insert(context.schema.notificationPreferences).values({
+          id: randomUUID13(),
+          userId: user.id
+        }).returning();
+        preferences = newPreferences;
+      }
+      return preferences;
+    },
+    myDeviceTokens: async (_parent, _args, context) => {
+      const user = requireAuth(context);
+      return await context.db.query.deviceTokens.findMany({
+        where: (tokens, { eq: eq2 }) => eq2(tokens.userId, user.id),
+        orderBy: (tokens, { desc: desc7 }) => desc7(tokens.lastUsed)
+      });
+    },
+    unreadNotificationCount: async (_parent, _args, context) => {
+      const user = requireAuth(context);
+      const unreadNotifications = await context.db.query.notifications.findMany({
+        where: (notifications3, { eq: eq2, and: and5 }) => and5(eq2(notifications3.userId, user.id), eq2(notifications3.isRead, false))
+      });
+      return unreadNotifications.length;
+    },
+    notificationStats: async (_parent, _args, context) => {
+      requireAdmin(context);
+      const allNotifications = await context.db.query.notifications.findMany();
+      const totalNotifications = allNotifications.length;
+      const unreadNotifications = allNotifications.filter((n) => !n.isRead).length;
+      const notificationsByType = Object.entries(allNotifications.reduce((acc, notification) => {
+        acc[notification.type] = (acc[notification.type] || 0) + 1;
+        return acc;
+      }, {})).map(([type, count5]) => ({ type, count: count5 }));
+      const notificationsByChannel = Object.entries(allNotifications.reduce((acc, notification) => {
+        acc[notification.channel] = (acc[notification.channel] || 0) + 1;
+        return acc;
+      }, {})).map(([channel, count5]) => ({ channel, count: count5 }));
+      const recentNotifications = allNotifications.sort((a, b2) => new Date(b2.createdAt).getTime() - new Date(a.createdAt).getTime()).slice(0, 10);
+      return {
+        totalNotifications,
+        unreadNotifications,
+        notificationsByType,
+        notificationsByChannel,
+        recentNotifications
+      };
+    },
+    notificationTemplates: async (_parent, _args, context) => {
+      requireAdmin(context);
+      return await context.db.query.notificationTemplates.findMany({
+        orderBy: (templates, { asc: asc4 }) => [asc4(templates.type), asc4(templates.channel)]
+      });
+    }
+  },
+  Mutation: {
+    markNotificationAsRead: async (_parent, { id: id2 }, context) => {
+      const user = requireAuth(context);
+      const notification = await context.db.query.notifications.findFirst({
+        where: (notifications3, { eq: eq2 }) => eq2(notifications3.id, id2)
+      });
+      if (!notification)
+        throw new Error("Notification not found");
+      if (notification.userId !== user.id) {
+        throw new Error("Unauthorized to update this notification");
+      }
+      const [updatedNotification] = await context.db.update(context.schema.notifications).set({
+        isRead: true,
+        readAt: new Date,
+        updatedAt: new Date
+      }).where(eq(context.schema.notifications.id, id2)).returning();
+      return updatedNotification;
+    },
+    markAllNotificationsAsRead: async (_parent, _args, context) => {
+      const user = requireAuth(context);
+      const updatedRows = await context.db.update(context.schema.notifications).set({
+        isRead: true,
+        readAt: new Date,
+        updatedAt: new Date
+      }).where(and(eq(context.schema.notifications.userId, user.id), eq(context.schema.notifications.isRead, false))).returning();
+      return updatedRows.length;
+    },
+    dismissNotification: async (_parent, { id: id2 }, context) => {
+      const user = requireAuth(context);
+      const [updatedNotification] = await context.db.update(context.schema.notifications).set({
+        dismissedAt: new Date,
+        updatedAt: new Date
+      }).where(and(eq(context.schema.notifications.id, id2), eq(context.schema.notifications.userId, user.id))).returning();
+      return updatedNotification;
+    },
+    clickNotification: async (_parent, { id: id2 }, context) => {
+      const user = requireAuth(context);
+      const [updatedNotification] = await context.db.update(context.schema.notifications).set({
+        clickedAt: new Date,
+        isRead: true,
+        readAt: new Date,
+        updatedAt: new Date
+      }).where(and(eq(context.schema.notifications.id, id2), eq(context.schema.notifications.userId, user.id))).returning();
+      return updatedNotification;
+    },
+    updateNotificationPreferences: async (_parent, { input }, context) => {
+      const user = requireAuth(context);
+      const existingPreferences = await context.db.query.notificationPreferences.findFirst({
+        where: (prefs, { eq: eq2 }) => eq2(prefs.userId, user.id)
+      });
+      if (existingPreferences) {
+        const [updatedPreferences] = await context.db.update(context.schema.notificationPreferences).set({
+          ...input,
+          updatedAt: new Date
+        }).where(eq(context.schema.notificationPreferences.id, existingPreferences.id)).returning();
+        return updatedPreferences;
+      } else {
+        const { randomUUID: randomUUID13 } = await import("crypto");
+        const [newPreferences] = await context.db.insert(context.schema.notificationPreferences).values({
+          id: randomUUID13(),
+          userId: user.id,
+          ...input
+        }).returning();
+        return newPreferences;
+      }
+    },
+    registerDeviceToken: async (_parent, { input }, context) => {
+      const user = requireAuth(context);
+      const existingToken = await context.db.query.deviceTokens.findFirst({
+        where: (tokens, { eq: eq2 }) => eq2(tokens.token, input.token)
+      });
+      if (existingToken) {
+        const [updatedToken] = await context.db.update(context.schema.deviceTokens).set({
+          userId: user.id,
+          platform: input.platform,
+          deviceName: input.deviceName,
+          deviceModel: input.deviceModel,
+          osVersion: input.osVersion,
+          appVersion: input.appVersion,
+          isActive: true,
+          lastUsed: new Date,
+          updatedAt: new Date
+        }).where(eq(context.schema.deviceTokens.id, existingToken.id)).returning();
+        return updatedToken;
+      } else {
+        const { randomUUID: randomUUID13 } = await import("crypto");
+        const [newToken] = await context.db.insert(context.schema.deviceTokens).values({
+          id: randomUUID13(),
+          userId: user.id,
+          ...input
+        }).returning();
+        return newToken;
+      }
+    },
+    unregisterDeviceToken: async (_parent, { token }, context) => {
+      const user = requireAuth(context);
+      await context.db.update(context.schema.deviceTokens).set({
+        isActive: false,
+        updatedAt: new Date
+      }).where(and(eq(context.schema.deviceTokens.token, token), eq(context.schema.deviceTokens.userId, user.id)));
+      return true;
+    },
+    createNotification: async (_parent, { input }, context) => {
+      requireAdmin(context);
+      const { randomUUID: randomUUID13 } = await import("crypto");
+      const [newNotification] = await context.db.insert(context.schema.notifications).values({
+        id: randomUUID13(),
+        ...input,
+        data: input.data ? JSON.stringify(input.data) : null,
+        isSent: !input.scheduledFor,
+        sentAt: !input.scheduledFor ? new Date : null
+      }).returning();
+      return newNotification;
+    },
+    sendBulkNotification: async (_parent, { input }, context) => {
+      requireAdmin(context);
+      const { randomUUID: randomUUID13 } = await import("crypto");
+      const notifications3 = [];
+      for (const userId of input.userIds) {
+        for (const channel of input.channels) {
+          const [notification] = await context.db.insert(context.schema.notifications).values({
+            id: randomUUID13(),
+            userId,
+            type: input.type,
+            channel,
+            priority: input.priority || "NORMAL",
+            title: input.title,
+            message: input.message,
+            actionText: input.actionText,
+            actionUrl: input.actionUrl,
+            data: input.data ? JSON.stringify(input.data) : null,
+            scheduledFor: input.scheduledFor ? new Date(input.scheduledFor) : null,
+            isSent: !input.scheduledFor,
+            sentAt: !input.scheduledFor ? new Date : null
+          }).returning();
+          notifications3.push(notification);
+        }
+      }
+      return notifications3;
+    },
+    createNotificationTemplate: async (_parent, { input }, context) => {
+      requireAdmin(context);
+      const { randomUUID: randomUUID13 } = await import("crypto");
+      const [newTemplate] = await context.db.insert(context.schema.notificationTemplates).values({
+        id: randomUUID13(),
+        ...input,
+        variables: input.variables ? JSON.stringify(input.variables) : null
+      }).returning();
+      return newTemplate;
+    },
+    updateNotificationTemplate: async (_parent, { id: id2, input }, context) => {
+      requireAdmin(context);
+      const [updatedTemplate] = await context.db.update(context.schema.notificationTemplates).set({
+        ...input,
+        variables: input.variables ? JSON.stringify(input.variables) : undefined,
+        updatedAt: new Date
+      }).where(eq(context.schema.notificationTemplates.id, id2)).returning();
+      return updatedTemplate;
+    },
+    sendTestNotification: async (_parent, { userId, type, channels }, context) => {
+      requireAdmin(context);
+      const { randomUUID: randomUUID13 } = await import("crypto");
+      const notifications3 = [];
+      for (const channel of channels) {
+        const [notification] = await context.db.insert(context.schema.notifications).values({
+          id: randomUUID13(),
+          userId,
+          type,
+          channel,
+          priority: "NORMAL",
+          title: `Test ${type} Notification`,
+          message: `This is a test ${channel} notification for ${type}`,
+          isSent: true,
+          sentAt: new Date
+        }).returning();
+        notifications3.push(notification);
+      }
+      return notifications3;
+    }
+  },
+  Notification: {
+    user: async (parent, _args, context) => {
+      return context.db.query.users.findFirst({
+        where: (users6, { eq: eq2 }) => eq2(users6.id, parent.userId)
+      });
+    },
+    data: (parent) => {
+      try {
+        return parent.data ? JSON.parse(parent.data) : null;
+      } catch {
+        return null;
+      }
+    },
+    relatedEntity: async (parent, _args, context) => {
+      if (!parent.relatedEntityType || !parent.relatedEntityId)
+        return null;
+      switch (parent.relatedEntityType) {
+        case "ORDER":
+          return context.db.query.orders.findFirst({
+            where: (orders5, { eq: eq2 }) => eq2(orders5.id, parent.relatedEntityId)
+          });
+        case "PRODUCT":
+          return context.db.query.products.findFirst({
+            where: (products5, { eq: eq2 }) => eq2(products5.id, parent.relatedEntityId)
+          });
+        case "USER":
+          return context.db.query.users.findFirst({
+            where: (users6, { eq: eq2 }) => eq2(users6.id, parent.relatedEntityId)
+          });
+        case "REVIEW":
+          return context.db.query.reviews.findFirst({
+            where: (reviews5, { eq: eq2 }) => eq2(reviews5.id, parent.relatedEntityId)
+          });
+        default:
+          return null;
+      }
+    }
+  },
+  NotificationPreferences: {
+    user: async (parent, _args, context) => {
+      return context.db.query.users.findFirst({
+        where: (users6, { eq: eq2 }) => eq2(users6.id, parent.userId)
+      });
+    }
+  },
+  DeviceToken: {
+    user: async (parent, _args, context) => {
+      return context.db.query.users.findFirst({
+        where: (users6, { eq: eq2 }) => eq2(users6.id, parent.userId)
+      });
+    }
+  },
+  NotificationTemplate: {
+    variables: (parent) => {
+      try {
+        return parent.variables ? JSON.parse(parent.variables) : null;
+      } catch {
+        return null;
+      }
+    }
+  }
+};
 // src/domains/notifications/schema/notifications.schema.ts
 import { randomUUID as randomUUID13 } from "crypto";
 var notificationTypeEnum2 = pgEnum("notification_type", [
@@ -183788,276 +185566,224 @@ var allTypeDefs = [
   deliveryTypeDefs,
   notificationsTypeDefs
 ];
+var allResolvers = [
+  authResolvers,
+  usersResolvers,
+  productsResolvers,
+  ordersResolvers,
+  reviewsResolvers,
+  deliveryResolvers,
+  notificationsResolvers
+];
 
-// src/graphql/schema.ts
-var typeDefs = allTypeDefs;
-
-// ../../node_modules/graphql-scalars/esm/error.js
-var import_graphql76 = __toESM(require_graphql2(), 1);
-function createGraphQLError2(message3, options) {
-  if (import_graphql76.versionInfo.major >= 17) {
-    return new import_graphql76.GraphQLError(message3, options);
-  }
-  return new import_graphql76.GraphQLError(message3, options === null || options === undefined ? undefined : options.nodes, options === null || options === undefined ? undefined : options.source, options === null || options === undefined ? undefined : options.positions, options === null || options === undefined ? undefined : options.path, options === null || options === undefined ? undefined : options.originalError, options === null || options === undefined ? undefined : options.extensions);
-}
-
-// ../../node_modules/graphql-scalars/esm/scalars/iso-date/formatter.js
-var parseDateTime = (dateTime) => {
-  return new Date(dateTime);
-};
-
-// ../../node_modules/graphql-scalars/esm/scalars/iso-date/validator.js
-var leapYear = (year3) => {
-  return year3 % 4 === 0 && year3 % 100 !== 0 || year3 % 400 === 0;
-};
-var validateTime = (time5) => {
-  time5 = time5 === null || time5 === undefined ? undefined : time5.toUpperCase();
-  const TIME_REGEX = /^([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9])(\.\d{1,})?(([Z])|([+|-]([01][0-9]|2[0-3]):[0-5][0-9]))$/;
-  return TIME_REGEX.test(time5);
-};
-var validateDate = (datestring) => {
-  const RFC_3339_REGEX = /^(\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]))$/;
-  if (!RFC_3339_REGEX.test(datestring)) {
-    return false;
-  }
-  const year3 = Number(datestring.substr(0, 4));
-  const month = Number(datestring.substr(5, 2));
-  const day3 = Number(datestring.substr(8, 2));
-  switch (month) {
-    case 2:
-      if (leapYear(year3) && day3 > 29) {
-        return false;
-      } else if (!leapYear(year3) && day3 > 28) {
-        return false;
+// src/infrastructure/config.ts
+var configurations = {
+  development: {
+    server: {
+      timeout: 30000,
+      bodyLimit: "10mb"
+    },
+    graphql: {
+      introspection: true,
+      playground: true,
+      debug: true,
+      tracing: true
+    },
+    logging: {
+      level: "debug",
+      format: "simple",
+      requests: true,
+      errors: true
+    },
+    monitoring: {
+      healthCheck: {
+        interval: 30000,
+        timeout: 5000
       }
-      return true;
-    case 4:
-    case 6:
-    case 9:
-    case 11:
-      if (day3 > 30) {
-        return false;
-      }
-      break;
-  }
-  return true;
-};
-var validateDateTime = (dateTimeString) => {
-  dateTimeString = dateTimeString === null || dateTimeString === undefined ? undefined : dateTimeString.toUpperCase();
-  const RFC_3339_REGEX = /^(\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01])T([01][0-9]|2[0-3]):([0-5][0-9]):([0-5][0-9]|60))(\.\d{1,})?(([Z])|([+|-]([01][0-9]|2[0-3]):[0-5][0-9]))$/;
-  if (!RFC_3339_REGEX.test(dateTimeString)) {
-    return false;
-  }
-  const time5 = Date.parse(dateTimeString);
-  if (time5 !== time5) {
-    return false;
-  }
-  const index = dateTimeString.indexOf("T");
-  const dateString = dateTimeString.substr(0, index);
-  const timeString = dateTimeString.substr(index + 1);
-  return validateDate(dateString) && validateTime(timeString);
-};
-var validateJSDate = (date7) => {
-  const time5 = date7.getTime();
-  return time5 === time5;
-};
-
-// ../../node_modules/graphql-scalars/esm/scalars/iso-date/DateTime.js
-var import_graphql77 = __toESM(require_graphql2(), 1);
-var GraphQLDateTimeConfig = {
-  name: "DateTime",
-  description: "A date-time string at UTC, such as 2007-12-03T10:15:30Z, " + "compliant with the `date-time` format outlined in section 5.6 of " + "the RFC 3339 profile of the ISO 8601 standard for representation " + "of dates and times using the Gregorian calendar.",
-  serialize(value) {
-    if (value instanceof Date) {
-      if (validateJSDate(value)) {
-        return value;
-      }
-      throw createGraphQLError2("DateTime cannot represent an invalid Date instance");
-    } else if (typeof value === "string") {
-      if (validateDateTime(value)) {
-        return parseDateTime(value);
-      }
-      throw createGraphQLError2(`DateTime cannot represent an invalid date-time-string ${value}.`);
-    } else if (typeof value === "number") {
-      try {
-        return new Date(value);
-      } catch (_a6) {
-        throw createGraphQLError2("DateTime cannot represent an invalid Unix timestamp " + value);
-      }
-    } else {
-      throw createGraphQLError2("DateTime cannot be serialized from a non string, " + "non numeric or non Date type " + JSON.stringify(value));
     }
   },
-  parseValue(value) {
-    if (value instanceof Date) {
-      if (validateJSDate(value)) {
-        return value;
-      }
-      throw createGraphQLError2("DateTime cannot represent an invalid Date instance");
+  test: {
+    server: {
+      timeout: 5000,
+      bodyLimit: "1mb"
+    },
+    graphql: {
+      introspection: false,
+      playground: false,
+      debug: false,
+      tracing: false
+    },
+    logging: {
+      level: "error",
+      format: "json",
+      requests: false,
+      errors: true
+    },
+    database: {
+      poolSize: 5
+    },
+    redis: {
+      db: 1
     }
-    if (typeof value === "string") {
-      if (validateDateTime(value)) {
-        return parseDateTime(value);
-      }
-      throw createGraphQLError2(`DateTime cannot represent an invalid date-time-string ${value}.`);
-    }
-    throw createGraphQLError2(`DateTime cannot represent non string or Date type ${JSON.stringify(value)}`);
   },
-  parseLiteral(ast) {
-    if (ast.kind !== import_graphql77.Kind.STRING) {
-      throw createGraphQLError2(`DateTime cannot represent non string or Date type ${"value" in ast && ast.value}`, {
-        nodes: ast
-      });
+  staging: {
+    server: {
+      timeout: 30000,
+      bodyLimit: "5mb"
+    },
+    graphql: {
+      introspection: true,
+      playground: true,
+      debug: false,
+      tracing: false
+    },
+    logging: {
+      level: "info",
+      format: "json",
+      requests: true,
+      errors: true
+    },
+    database: {
+      poolSize: 10,
+      connectionTimeout: 1e4
     }
-    const { value } = ast;
-    if (validateDateTime(value)) {
-      return parseDateTime(value);
-    }
-    throw createGraphQLError2(`DateTime cannot represent an invalid date-time-string ${String(value)}.`, { nodes: ast });
   },
-  extensions: {
-    codegenScalarType: "Date | string",
-    jsonSchema: {
-      type: "string",
-      format: "date-time"
+  production: {
+    server: {
+      timeout: 30000,
+      bodyLimit: "5mb"
+    },
+    graphql: {
+      introspection: false,
+      playground: false,
+      debug: false,
+      tracing: false
+    },
+    logging: {
+      level: "warn",
+      format: "json",
+      requests: false,
+      errors: true
+    },
+    database: {
+      poolSize: 20,
+      connectionTimeout: 1e4,
+      maxRetries: 5
+    },
+    redis: {
+      maxRetries: 5,
+      retryDelay: 1000
+    },
+    security: {
+      rateLimit: {
+        windowMs: 15 * 60 * 1000,
+        max: 100
+      }
+    },
+    monitoring: {
+      healthCheck: {
+        interval: 1e4,
+        timeout: 3000
+      },
+      metrics: {
+        enabled: true
+      }
     }
   }
 };
-var GraphQLDateTime = /* @__PURE__ */ new import_graphql77.GraphQLScalarType(GraphQLDateTimeConfig);
-// ../../node_modules/graphql-scalars/esm/scalars/json/JSON.js
-var import_graphql79 = __toESM(require_graphql2(), 1);
-
-// ../../node_modules/graphql-scalars/esm/scalars/json/utils.js
-var import_graphql78 = __toESM(require_graphql2(), 1);
-function identity(value) {
-  return value;
-}
-function parseObject2(ast, variables) {
-  if (ast.kind !== import_graphql78.Kind.OBJECT) {
-    throw createGraphQLError2(`JSONObject cannot represent non-object value: ${import_graphql78.print(ast)}`, ast ? {
-      nodes: ast
-    } : undefined);
+var baseConfig = {
+  server: {
+    port: env3.PORT,
+    healthPort: env3.PORT + 1,
+    corsOrigins: env3.CORS_ORIGIN.split(",").map((origin) => origin.trim()),
+    bodyLimit: "5mb",
+    timeout: 30000
+  },
+  graphql: {
+    introspection: env3.GRAPHQL_INTROSPECTION,
+    playground: env3.GRAPHQL_PLAYGROUND_ENABLED,
+    debug: env3.NODE_ENV === "development",
+    tracing: env3.NODE_ENV === "development"
+  },
+  database: {
+    url: env3.DATABASE_URL,
+    poolSize: 10,
+    connectionTimeout: 1e4,
+    maxRetries: 3
+  },
+  redis: {
+    host: env3.REDIS_HOST,
+    port: env3.REDIS_PORT,
+    db: 0,
+    maxRetries: 3,
+    retryDelay: 500,
+    keyPrefix: env3.REDIS_KEY_PREFIX
+  },
+  minio: {
+    endpoint: env3.MINIO_ENDPOINT,
+    accessKey: env3.MINIO_ACCESS_KEY,
+    secretKey: env3.MINIO_SECRET_KEY,
+    useSSL: env3.MINIO_USE_SSL,
+    region: env3.MINIO_REGION,
+    buckets: {
+      public: env3.MINIO_BUCKET_PUBLIC,
+      private: env3.MINIO_BUCKET_PRIVATE,
+      temp: env3.MINIO_BUCKET_TEMP
+    }
+  },
+  auth: {
+    jwtSecret: env3.JWT_SECRET,
+    jwtExpiry: env3.JWT_EXPIRES_IN,
+    refreshExpiry: env3.JWT_REFRESH_EXPIRES_IN,
+    bcryptRounds: env3.BCRYPT_ROUNDS
+  },
+  security: {
+    rateLimit: {
+      windowMs: 15 * 60 * 1000,
+      max: 1000
+    },
+    cors: {
+      credentials: true,
+      maxAge: 86400
+    }
+  },
+  logging: {
+    level: env3.LOG_LEVEL,
+    format: env3.NODE_ENV === "production" ? "json" : "simple",
+    requests: env3.NODE_ENV !== "production",
+    errors: true
+  },
+  monitoring: {
+    healthCheck: {
+      interval: 30000,
+      timeout: 5000
+    },
+    metrics: {
+      enabled: env3.NODE_ENV === "production",
+      prefix: "winmarket_api_"
+    }
   }
-  const value = Object.create(null);
-  ast.fields.forEach((field) => {
-    value[field.name.value] = parseLiteral(field.value, variables);
+};
+function createConfig() {
+  const environment = env3.NODE_ENV;
+  const envConfig = configurations[environment] || {};
+  const config4 = {
+    ...baseConfig,
+    ...Object.keys(envConfig).reduce((acc, key) => {
+      const k = key;
+      acc[k] = { ...baseConfig[k], ...envConfig[k] };
+      return acc;
+    }, {})
+  };
+  logger.info("\uD83D\uDD27 Configuration loaded", {
+    environment,
+    server: { port: config4.server.port, healthPort: config4.server.healthPort },
+    graphql: { introspection: config4.graphql.introspection, playground: config4.graphql.playground },
+    logging: { level: config4.logging.level, format: config4.logging.format }
   });
-  return value;
+  return config4;
 }
-function parseLiteral(ast, variables) {
-  switch (ast.kind) {
-    case import_graphql78.Kind.STRING:
-    case import_graphql78.Kind.BOOLEAN:
-      return ast.value;
-    case import_graphql78.Kind.INT:
-    case import_graphql78.Kind.FLOAT:
-      return parseFloat(ast.value);
-    case import_graphql78.Kind.OBJECT:
-      return parseObject2(ast, variables);
-    case import_graphql78.Kind.LIST:
-      return ast.values.map((n) => parseLiteral(n, variables));
-    case import_graphql78.Kind.NULL:
-      return null;
-    case import_graphql78.Kind.VARIABLE: {
-      const name = ast.name.value;
-      return variables ? variables[name] : undefined;
-    }
-  }
-}
-
-// ../../node_modules/graphql-scalars/esm/scalars/json/JSON.js
-var specifiedByURL = "http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf";
-var GraphQLJSONConfig = {
-  name: "JSON",
-  description: "The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).",
-  serialize: identity,
-  parseValue: identity,
-  parseLiteral,
-  specifiedByURL,
-  specifiedByUrl: specifiedByURL,
-  extensions: {
-    codegenScalarType: "any"
-  }
-};
-var GraphQLJSON = /* @__PURE__ */ new import_graphql79.GraphQLScalarType(GraphQLJSONConfig);
-// src/graphql/resolvers.ts
-var scalarResolvers = {
-  DateTime: GraphQLDateTime,
-  JSON: GraphQLJSON
-};
-var baseResolvers = {
-  Query: {
-    _empty: () => "GraphQL API is running"
-  },
-  Mutation: {
-    _empty: () => "GraphQL API is running"
-  },
-  Subscription: {
-    _empty: () => "GraphQL API is running"
-  },
-  User: {
-    profile: async (parent, _args, context) => {
-      return context.db.query.userProfiles.findFirst({
-        where: (profiles, { eq: eq2 }) => eq2(profiles.userId, parent.id)
-      });
-    },
-    wallet: async (parent, _args, context) => {
-      return context.db.query.userWallets.findFirst({
-        where: (userWallets3, { eq: eq2 }) => eq2(userWallets3.userId, parent.id)
-      });
-    }
-  },
-  UserProfile: {
-    user: async (parent, _args, context) => {
-      return context.db.query.users.findFirst({
-        where: (users7, { eq: eq2 }) => eq2(users7.id, parent.userId)
-      });
-    }
-  },
-  Review: {
-    product: async (parent, _args, context) => {
-      return context.db.query.products.findFirst({
-        where: (products6, { eq: eq2 }) => eq2(products6.id, parent.productId)
-      });
-    },
-    buyer: async (parent, _args, context) => {
-      return context.db.query.users.findFirst({
-        where: (users7, { eq: eq2 }) => eq2(users7.id, parent.buyerId)
-      });
-    },
-    order: async (parent, _args, context) => {
-      return context.db.query.orders.findFirst({
-        where: (orders6, { eq: eq2 }) => eq2(orders6.id, parent.orderId)
-      });
-    }
-  }
-};
-var resolvers = {
-  ...scalarResolvers,
-  Query: {
-    ...baseResolvers.Query,
-    ...authResolvers.Query,
-    ...usersResolvers.Query
-  },
-  Mutation: {
-    ...baseResolvers.Mutation,
-    ...authResolvers.Mutation,
-    ...usersResolvers.Mutation
-  },
-  Subscription: {
-    ...baseResolvers.Subscription
-  },
-  User: {
-    ...baseResolvers.User,
-    ...usersResolvers.User
-  },
-  UserProfile: {
-    ...usersResolvers.UserProfile
-  },
-  Wallet: {
-    ...usersResolvers.Wallet
-  }
-};
+var config4 = createConfig();
 
 // ../../node_modules/minio/dist/esm/internal/callbackify.mjs
 function callbackify(fn) {
@@ -184640,9 +186366,9 @@ function validateAmpersand(xmlData, i) {
     i++;
     return validateNumberAmpersand(xmlData, i);
   }
-  let count2 = 0;
-  for (;i < xmlData.length; i++, count2++) {
-    if (xmlData[i].match(/\w/) && count2 < 20)
+  let count5 = 0;
+  for (;i < xmlData.length; i++, count5++) {
+    if (xmlData[i].match(/\w/) && count5 < 20)
       continue;
     if (xmlData[i] === ";")
       break;
@@ -186921,8 +188647,8 @@ class Matcher {
     const siblingKey = namespace2 ? `${namespace2}:${tagName}` : tagName;
     const counter = siblings.get(siblingKey) || 0;
     let position = 0;
-    for (const count2 of siblings.values()) {
-      position += count2;
+    for (const count5 of siblings.values()) {
+      position += count5;
     }
     siblings.set(siblingKey, counter + 1);
     const node = {
@@ -189331,11 +191057,11 @@ function parseBucketNotification(xml) {
   let xmlobj = parseXml2(xml);
   xmlobj = xmlobj.NotificationConfiguration;
   if (xmlobj.TopicConfiguration) {
-    toArray(xmlobj.TopicConfiguration).forEach((config4) => {
-      const Id = toArray(config4.Id)[0];
-      const Topic = toArray(config4.Topic)[0];
-      const Event = genEvents(config4.Event);
-      const Filter = genFilterRules(config4.Filter);
+    toArray(xmlobj.TopicConfiguration).forEach((config5) => {
+      const Id = toArray(config5.Id)[0];
+      const Topic = toArray(config5.Topic)[0];
+      const Event = genEvents(config5.Event);
+      const Filter = genFilterRules(config5.Filter);
       result.TopicConfiguration.push({
         Id,
         Topic,
@@ -189345,11 +191071,11 @@ function parseBucketNotification(xml) {
     });
   }
   if (xmlobj.QueueConfiguration) {
-    toArray(xmlobj.QueueConfiguration).forEach((config4) => {
-      const Id = toArray(config4.Id)[0];
-      const Queue2 = toArray(config4.Queue)[0];
-      const Event = genEvents(config4.Event);
-      const Filter = genFilterRules(config4.Filter);
+    toArray(xmlobj.QueueConfiguration).forEach((config5) => {
+      const Id = toArray(config5.Id)[0];
+      const Queue2 = toArray(config5.Queue)[0];
+      const Event = genEvents(config5.Event);
+      const Filter = genFilterRules(config5.Filter);
       result.QueueConfiguration.push({
         Id,
         Queue: Queue2,
@@ -189359,11 +191085,11 @@ function parseBucketNotification(xml) {
     });
   }
   if (xmlobj.CloudFunctionConfiguration) {
-    toArray(xmlobj.CloudFunctionConfiguration).forEach((config4) => {
-      const Id = toArray(config4.Id)[0];
-      const CloudFunction = toArray(config4.CloudFunction)[0];
-      const Event = genEvents(config4.Event);
-      const Filter = genFilterRules(config4.Filter);
+    toArray(xmlobj.CloudFunctionConfiguration).forEach((config5) => {
+      const Id = toArray(config5.Id)[0];
+      const CloudFunction = toArray(config5.CloudFunction)[0];
+      const Event = genEvents(config5.Event);
+      const Filter = genFilterRules(config5.Filter);
       result.CloudFunctionConfiguration.push({
         Id,
         CloudFunction,
@@ -191428,7 +193154,7 @@ class TypedClient {
     if (setOpts.versionId) {
       query += `&versionId=${setOpts.versionId}`;
     }
-    const config4 = {
+    const config5 = {
       Status: setOpts.status
     };
     const builder = new import_xml2js.default.Builder({
@@ -191438,7 +193164,7 @@ class TypedClient {
       },
       headless: true
     });
-    const payload = builder.buildObject(config4);
+    const payload = builder.buildObject(config5);
     const headers = {};
     headers["Content-MD5"] = toMd5(payload);
     await this.makeRequestAsyncOmit({
@@ -191609,7 +193335,7 @@ class TypedClient {
     }
     const method = "PUT";
     const query = "object-lock";
-    const config4 = {
+    const config5 = {
       ObjectLockEnabled: "Enabled"
     };
     const configKeys = Object.keys(lockConfigOpts);
@@ -191618,16 +193344,16 @@ class TypedClient {
       if (!isAllKeysSet) {
         throw new TypeError(`lockConfigOpts.mode,lockConfigOpts.unit,lockConfigOpts.validity all the properties should be specified.`);
       } else {
-        config4.Rule = {
+        config5.Rule = {
           DefaultRetention: {}
         };
         if (lockConfigOpts.mode) {
-          config4.Rule.DefaultRetention.Mode = lockConfigOpts.mode;
+          config5.Rule.DefaultRetention.Mode = lockConfigOpts.mode;
         }
         if (lockConfigOpts.unit === RETENTION_VALIDITY_UNITS.DAYS) {
-          config4.Rule.DefaultRetention.Days = lockConfigOpts.validity;
+          config5.Rule.DefaultRetention.Days = lockConfigOpts.validity;
         } else if (lockConfigOpts.unit === RETENTION_VALIDITY_UNITS.YEARS) {
-          config4.Rule.DefaultRetention.Years = lockConfigOpts.validity;
+          config5.Rule.DefaultRetention.Years = lockConfigOpts.validity;
         }
       }
     }
@@ -191638,7 +193364,7 @@ class TypedClient {
       },
       headless: true
     });
-    const payload = builder.buildObject(config4);
+    const payload = builder.buildObject(config5);
     const headers = {};
     headers["Content-MD5"] = toMd5(payload);
     await this.makeRequestAsyncOmit({
@@ -191841,7 +193567,7 @@ class TypedClient {
     }
     const method = "POST";
     const query = `select&select-type=2`;
-    const config4 = [{
+    const config5 = [{
       Expression: selectOpts.expression
     }, {
       ExpressionType: selectOpts.expressionType || "SQL"
@@ -191851,12 +193577,12 @@ class TypedClient {
       OutputSerialization: [selectOpts.outputSerialization]
     }];
     if (selectOpts.requestProgress) {
-      config4.push({
+      config5.push({
         RequestProgress: selectOpts === null || selectOpts === undefined ? undefined : selectOpts.requestProgress
       });
     }
     if (selectOpts.scanRange) {
-      config4.push({
+      config5.push({
         ScanRange: selectOpts.scanRange
       });
     }
@@ -191867,7 +193593,7 @@ class TypedClient {
       },
       headless: true
     });
-    const payload = builder.buildObject(config4);
+    const payload = builder.buildObject(config5);
     const res = await this.makeRequestAsync({
       method,
       bucketName,
@@ -192687,11 +194413,11 @@ class TypedClient {
     };
     return readStream;
   }
-  async setBucketNotification(bucketName, config4) {
+  async setBucketNotification(bucketName, config5) {
     if (!isValidBucketName(bucketName)) {
       throw new InvalidBucketNameError("Invalid bucket name: " + bucketName);
     }
-    if (!isObject9(config4)) {
+    if (!isObject9(config5)) {
       throw new TypeError('notification config should be of type "Object"');
     }
     const method = "PUT";
@@ -192703,7 +194429,7 @@ class TypedClient {
       },
       headless: true
     });
-    const payload = builder.buildObject(config4);
+    const payload = builder.buildObject(config5);
     await this.makeRequestAsyncOmit({
       method,
       bucketName,
@@ -193055,14 +194781,14 @@ async function initializeMonitoring() {
 import crypto6 from "node:crypto";
 import fs5 from "node:fs";
 import path3 from "node:path";
-function readMigrationFiles(config4) {
+function readMigrationFiles(config5) {
   let migrationFolderTo;
-  if (typeof config4 === "string") {
-    const configAsString = fs5.readFileSync(path3.resolve(".", config4), "utf8");
+  if (typeof config5 === "string") {
+    const configAsString = fs5.readFileSync(path3.resolve(".", config5), "utf8");
     const jsonConfig = JSON.parse(configAsString);
     migrationFolderTo = jsonConfig.out;
   } else {
-    migrationFolderTo = config4.migrationsFolder;
+    migrationFolderTo = config5.migrationsFolder;
   }
   if (!migrationFolderTo) {
     throw new Error("no migration folder defined");
@@ -193095,9 +194821,9 @@ function readMigrationFiles(config4) {
 }
 
 // ../../node_modules/drizzle-orm/postgres-js/migrator.js
-async function migrate(db3, config4) {
-  const migrations = readMigrationFiles(config4);
-  await db3.dialect.migrate(migrations, db3.session, config4);
+async function migrate(db3, config5) {
+  const migrations = readMigrationFiles(config5);
+  await db3.dialect.migrate(migrations, db3.session, config5);
 }
 
 // src/infrastructure/database/migrations.ts
@@ -193111,16 +194837,268 @@ async function runMigrations() {
     throw error53;
   }
 }
+async function seedDatabase() {
+  try {
+    logger.info("Seeding database with initial data...");
+    logger.info("✅ Database seeding completed successfully");
+  } catch (error53) {
+    logger.error("❌ Database seeding failed:", error53);
+    throw error53;
+  }
+}
+
+// src/infrastructure/health-endpoint.ts
+import { createServer } from "http";
+class HealthEndpointService {
+  server;
+  port;
+  constructor(port = 4001) {
+    this.port = port;
+  }
+  async start() {
+    this.server = createServer(this.handleRequest.bind(this));
+    return new Promise((resolve, reject) => {
+      this.server.listen(this.port, (err) => {
+        if (err) {
+          reject(err);
+        } else {
+          logger.info(`\uD83D\uDD0D Health endpoint listening on http://localhost:${this.port}/health`);
+          resolve();
+        }
+      });
+    });
+  }
+  async stop() {
+    if (this.server) {
+      return new Promise((resolve) => {
+        this.server.close(() => {
+          logger.info("✅ Health endpoint stopped");
+          resolve();
+        });
+      });
+    }
+  }
+  async handleRequest(req, res) {
+    const url2 = req.url;
+    const method = req.method;
+    res.setHeader("Access-Control-Allow-Origin", "*");
+    res.setHeader("Access-Control-Allow-Methods", "GET, OPTIONS");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    if (method === "OPTIONS") {
+      res.writeHead(200);
+      res.end();
+      return;
+    }
+    if (method !== "GET") {
+      res.writeHead(405, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({ error: "Method not allowed" }));
+      return;
+    }
+    try {
+      switch (url2) {
+        case "/health":
+          await this.handleHealthCheck(res);
+          break;
+        case "/ready":
+          await this.handleReadinessCheck(res);
+          break;
+        case "/live":
+          await this.handleLivenessCheck(res);
+          break;
+        default:
+          res.writeHead(404, { "Content-Type": "application/json" });
+          res.end(JSON.stringify({
+            error: "Not found",
+            availableEndpoints: ["/health", "/ready", "/live"]
+          }));
+      }
+    } catch (error53) {
+      logger.error("Health endpoint error:", error53);
+      res.writeHead(500, { "Content-Type": "application/json" });
+      res.end(JSON.stringify({
+        error: "Internal server error",
+        status: "unhealthy"
+      }));
+    }
+  }
+  async handleHealthCheck(res) {
+    const healthReport = await performHealthCheck();
+    const statusCode = healthReport.status === "healthy" ? 200 : healthReport.status === "degraded" ? 200 : 503;
+    res.writeHead(statusCode, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({
+      status: healthReport.status,
+      timestamp: healthReport.timestamp,
+      uptime: process.uptime(),
+      services: healthReport.services,
+      environment: "development",
+      version: process.env.npm_package_version || "1.0.0"
+    }));
+  }
+  async handleReadinessCheck(res) {
+    const healthReport = await performHealthCheck();
+    const criticalServices = ["database"];
+    const criticalHealthy = healthReport.services.filter((s) => criticalServices.includes(s.service)).every((s) => s.status === "healthy");
+    const statusCode = criticalHealthy ? 200 : 503;
+    res.writeHead(statusCode, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({
+      ready: criticalHealthy,
+      timestamp: healthReport.timestamp,
+      criticalServices: healthReport.services.filter((s) => criticalServices.includes(s.service))
+    }));
+  }
+  async handleLivenessCheck(res) {
+    const isAlive = process.uptime() > 0;
+    res.writeHead(isAlive ? 200 : 503, { "Content-Type": "application/json" });
+    res.end(JSON.stringify({
+      alive: isAlive,
+      timestamp: new Date().toISOString(),
+      uptime: process.uptime(),
+      memory: process.memoryUsage(),
+      pid: process.pid
+    }));
+  }
+}
+
+// src/infrastructure/app-initializer.ts
+class AppInitializer {
+  healthEndpoint;
+  async initialize() {
+    const result = {
+      success: false,
+      services: {
+        database: false,
+        cache: false,
+        storage: false,
+        healthEndpoint: false
+      },
+      errors: []
+    };
+    try {
+      logger.info("\uD83D\uDE80 Initializing WinMarket V2 API...");
+      logger.info("\uD83D\uDCCA Initializing monitoring system...");
+      const monitoringInitialized = await initializeMonitoring();
+      if (!monitoringInitialized) {
+        result.errors.push("Failed to initialize monitoring system");
+        return result;
+      }
+      logger.info("\uD83D\uDD0D Performing initial health check...");
+      const healthReport = await performHealthCheck();
+      if (healthReport.status === "unhealthy") {
+        logger.error("❌ Initial health check failed");
+        result.errors.push("Initial health check failed");
+        return result;
+      }
+      if (healthReport.status === "degraded") {
+        logger.warn("⚠️ Some services are unhealthy, continuing with limited functionality");
+      }
+      for (const service of healthReport.services) {
+        switch (service.service) {
+          case "database":
+            result.services.database = service.status === "healthy";
+            if (!result.services.database) {
+              logger.warn("⚠️ Database service is unhealthy");
+            }
+            break;
+          case "cache":
+            result.services.cache = service.status === "healthy";
+            if (!result.services.cache) {
+              logger.warn("⚠️ Cache service is unhealthy");
+            }
+            break;
+          case "storage":
+            result.services.storage = service.status === "healthy";
+            if (!result.services.storage) {
+              logger.warn("⚠️ Storage service is unhealthy");
+            }
+            break;
+        }
+      }
+      if (result.services.database && config4.database && true) {
+        try {
+          logger.info("\uD83D\uDD04 Running database migrations...");
+          await runMigrations();
+          logger.info("✅ Database migrations completed");
+        } catch (error53) {
+          logger.warn("⚠️ Database migrations failed:", error53);
+        }
+      }
+      try {
+        logger.info("\uD83C\uDFE5 Starting health endpoint...");
+        this.healthEndpoint = new HealthEndpointService(config4.server.healthPort);
+        await this.healthEndpoint.start();
+        result.services.healthEndpoint = true;
+      } catch (error53) {
+        logger.warn("⚠️ Failed to start health endpoint:", error53);
+        result.errors.push("Failed to start health endpoint");
+      }
+      const criticalServices = ["database"];
+      const criticalHealthy = criticalServices.every((service) => {
+        const serviceKey = service;
+        return result.services[serviceKey];
+      });
+      if (!criticalHealthy) {
+        logger.error("❌ Critical services are not healthy");
+        result.errors.push("Critical services are not healthy");
+        return result;
+      }
+      result.success = true;
+      logger.info("✅ Application initialization completed successfully");
+      logger.info("\uD83D\uDCCA Service Status Summary:", {
+        database: result.services.database ? "✅" : "❌",
+        cache: result.services.cache ? "✅" : "⚠️",
+        storage: result.services.storage ? "✅" : "⚠️",
+        healthEndpoint: result.services.healthEndpoint ? "✅" : "⚠️"
+      });
+      return result;
+    } catch (error53) {
+      logger.error("\uD83D\uDCA5 Application initialization failed:", error53);
+      result.errors.push(`Initialization failed: ${error53}`);
+      return result;
+    }
+  }
+  async seedDevelopmentData() {
+    if (config4.database && true) {
+      try {
+        logger.info("\uD83C\uDF31 Seeding development data...");
+        await seedDatabase();
+        logger.info("✅ Development data seeded");
+      } catch (error53) {
+        logger.warn("⚠️ Failed to seed development data:", error53);
+      }
+    }
+  }
+  async shutdown() {
+    logger.info("\uD83E\uDDF9 Shutting down application services...");
+    const shutdownPromises = [];
+    if (this.healthEndpoint) {
+      shutdownPromises.push(this.healthEndpoint.stop());
+    }
+    try {
+      shutdownPromises.push(cache.disconnect());
+    } catch (error53) {
+      logger.warn("⚠️ Cache disconnect error:", error53);
+    }
+    try {
+      await Promise.all(shutdownPromises);
+      logger.info("✅ Application shutdown completed");
+    } catch (error53) {
+      logger.error("❌ Error during application shutdown:", error53);
+    }
+  }
+  getHealthEndpointPort() {
+    return config4.server.healthPort;
+  }
+}
 
 // src/index.ts
 dotenv.config();
 var schema8 = makeExecutableSchema2({
-  typeDefs,
-  resolvers
+  typeDefs: allTypeDefs,
+  resolvers: allResolvers
 });
 var server = new ApolloServer({
   schema: schema8,
-  introspection: env3.GRAPHQL_INTROSPECTION,
+  introspection: config4.graphql.introspection,
   plugins: [
     {
       async requestDidStart() {
@@ -193146,39 +195124,25 @@ var server = new ApolloServer({
   ]
 });
 async function startServer() {
+  const appInitializer = new AppInitializer;
   try {
     logger.info("\uD83D\uDE80 Starting WinMarket V2 API...");
-    const monitoringInitialized = await initializeMonitoring();
-    if (!monitoringInitialized) {
-      logger.error("❌ Failed to initialize monitoring");
+    const initResult = await appInitializer.initialize();
+    if (!initResult.success) {
+      logger.error("❌ Application initialization failed:", initResult.errors);
       process.exit(1);
-    }
-    const healthReport = await performHealthCheck();
-    if (env3.NODE_ENV !== "test") {
-      const dbHealthy = healthReport.services.find((s) => s.service === "database")?.status === "healthy";
-      if (dbHealthy) {
-        await runMigrations();
-        logger.info("✅ Database migrations completed");
-      } else {
-        logger.warn("⚠️ Skipping migrations - database not available");
-      }
-    }
-    if (healthReport.status === "unhealthy") {
-      logger.error("❌ Initial health check failed - aborting startup");
-      process.exit(1);
-    }
-    if (healthReport.status === "degraded") {
-      logger.warn("⚠️ Some services are unhealthy, but continuing startup...");
     }
     const { url: url2 } = await startStandaloneServer(server, {
-      listen: { port: env3.PORT },
+      listen: { port: config4.server.port },
       context: createContext
     });
     logger.info(`✅ WinMarket V2 GraphQL API ready at ${url2}`);
-    if (env3.GRAPHQL_PLAYGROUND_ENABLED) {
-      logger.info(`\uD83D\uDCCA GraphQL Playground available at ${url2}graphql`);
+    if (config4.graphql.playground) {
+      logger.info(`\uD83D\uDCCA GraphQL Playground available at ${url2}`);
     }
-    logger.info(`\uD83D\uDD0D Health check endpoint: ${url2}health`);
+    logger.info(`\uD83D\uDD0D Health check endpoint: http://localhost:${appInitializer.getHealthEndpointPort()}/health`);
+    await appInitializer.seedDevelopmentData();
+    global.__appInitializer = appInitializer;
   } catch (error53) {
     logger.error("❌ Failed to start server:", error53);
     await cleanup();
@@ -193188,10 +195152,11 @@ async function startServer() {
 async function cleanup() {
   logger.info("\uD83E\uDDF9 Cleaning up resources...");
   try {
+    const appInitializer = global.__appInitializer;
     await Promise.all([
       server.stop(),
-      closeDatabaseConnection(),
-      cache.disconnect()
+      appInitializer?.shutdown(),
+      closeDatabaseConnection()
     ]);
     logger.info("✅ Cleanup completed");
   } catch (error53) {
