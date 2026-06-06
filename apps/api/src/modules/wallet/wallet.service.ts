@@ -1,7 +1,7 @@
 import { eq, and, desc, gte, lte } from 'drizzle-orm';
 import type { Database } from '../../infrastructure/database/connection';
 import { users, userWallets, walletTransactions } from '../../infrastructure/database/schema';
-import { createId } from '@paralleldrive/cuid2';
+import { randomUUID } from "crypto";
 
 export interface DepositInput {
   amount: number;
@@ -36,7 +36,7 @@ export class WalletService {
     if (!wallet) {
       // Create wallet if it doesn't exist
       const [newWallet] = await this.db.insert(userWallets).values({
-        id: createId(),
+        id: randomUUID(),
         userId,
         balance: '0.00',
         frozenBalance: '0.00',
@@ -146,7 +146,7 @@ export class WalletService {
 
       // Create transaction record
       const [transaction] = await tx.insert(walletTransactions).values({
-        id: createId(),
+        id: randomUUID(),
         userId,
         type: 'DEPOSIT',
         amount: input.amount.toFixed(2),
@@ -186,7 +186,7 @@ export class WalletService {
 
       // Create transaction record
       const [transaction] = await tx.insert(walletTransactions).values({
-        id: createId(),
+        id: randomUUID(),
         userId,
         type: 'WITHDRAWAL',
         amount: (-input.amount).toFixed(2),
@@ -226,7 +226,7 @@ export class WalletService {
 
       // Create transaction record
       const [transaction] = await tx.insert(walletTransactions).values({
-        id: createId(),
+        id: randomUUID(),
         userId,
         type: amount > 0 ? 'DEPOSIT' : 'WITHDRAWAL',
         amount: amount.toFixed(2),

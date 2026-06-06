@@ -1,5 +1,5 @@
 import { pgTable, uuid, varchar, text, decimal, integer, timestamp, pgEnum } from "drizzle-orm/pg-core";
-import { createId } from "@paralleldrive/cuid2";
+import { randomUUID } from "crypto";
 import { users } from "./users";
 import { products } from "./products";
 
@@ -28,7 +28,7 @@ export const paymentMethodEnum = pgEnum("payment_method", [
 ]);
 
 export const orders = pgTable("orders", {
-  id: uuid("id").primaryKey().$defaultFn(() => createId()),
+  id: uuid("id").primaryKey().$defaultFn(() => randomUUID()),
   buyerId: uuid("buyer_id").notNull().references(() => users.id),
   sellerId: uuid("seller_id").notNull().references(() => users.id),
   orderNumber: varchar("order_number", { length: 20 }).notNull().unique(),
@@ -66,7 +66,7 @@ export const orders = pgTable("orders", {
 });
 
 export const orderItems = pgTable("order_items", {
-  id: uuid("id").primaryKey().$defaultFn(() => createId()),
+  id: uuid("id").primaryKey().$defaultFn(() => randomUUID()),
   orderId: uuid("order_id").notNull().references(() => orders.id, { onDelete: "cascade" }),
   productId: uuid("product_id").notNull().references(() => products.id),
   variantId: uuid("variant_id"), // references product_variants.id
@@ -79,7 +79,7 @@ export const orderItems = pgTable("order_items", {
 });
 
 export const walletTransactions = pgTable("wallet_transactions", {
-  id: uuid("id").primaryKey().$defaultFn(() => createId()),
+  id: uuid("id").primaryKey().$defaultFn(() => randomUUID()),
   userId: uuid("user_id").notNull().references(() => users.id),
   orderId: uuid("order_id").references(() => orders.id),
   type: varchar("type", { length: 50 }).notNull(), // DEPOSIT, WITHDRAWAL, COMMISSION, PAYMENT, REFUND

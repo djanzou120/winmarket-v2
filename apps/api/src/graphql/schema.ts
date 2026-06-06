@@ -3,6 +3,9 @@ import { authTypeDefs } from '../modules/auth/auth.module';
 import { productsTypeDefs } from '../modules/products/products.module';
 import { walletTypeDefs } from '../modules/wallet/wallet.module';
 import { ordersTypeDefs } from '../modules/orders/orders.module';
+import { reviewsTypeDefs } from '../modules/reviews/reviews.module';
+import { deliveryTypeDefs } from '../modules/delivery/delivery.module';
+import { notificationsTypeDefs } from '../modules/notifications/notifications.module';
 
 // Base schema with common types
 const baseTypeDefs = gql`
@@ -109,4 +112,7 @@ export const typeDefs = [
   productsTypeDefs,
   walletTypeDefs,
   ordersTypeDefs,
+  reviewsTypeDefs,
+  deliveryTypeDefs,
+  notificationsTypeDefs,
 ];

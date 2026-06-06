@@ -2,6 +2,9 @@ import { authResolvers } from '../modules/auth/auth.module';
 import { productsResolvers } from '../modules/products/products.module';
 import { walletResolvers } from '../modules/wallet/wallet.module';
 import { ordersResolvers } from '../modules/orders/orders.module';
+import { reviewsResolvers } from '../modules/reviews/reviews.module';
+import { deliveryResolvers } from '../modules/delivery/delivery.module';
+import { notificationsResolvers } from '../modules/notifications/notifications.module';
 import { GraphQLDateTime, GraphQLJSON } from 'graphql-scalars';
 
 // Custom scalar resolvers
@@ -77,6 +80,9 @@ export const resolvers = {
     ...productsResolvers.Query,
     ...walletResolvers.Query,
     ...ordersResolvers.Query,
+    ...reviewsResolvers.Query,
+    ...deliveryResolvers.Query,
+    ...notificationsResolvers.Query,
   },
 
   Mutation: {
@@ -85,12 +91,16 @@ export const resolvers = {
     ...productsResolvers.Mutation,
     ...walletResolvers.Mutation,
     ...ordersResolvers.Mutation,
+    ...reviewsResolvers.Mutation,
+    ...deliveryResolvers.Mutation,
+    ...notificationsResolvers.Mutation,
   },
 
   Subscription: {
     ...baseResolvers.Subscription,
     ...(walletResolvers.Subscription || {}),
     ...(ordersResolvers.Subscription || {}),
+    ...(notificationsResolvers.Subscription || {}),
   },
 
   // Type resolvers
@@ -102,20 +112,12 @@ export const resolvers = {
     ...baseResolvers.UserProfile,
   },
 
-  Review: {
-    ...baseResolvers.Review,
-  },
-
   Product: {
     ...productsResolvers.Product,
   },
 
   Category: {
     ...productsResolvers.Category,
-  },
-
-  DeliveryOption: {
-    ...productsResolvers.DeliveryOption,
   },
 
   Wallet: {
@@ -136,5 +138,45 @@ export const resolvers = {
 
   OrderStatusHistory: {
     ...ordersResolvers.OrderStatusHistory,
+  },
+
+  // Reviews type resolvers
+  Review: {
+    ...baseResolvers.Review,
+    ...reviewsResolvers.Review,
+  },
+
+  ReviewVote: {
+    ...reviewsResolvers.ReviewVote,
+  },
+
+  ReviewReport: {
+    ...reviewsResolvers.ReviewReport,
+  },
+
+  // Delivery type resolvers
+  DeliveryProvider: {
+    ...deliveryResolvers.DeliveryProvider,
+  },
+
+  DeliveryOption: {
+    ...deliveryResolvers.DeliveryOption,
+  },
+
+  DeliveryZone: {
+    ...deliveryResolvers.DeliveryZone,
+  },
+
+  // Notifications type resolvers
+  Notification: {
+    ...notificationsResolvers.Notification,
+  },
+
+  NotificationPreference: {
+    ...notificationsResolvers.NotificationPreference,
+  },
+
+  DeviceToken: {
+    ...notificationsResolvers.DeviceToken,
   },
 };

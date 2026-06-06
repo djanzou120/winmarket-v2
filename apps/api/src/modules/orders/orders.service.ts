@@ -1,7 +1,7 @@
 import { eq, and, desc, gte, lte, inArray } from 'drizzle-orm';
 import type { Database } from '../../infrastructure/database/connection';
 import { orders, orderItems, products, users, walletTransactions, userWallets } from '../../infrastructure/database/schema';
-import { createId } from '@paralleldrive/cuid2';
+import { randomUUID } from "crypto";
 
 export interface CreateOrderInput {
   sellerId: string;
@@ -61,7 +61,7 @@ export class OrdersService {
         subtotal += itemTotal;
 
         orderItemsData.push({
-          id: createId(),
+          id: randomUUID(),
           productId: item.productId,
           variantId: item.variantId,
           quantity: item.quantity,
@@ -84,7 +84,7 @@ export class OrdersService {
 
       // Create order
       const [order] = await tx.insert(orders).values({
-        id: createId(),
+        id: randomUUID(),
         buyerId,
         sellerId: input.sellerId,
         orderNumber,
@@ -161,7 +161,7 @@ export class OrdersService {
 
     // Create buyer transaction
     await tx.insert(walletTransactions).values({
-      id: createId(),
+      id: randomUUID(),
       userId: buyerId,
       orderId: order.id,
       type: 'PAYMENT',
@@ -178,7 +178,7 @@ export class OrdersService {
 
     if (!sellerWallet) {
       [sellerWallet] = await tx.insert(userWallets).values({
-        id: createId(),
+        id: randomUUID(),
         userId: sellerId,
         balance: '0.00',
         frozenBalance: '0.00',
@@ -203,7 +203,7 @@ export class OrdersService {
 
     // Create seller transaction
     await tx.insert(walletTransactions).values({
-      id: createId(),
+      id: randomUUID(),
       userId: sellerId,
       orderId: order.id,
       type: 'COMMISSION',

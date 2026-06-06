@@ -28,6 +28,19 @@ const envSchema = z.object({
   JWT_REFRESH_EXPIRES_IN: z.string().default("30d"),
   BETTER_AUTH_SECRET: z.string().min(32, "BETTER_AUTH_SECRET must be at least 32 characters"),
 
+  // Social Auth
+  GOOGLE_CLIENT_ID: z.string().optional(),
+  GOOGLE_CLIENT_SECRET: z.string().optional(),
+  GITHUB_CLIENT_ID: z.string().optional(),
+  GITHUB_CLIENT_SECRET: z.string().optional(),
+  FACEBOOK_CLIENT_ID: z.string().optional(),
+  FACEBOOK_CLIENT_SECRET: z.string().optional(),
+
+  // Frontend URLs
+  FRONTEND_URL: z.string().default("http://localhost:3000"),
+  ADMIN_URL: z.string().default("http://localhost:3001"),
+  COOKIE_DOMAIN: z.string().default("localhost"),
+
   // MinIO/S3
   MINIO_ENDPOINT: z.string().default("http://localhost:9000"),
   MINIO_ACCESS_KEY: z.string().min(1, "MINIO_ACCESS_KEY is required"),

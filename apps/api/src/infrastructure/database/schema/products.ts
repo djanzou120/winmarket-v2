@@ -1,12 +1,12 @@
 import { pgTable, uuid, varchar, text, decimal, integer, timestamp, boolean, pgEnum } from "drizzle-orm/pg-core";
-import { createId } from "@paralleldrive/cuid2";
+import { randomUUID } from "crypto";
 import { users } from "./users";
 
 export const productStatusEnum = pgEnum("product_status", ["DRAFT", "ACTIVE", "INACTIVE", "SUSPENDED"]);
 export const productConditionEnum = pgEnum("product_condition", ["NEW", "USED_LIKE_NEW", "USED_GOOD", "USED_FAIR"]);
 
 export const categories = pgTable("categories", {
-  id: uuid("id").primaryKey().$defaultFn(() => createId()),
+  id: uuid("id").primaryKey().$defaultFn(() => randomUUID()),
   name: varchar("name", { length: 100 }).notNull(),
   slug: varchar("slug", { length: 100 }).notNull().unique(),
   description: text("description"),
@@ -19,7 +19,7 @@ export const categories = pgTable("categories", {
 });
 
 export const products = pgTable("products", {
-  id: uuid("id").primaryKey().$defaultFn(() => createId()),
+  id: uuid("id").primaryKey().$defaultFn(() => randomUUID()),
   sellerId: uuid("seller_id").notNull().references(() => users.id),
   categoryId: uuid("category_id").notNull().references(() => categories.id),
   title: varchar("title", { length: 200 }).notNull(),
@@ -52,7 +52,7 @@ export const products = pgTable("products", {
 });
 
 export const productVariants = pgTable("product_variants", {
-  id: uuid("id").primaryKey().$defaultFn(() => createId()),
+  id: uuid("id").primaryKey().$defaultFn(() => randomUUID()),
   productId: uuid("product_id").notNull().references(() => products.id, { onDelete: "cascade" }),
   name: varchar("name", { length: 100 }).notNull(),
   sku: varchar("sku", { length: 100 }).unique(),

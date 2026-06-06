@@ -1,11 +1,11 @@
 import { pgTable, uuid, varchar, text, timestamp, boolean, decimal, pgEnum } from "drizzle-orm/pg-core";
-import { createId } from "@paralleldrive/cuid2";
+import { randomUUID } from "crypto";
 
 export const userTypeEnum = pgEnum("user_type", ["BUYER", "SELLER", "ADMIN"]);
 export const userStatusEnum = pgEnum("user_status", ["ACTIVE", "SUSPENDED", "PENDING_VERIFICATION"]);
 
 export const users = pgTable("users", {
-  id: uuid("id").primaryKey().$defaultFn(() => createId()),
+  id: uuid("id").primaryKey().$defaultFn(() => randomUUID()),
   email: varchar("email", { length: 255 }).notNull().unique(),
   phone: varchar("phone", { length: 20 }).unique(),
   passwordHash: varchar("password_hash", { length: 255 }).notNull(),
@@ -22,7 +22,7 @@ export const users = pgTable("users", {
 });
 
 export const userProfiles = pgTable("user_profiles", {
-  id: uuid("id").primaryKey().$defaultFn(() => createId()),
+  id: uuid("id").primaryKey().$defaultFn(() => randomUUID()),
   userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }),
   bio: text("bio"),
   address: text("address"),
@@ -38,7 +38,7 @@ export const userProfiles = pgTable("user_profiles", {
 });
 
 export const userWallets = pgTable("user_wallets", {
-  id: uuid("id").primaryKey().$defaultFn(() => createId()),
+  id: uuid("id").primaryKey().$defaultFn(() => randomUUID()),
   userId: uuid("user_id").notNull().references(() => users.id, { onDelete: "cascade" }).unique(),
   balance: decimal("balance", { precision: 10, scale: 2 }).notNull().default("0.00"),
   frozenBalance: decimal("frozen_balance", { precision: 10, scale: 2 }).notNull().default("0.00"),
