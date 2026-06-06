@@ -1,19 +1,18 @@
-version: '3.8'
-
 services:
   postgres:
     image: postgres:15
     container_name: winmarket-postgres
     environment:
       POSTGRES_DB: winmarket_v2
-      POSTGRES_USER: winmarket
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+      - ./scripts/init-user.sql:/docker-entrypoint-initdb.d/init-user.sql
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U winmarket -d winmarket_v2"]
+      test: ["CMD-SHELL", "pg_isready -U postgres -d winmarket_v2"]
       interval: 5s
       timeout: 5s
       retries: 5

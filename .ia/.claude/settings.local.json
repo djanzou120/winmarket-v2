@@ -9,7 +9,13 @@
       "Bash(chmod +x scripts/update-services-to-drizzle.js)",
       "Bash(bun scripts/update-services-to-drizzle.js)",
       "Bash(bun scripts/generate-services.js)",
-      "Bash(tree -L 3 /Users/djanzou120/Documents/Projects/winmarket-v2)"
+      "Bash(tree -L 3 /Users/djanzou120/Documents/Projects/winmarket-v2)",
+      "Bash(pgrep -x \"Docker Desktop\")",
+      "Bash(open -a \"Docker Desktop\")",
+      "Bash(bun add minio)",
+      "Bash(docker exec winmarket-postgres cat /var/lib/postgresql/data/pg_hba.conf)",
+      "Bash(grep -v '^$')",
+      "Bash(docker exec -it winmarket-postgres psql -d postgres)"
     ],
     "deny": [],
     "ask": []

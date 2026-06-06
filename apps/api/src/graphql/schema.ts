@@ -25,6 +25,7 @@ const baseTypeDefs = gql`
   type UserProfile {
     id: ID!
     userId: ID!
+    user: User!
     firstName: String
     lastName: String
     phone: String

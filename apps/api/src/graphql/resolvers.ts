@@ -32,8 +32,8 @@ const baseResolvers = {
     },
 
     wallet: async (parent: any, _args: any, context: any) => {
-      return context.db.query.wallets.findFirst({
-        where: (wallets: any, { eq }: any) => eq(wallets.userId, parent.id),
+      return context.db.query.userWallets.findFirst({
+        where: (userWallets: any, { eq }: any) => eq(userWallets.userId, parent.id),
       });
     },
   },

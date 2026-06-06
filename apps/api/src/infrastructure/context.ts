@@ -1,14 +1,11 @@
 import type { BaseContext } from '@apollo/server';
-import { db, type Database } from 'database';
+import { db, type Database } from './database/connection';
 import { createRedisClient } from './cache';
-import { logger } from './logger';
-import { verifyToken } from '../modules/auth/utils/jwt';
-import type { User } from 'database/types';
 
 export interface GraphQLContext extends BaseContext {
   db: Database;
   cache: ReturnType<typeof createRedisClient>;
-  user?: User;
+  user?: any; // Will be typed properly once auth is implemented
   isAuthenticated: boolean;
   req: {
     headers: Record<string, string>;
@@ -20,40 +17,36 @@ export interface GraphQLContext extends BaseContext {
 export async function createContext({ req }: { req: any }): Promise<GraphQLContext> {
   const cache = createRedisClient();
 
-  // Extract auth token
-  const authorization = req.headers.authorization || '';
-  const token = authorization.replace('Bearer ', '');
+  // Extract auth token (for future implementation)
+  // const authorization = req.headers.authorization || '';
+  // const token = authorization.replace('Bearer ', '');
 
-  let user: User | undefined;
+  let user: any = undefined;
   let isAuthenticated = false;
 
-  // Verify JWT token if present
-  if (token) {
-    try {
-      const payload = await verifyToken(token);
-      if (payload && payload.userId) {
-        // Fetch user from database
-        const users = await db.query.users.findFirst({
-          where: (users, { eq, and }) =>
-            and(
-              eq(users.id, payload.userId),
-              eq(users.status, 'ACTIVE')
-            ),
-          with: {
-            profile: true,
-            wallet: true,
-          },
-        });
+  // TODO: Implement JWT token verification once auth module is ready
+  // if (token) {
+  //   try {
+  //     const payload = await verifyToken(token);
+  //     if (payload && payload.userId) {
+  //       // Fetch user from database
+  //       const users = await db.query.users.findFirst({
+  //         where: (users, { eq, and }) =>
+  //           and(
+  //             eq(users.id, payload.userId),
+  //             eq(users.status, 'ACTIVE')
+  //           ),
+  //       });
 
-        if (users) {
-          user = users;
-          isAuthenticated = true;
-        }
-      }
-    } catch (error) {
-      logger.warn('Invalid token provided:', { token: token.substring(0, 20) + '...' });
-    }
-  }
+  //       if (users) {
+  //         user = users;
+  //         isAuthenticated = true;
+  //       }
+  //     }
+  //   } catch (error) {
+  //     logger.warn('Invalid token provided:', { token: token.substring(0, 20) + '...' });
+  //   }
+  // }
 
   return {
     db,
@@ -69,14 +62,14 @@ export async function createContext({ req }: { req: any }): Promise<GraphQLConte
 }
 
 // Helper functions for context
-export function requireAuth(context: GraphQLContext): User {
+export function requireAuth(context: GraphQLContext): any {
   if (!context.isAuthenticated || !context.user) {
     throw new Error('Authentication required');
   }
   return context.user;
 }
 
-export function requireRole(context: GraphQLContext, roles: string[]): User {
+export function requireRole(context: GraphQLContext, roles: string[]): any {
   const user = requireAuth(context);
   if (!roles.includes(user.role)) {
     throw new Error(`Access denied. Required roles: ${roles.join(', ')}`);
@@ -84,10 +77,10 @@ export function requireRole(context: GraphQLContext, roles: string[]): User {
   return user;
 }
 
-export function requireAdmin(context: GraphQLContext): User {
+export function requireAdmin(context: GraphQLContext): any {
   return requireRole(context, ['ADMIN']);
 }
 
-export function requireSeller(context: GraphQLContext): User {
+export function requireSeller(context: GraphQLContext): any {
   return requireRole(context, ['SELLER', 'ADMIN']);
 }
