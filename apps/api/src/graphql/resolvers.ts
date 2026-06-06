@@ -1,10 +1,4 @@
-import { authResolvers } from '../modules/auth/auth.module';
-import { productsResolvers } from '../modules/products/products.module';
-import { walletResolvers } from '../modules/wallet/wallet.module';
-import { ordersResolvers } from '../modules/orders/orders.module';
-import { reviewsResolvers } from '../modules/reviews/reviews.module';
-import { deliveryResolvers } from '../modules/delivery/delivery.module';
-import { notificationsResolvers } from '../modules/notifications/notifications.module';
+import { authResolvers, usersResolvers } from '../domains';
 import { GraphQLDateTime, GraphQLJSON } from 'graphql-scalars';
 
 // Custom scalar resolvers
@@ -77,106 +71,35 @@ export const resolvers = {
   Query: {
     ...baseResolvers.Query,
     ...authResolvers.Query,
-    ...productsResolvers.Query,
-    ...walletResolvers.Query,
-    ...ordersResolvers.Query,
-    ...reviewsResolvers.Query,
-    ...deliveryResolvers.Query,
-    ...notificationsResolvers.Query,
+    ...usersResolvers.Query,
+    // Autres domaines seront ajoutés progressivement
   },
 
   Mutation: {
     ...baseResolvers.Mutation,
     ...authResolvers.Mutation,
-    ...productsResolvers.Mutation,
-    ...walletResolvers.Mutation,
-    ...ordersResolvers.Mutation,
-    ...reviewsResolvers.Mutation,
-    ...deliveryResolvers.Mutation,
-    ...notificationsResolvers.Mutation,
+    ...usersResolvers.Mutation,
+    // Autres domaines seront ajoutés progressivement
   },
 
   Subscription: {
     ...baseResolvers.Subscription,
-    ...(walletResolvers.Subscription || {}),
-    ...(ordersResolvers.Subscription || {}),
-    ...(notificationsResolvers.Subscription || {}),
+    // Subscriptions seront ajoutées progressivement
   },
 
-  // Type resolvers
+  // Type resolvers par domaine
   User: {
     ...baseResolvers.User,
+    ...usersResolvers.User,
   },
 
   UserProfile: {
-    ...baseResolvers.UserProfile,
-  },
-
-  Product: {
-    ...productsResolvers.Product,
-  },
-
-  Category: {
-    ...productsResolvers.Category,
+    ...usersResolvers.UserProfile,
   },
 
   Wallet: {
-    ...walletResolvers.Wallet,
+    ...usersResolvers.Wallet,
   },
 
-  WalletTransaction: {
-    ...walletResolvers.WalletTransaction,
-  },
-
-  Order: {
-    ...ordersResolvers.Order,
-  },
-
-  OrderItem: {
-    ...ordersResolvers.OrderItem,
-  },
-
-  OrderStatusHistory: {
-    ...ordersResolvers.OrderStatusHistory,
-  },
-
-  // Reviews type resolvers
-  Review: {
-    ...baseResolvers.Review,
-    ...reviewsResolvers.Review,
-  },
-
-  ReviewVote: {
-    ...reviewsResolvers.ReviewVote,
-  },
-
-  ReviewReport: {
-    ...reviewsResolvers.ReviewReport,
-  },
-
-  // Delivery type resolvers
-  DeliveryProvider: {
-    ...deliveryResolvers.DeliveryProvider,
-  },
-
-  DeliveryOption: {
-    ...deliveryResolvers.DeliveryOption,
-  },
-
-  DeliveryZone: {
-    ...deliveryResolvers.DeliveryZone,
-  },
-
-  // Notifications type resolvers
-  Notification: {
-    ...notificationsResolvers.Notification,
-  },
-
-  NotificationPreference: {
-    ...notificationsResolvers.NotificationPreference,
-  },
-
-  DeviceToken: {
-    ...notificationsResolvers.DeviceToken,
-  },
+  // Autres resolvers de types seront ajoutés au fur et à mesure
 };

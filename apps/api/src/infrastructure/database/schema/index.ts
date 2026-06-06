@@ -1,22 +1,17 @@
-// Users and Authentication
+// Configuration du schéma de base de données - Migration vers la structure par domaines
+
+// ⚠️ TRANSITION: Ce fichier maintient la compatibilité avec l'ancien système
+// Tout est maintenant organisé par domaine métier dans /src/domains/
+
+// Export de compatibilité avec l'ancien système
 export * from "./users";
-
-// Products and Categories
 export * from "./products";
-
-// Orders and Payments
 export * from "./orders";
-
-// Reviews and Feedback
 export * from "./reviews";
-
-// Delivery and Logistics
 export * from "./delivery";
-
-// Notifications and Communication
 export * from "./notifications";
 
-// Re-export all tables for drizzle-kit
+// Import pour compatibilité
 import { users, userProfiles, userWallets } from "./users";
 import { categories, products, productVariants } from "./products";
 import { orders, orderItems, walletTransactions } from "./orders";
@@ -24,6 +19,7 @@ import { reviews, reviewVotes, reviewReports } from "./reviews";
 import { deliveryProviders, deliveryOptions, deliveryZones } from "./delivery";
 import { notifications, notificationPreferences, deviceTokens } from "./notifications";
 
+// Schéma existant (maintenu pour compatibilité)
 export const schema = {
   // Users (3 tables)
   users,
@@ -55,5 +51,8 @@ export const schema = {
   notificationPreferences,
   deviceTokens,
 };
+
+// TODO: Export du nouveau schéma organisé par domaines
+// export { schema as domainsSchema } from '../../../domains/schema';
 
 export type Schema = typeof schema;
