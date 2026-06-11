@@ -1,56 +1,175 @@
 'use client';
 
-import { Star, MapPin } from 'lucide-react';
+import { useQuery } from '@apollo/client';
+import { FeaturedProductsDocument } from '@/graphql/generated';
+import { ProductGrid } from '@/components/products/ProductGrid';
+import Link from 'next/link';
 
-// Mock data - will be replaced with GraphQL query
+// Mock data for development
 const mockProducts = [
   {
     id: '1',
-    title: 'MacBook Pro 14-inch',
+    title: 'MacBook Pro 14-inch M3 Max',
+    slug: 'macbook-pro-14-inch-m3-max',
+    shortDescription: 'Professional laptop with M3 Max chip for demanding creative workflows.',
     price: 1999,
+    originalPrice: 2199,
     images: ['/placeholder-laptop.jpg'],
-    rating: 4.8,
+    averageRating: 4.8,
     reviewCount: 124,
-    seller: 'TechStore Pro',
-    location: 'San Francisco, CA',
-    deliveryOptions: ['Pickup', 'Delivery']
+    isDigital: false,
+    shippingRequired: true,
+    seller: {
+      id: 'seller-1',
+      firstName: 'TechStore',
+      lastName: 'Pro'
+    },
+    category: {
+      id: 'electronics',
+      name: 'Electronics',
+      slug: 'electronics'
+    }
   },
   {
-    id: '2', 
-    title: 'Vintage Leather Jacket',
+    id: '2',
+    title: 'Premium Leather Jacket',
+    slug: 'premium-leather-jacket',
+    shortDescription: 'Vintage-style leather jacket crafted from high-quality materials.',
     price: 249,
+    originalPrice: null,
     images: ['/placeholder-jacket.jpg'],
-    rating: 4.6,
+    averageRating: 4.6,
     reviewCount: 89,
-    seller: 'Fashion Forward',
-    location: 'New York, NY',
-    deliveryOptions: ['Pickup', 'Delivery']
+    isDigital: false,
+    shippingRequired: true,
+    seller: {
+      id: 'seller-2',
+      firstName: 'Fashion',
+      lastName: 'Forward'
+    },
+    category: {
+      id: 'fashion',
+      name: 'Fashion',
+      slug: 'fashion'
+    }
   },
   {
     id: '3',
     title: 'Professional Camera Kit',
+    slug: 'professional-camera-kit',
+    shortDescription: 'Complete camera setup for professional photography and videography.',
     price: 1299,
+    originalPrice: 1499,
     images: ['/placeholder-camera.jpg'],
-    rating: 4.9,
+    averageRating: 4.9,
     reviewCount: 67,
-    seller: 'PhotoGear Plus',
-    location: 'Los Angeles, CA',
-    deliveryOptions: ['Pickup']
+    isDigital: false,
+    shippingRequired: true,
+    seller: {
+      id: 'seller-3',
+      firstName: 'PhotoGear',
+      lastName: 'Plus'
+    },
+    category: {
+      id: 'electronics',
+      name: 'Electronics',
+      slug: 'electronics'
+    }
   },
   {
     id: '4',
     title: 'Ergonomic Office Chair',
+    slug: 'ergonomic-office-chair',
+    shortDescription: 'Comfortable office chair with full lumbar support for long work sessions.',
     price: 399,
+    originalPrice: null,
     images: ['/placeholder-chair.jpg'],
-    rating: 4.5,
+    averageRating: 4.5,
     reviewCount: 156,
-    seller: 'Office Solutions',
-    location: 'Chicago, IL',
-    deliveryOptions: ['Delivery']
+    isDigital: false,
+    shippingRequired: true,
+    seller: {
+      id: 'seller-4',
+      firstName: 'Office',
+      lastName: 'Solutions'
+    },
+    category: {
+      id: 'furniture',
+      name: 'Furniture',
+      slug: 'furniture'
+    }
   },
 ];
 
 export function FeaturedProducts() {
+  // GraphQL query for featured products
+  const { data, loading, error } = useQuery(FeaturedProductsDocument, {
+    variables: { limit: 8 },
+    fetchPolicy: 'cache-first',
+    errorPolicy: 'ignore'
+  });
+
+  // Use mock data if GraphQL data is not available
+  const products = data?.featuredProducts || mockProducts;
+
+  const handleAddToCart = (_productId: string) => {
+    // Cart functionality handled via product detail page
+  };
+
+  const handleToggleFavorite = (_productId: string) => {
+    // Favorites functionality to be implemented
+  };
+
+  if (loading) {
+    return (
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Products</h2>
+            <p className="text-gray-600">Discover the best deals from our trusted sellers</p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="bg-white rounded-xl shadow-sm overflow-hidden animate-pulse">
+                <div className="aspect-square bg-gray-300" />
+                <div className="p-4 space-y-3">
+                  <div className="h-5 bg-gray-300 rounded w-3/4" />
+                  <div className="h-4 bg-gray-300 rounded w-1/2" />
+                  <div className="h-4 bg-gray-300 rounded w-full" />
+                  <div className="h-8 bg-gray-300 rounded w-full" />
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  if (error || !products?.length) {
+    return (
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Featured Products</h2>
+            <p className="text-gray-600">Discover the best deals from our trusted sellers</p>
+          </div>
+
+          <div className="text-center py-8">
+            <p className="text-gray-500 mb-4">Unable to load featured products</p>
+            <Link
+              href="/products"
+              className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              View All Products
+            </Link>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-16 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -59,62 +178,25 @@ export function FeaturedProducts() {
           <p className="text-gray-600">Discover the best deals from our trusted sellers</p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {mockProducts.map((product) => (
-            <div key={product.id} className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden">
-              <div className="aspect-square bg-gray-200 relative">
-                <div className="absolute inset-0 bg-gray-300 flex items-center justify-center">
-                  <span className="text-gray-500 text-sm">Product Image</span>
-                </div>
-              </div>
-              
-              <div className="p-4">
-                <h3 className="font-semibold text-gray-900 mb-2 line-clamp-2">{product.title}</h3>
-                
-                <div className="flex items-center mb-2">
-                  <div className="flex items-center">
-                    <Star className="w-4 h-4 text-yellow-400 fill-current" />
-                    <span className="text-sm text-gray-600 ml-1">
-                      {product.rating} ({product.reviewCount})
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex items-center text-sm text-gray-500 mb-3">
-                  <MapPin className="w-4 h-4 mr-1" />
-                  <span>{product.location}</span>
-                </div>
-
-                <div className="flex items-center justify-between">
-                  <span className="text-2xl font-bold text-gray-900">
-                    ${product.price.toLocaleString()}
-                  </span>
-                  <div className="flex gap-1">
-                    {product.deliveryOptions.includes('Pickup') && (
-                      <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
-                        Pickup
-                      </span>
-                    )}
-                    {product.deliveryOptions.includes('Delivery') && (
-                      <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
-                        Delivery
-                      </span>
-                    )}
-                  </div>
-                </div>
-
-                <button className="w-full mt-4 bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors">
-                  View Details
-                </button>
-              </div>
-            </div>
-          ))}
-        </div>
+        <ProductGrid
+          products={products.slice(0, 8)}
+          loading={false}
+          layout="grid"
+          columns={4}
+          showQuickActions={true}
+          showSellerInfo={false}
+          showStats={true}
+          onAddToCart={handleAddToCart}
+          onToggleFavorite={handleToggleFavorite}
+        />
 
         <div className="text-center mt-12">
-          <button className="bg-white text-blue-600 border-2 border-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50">
+          <Link
+            href="/products"
+            className="bg-white text-blue-600 border-2 border-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-colors"
+          >
             View All Products
-          </button>
+          </Link>
         </div>
       </div>
     </section>

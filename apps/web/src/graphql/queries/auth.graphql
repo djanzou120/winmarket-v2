@@ -1,0 +1,37 @@
+query Me {
+  me {
+    id
+    email
+    phone
+    firstName
+    lastName
+    avatar
+    userType
+    status
+    emailVerified
+    phoneVerified
+    lastLoginAt
+    createdAt
+    updatedAt
+    profile {
+      id
+      bio
+      address
+      city
+      zipCode
+      country
+      language
+      notificationsEnabled
+      marketingEnabled
+    }
+    wallet {
+      id
+      balance
+      frozenBalance
+      totalEarnings
+      totalSpent
+    }
+  }
+}
+
+# GetSession query removed - session field doesn't exist in current schema

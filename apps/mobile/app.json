@@ -5,40 +5,114 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#2563eb"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.winmarket.mobile"
+      "bundleIdentifier": "com.winmarket.mobile",
+      "buildNumber": "1",
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app uses the camera to take photos for product listings and profile pictures.",
+        "NSPhotoLibraryUsageDescription": "This app accesses your photo library to select images for product listings and profile pictures.",
+        "NSLocationWhenInUseUsageDescription": "This app uses your location to show nearby sellers and delivery options.",
+        "NSNotificationAlwaysUsageDescription": "This app uses notifications to keep you updated on order status and new messages."
+      },
+      "associatedDomains": [
+        "applinks:winmarket.app",
+        "applinks:*.winmarket.app"
+      ]
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#2563eb"
       },
-      "package": "com.winmarket.mobile"
+      "package": "com.winmarket.mobile",
+      "versionCode": 1,
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "ACCESS_FINE_LOCATION",
+        "ACCESS_COARSE_LOCATION",
+        "RECEIVE_BOOT_COMPLETED",
+        "VIBRATE"
+      ],
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "winmarket.app"
+            }
+          ],
+          "category": [
+            "BROWSABLE",
+            "DEFAULT"
+          ]
+        }
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow WinMarket to access your camera to take photos for product listings and profile pictures."
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Allow WinMarket to access your photos to select images for product listings and profile pictures."
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationAlwaysAndWhenInUsePermission": "Allow WinMarket to use your location to show nearby sellers and delivery options."
+        }
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#2563eb",
+          "sounds": ["./assets/notification.wav"]
+        }
+      ],
+      [
+        "@react-native-async-storage/async-storage",
+        {
+          "ios": {
+            "privacy": "NSPrivacyCollectedDataTypeUserContent"
+          }
+        }
+      ]
     ],
     "scheme": "winmarket",
+    "experiments": {
+      "typedRoutes": true
+    },
     "extra": {
       "router": {
         "origin": false
       },
       "eas": {
-        "projectId": "your-project-id-here"
+        "projectId": "winmarket-mobile-2024"
       }
     }
   }

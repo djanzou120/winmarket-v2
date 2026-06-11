@@ -1,0 +1,1534 @@
+input AddToCartInput {
+  productId: ID!
+  productVariantId: ID
+  quantity: Int!
+}
+
+type Address {
+  city: String!
+  country: String!
+  name: String
+  phone: String
+  postalCode: String
+  state: String
+  street: String!
+}
+
+input AddressInput {
+  city: String!
+  country: String!
+  name: String
+  phone: String
+  postalCode: String
+  state: String
+  street: String!
+}
+
+type AuthPayload {
+  session: Session
+  token: String
+  user: User!
+}
+
+input BulkNotificationInput {
+  actionText: String
+  actionUrl: String
+  channels: [NotificationChannel!]!
+  data: JSON
+  message: String!
+  priority: NotificationPriority
+  scheduledFor: String
+  title: String!
+  type: NotificationType!
+  userIds: [ID!]!
+}
+
+type Cart {
+  currency: String!
+  itemCount: Int!
+  items: [CartItem!]!
+  subtotal: Float!
+  updatedAt: String!
+}
+
+type CartItem {
+  addedAt: String!
+  id: ID!
+  product: Product!
+  productId: ID!
+  productVariant: ProductVariant
+  productVariantId: ID
+  quantity: Int!
+  totalPrice: Float!
+  unitPrice: Float!
+  updatedAt: String!
+  userId: ID!
+}
+
+type CategoriesConnection {
+  edges: [CategoryEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type Category {
+  children: [Category!]!
+  createdAt: String!
+  description: String
+  id: ID!
+  imageUrl: String
+  isActive: Boolean!
+  name: String!
+  parent: Category
+  parentId: ID
+  productCount: Int!
+  slug: String!
+  sortOrder: Int!
+  updatedAt: String!
+}
+
+type CategoryEdge {
+  cursor: String!
+  node: Category!
+}
+
+input CategoryFilter {
+  isActive: Boolean
+  parentId: ID
+  search: String
+}
+
+type CategoryProductCount {
+  category: Category!
+  count: Int!
+}
+
+input ChangePasswordInput {
+  currentPassword: String!
+  newPassword: String!
+}
+
+input CreateCategoryInput {
+  description: String
+  imageUrl: String
+  isActive: Boolean
+  name: String!
+  parentId: ID
+  slug: String!
+  sortOrder: Int
+}
+
+input CreateDeliveryOptionInput {
+  basePrice: Float!
+  description: String
+  estimatedDays: Int!
+  freeShippingThreshold: Float
+  maxDays: Int
+  maxDimensions: String
+  maxWeight: Float
+  method: DeliveryMethod!
+  name: String!
+  pricePerKg: Float
+  providerId: ID!
+  sortOrder: Int
+}
+
+input CreateDeliveryProviderInput {
+  apiBaseUrl: String
+  apiKey: String
+  contactEmail: String
+  contactPhone: String
+  coverageAreas: [String!]
+  description: String
+  logo: String
+  name: String!
+  slug: String!
+  supportsCOD: Boolean
+  supportsTracking: Boolean
+  trackingUrlPattern: String
+  website: String
+}
+
+input CreateDeliveryZoneInput {
+  coordinates: String
+  name: String!
+  type: String!
+  value: String!
+}
+
+input CreateNotificationInput {
+  actionText: String
+  actionUrl: String
+  channel: NotificationChannel!
+  data: JSON
+  message: String!
+  priority: NotificationPriority
+  relatedEntityId: ID
+  relatedEntityType: String
+  scheduledFor: String
+  title: String!
+  type: NotificationType!
+  userId: ID!
+}
+
+input CreateOrderInput {
+  billingAddress: AddressInput
+  couponCode: String
+  items: [OrderItemInput!]!
+  notes: String
+  paymentMethod: PaymentMethod!
+  shippingAddress: AddressInput!
+  shippingMethod: String
+}
+
+input CreateProductInput {
+  allowReviews: Boolean
+  categoryId: ID!
+  condition: ProductCondition!
+  description: String!
+  dimensions: String
+  images: [String!]
+  isDigital: Boolean
+  maxOrderQuantity: Int
+  minOrderQuantity: Int
+  originalPrice: Float
+  price: Float!
+  shippingRequired: Boolean
+  shortDescription: String
+  sku: String
+  stock: Int!
+  tags: [String!]
+  title: String!
+  weight: Float
+}
+
+input CreateProductVariantInput {
+  image: String
+  isActive: Boolean
+  name: String!
+  price: Float
+  productId: ID!
+  sku: String
+  sortOrder: Int
+  stock: Int!
+  value: String!
+}
+
+input CreateReviewInput {
+  content: String
+  images: [String!]
+  isAnonymous: Boolean
+  orderId: ID
+  orderItemId: ID
+  productId: ID!
+  rating: Int!
+  title: String
+}
+
+input CreateTemplateInput {
+  actionTextTemplate: String
+  actionUrlTemplate: String
+  channel: NotificationChannel!
+  emailHtml: String
+  emailSubject: String
+  messageTemplate: String!
+  titleTemplate: String!
+  type: NotificationType!
+  variables: JSON
+}
+
+input CreateTrackingInput {
+  deliveryAddress: AddressInput!
+  dimensions: String
+  estimatedDelivery: String
+  orderId: ID!
+  pickupAddress: AddressInput
+  providerId: ID!
+  trackingNumber: String!
+  weight: Float
+}
+
+scalar DateTime
+
+input DeliveryCalculationInput {
+  codAmount: Float
+  dimensions: String
+  fromAddress: AddressInput
+  toAddress: AddressInput!
+  value: Float
+  weight: Float
+}
+
+enum DeliveryMethod {
+  EXPRESS
+  PICKUP
+  SAME_DAY
+  STANDARD
+}
+
+type DeliveryOption {
+  basePrice: Float!
+  calculatedPrice: Float
+  createdAt: String!
+  description: String
+  estimatedDays: Int!
+  freeShippingThreshold: Float
+  id: ID!
+  isActive: Boolean!
+  isAvailable: Boolean!
+  maxDays: Int
+  maxDimensions: String
+  maxWeight: Float
+  method: DeliveryMethod!
+  name: String!
+  pricePerKg: Float
+  provider: DeliveryProvider!
+  providerId: ID!
+  sortOrder: Int!
+  updatedAt: String!
+}
+
+type DeliveryProvider {
+  apiBaseUrl: String
+  contactEmail: String
+  contactPhone: String
+  coverageAreas: [String!]!
+  createdAt: String!
+  description: String
+  id: ID!
+  isActive: Boolean!
+  logo: String
+  name: String!
+  options: [DeliveryOption!]!
+  slug: String!
+  status: DeliveryProviderStatus!
+  supportsCOD: Boolean!
+  supportsTracking: Boolean!
+  trackingUrlPattern: String
+  updatedAt: String!
+  website: String
+  zones: [ProviderZone!]!
+}
+
+enum DeliveryProviderStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+type DeliveryQuote {
+  estimatedDays: Int!
+  isAvailable: Boolean!
+  option: DeliveryOption!
+  price: Float!
+  restrictions: [String!]!
+}
+
+type DeliveryRate {
+  createdAt: String!
+  id: ID!
+  isActive: Boolean!
+  maxVolume: Float
+  maxWeight: Float
+  minVolume: Float
+  minWeight: Float!
+  option: DeliveryOption!
+  optionId: ID!
+  rate: Float!
+  zone: DeliveryZone!
+  zoneId: ID!
+}
+
+type DeliveryStats {
+  averageDeliveryTime: Float!
+  deliveredToday: Int!
+  failedDeliveries: Int!
+  inTransitDeliveries: Int!
+  onTimeDeliveryRate: Float!
+  pendingDeliveries: Int!
+  totalDeliveries: Int!
+}
+
+enum DeliveryStatus {
+  CONFIRMED
+  DELIVERED
+  FAILED
+  IN_TRANSIT
+  OUT_FOR_DELIVERY
+  PENDING
+  PICKED_UP
+  RETURNED
+}
+
+type DeliveryTracking {
+  actualDelivery: String
+  createdAt: String!
+  deliveryAddress: Address
+  dimensions: String
+  driverName: String
+  driverPhone: String
+  estimatedDelivery: String
+  id: ID!
+  notes: String
+  order: Order
+  orderId: ID!
+  pickupAddress: Address
+  pickupDate: String
+  provider: DeliveryProvider!
+  providerId: ID!
+  status: DeliveryStatus!
+  trackingEvents: [TrackingEvent!]!
+  trackingNumber: String!
+  trackingUrl: String
+  updatedAt: String!
+  weight: Float
+}
+
+type DeliveryZone {
+  coordinates: String
+  createdAt: String!
+  id: ID!
+  isActive: Boolean!
+  name: String!
+  providers: [ProviderZone!]!
+  type: String!
+  updatedAt: String!
+  value: String!
+}
+
+enum DevicePlatform {
+  ANDROID
+  IOS
+  WEB
+}
+
+type DeviceToken {
+  appVersion: String
+  createdAt: String!
+  deviceModel: String
+  deviceName: String
+  id: ID!
+  isActive: Boolean!
+  lastUsed: String!
+  osVersion: String
+  platform: DevicePlatform!
+  token: String!
+  updatedAt: String!
+  user: User!
+  userId: ID!
+}
+
+type EmailVerification {
+  email: String!
+  sent: Boolean!
+}
+
+input Enable2FAInput {
+  code: String!
+}
+
+input ForgotPasswordInput {
+  email: String!
+}
+
+scalar JSON
+
+input LoginInput {
+  email: String!
+  password: String!
+  rememberMe: Boolean = false
+  twoFactorCode: String
+}
+
+input ModerateReviewInput {
+  reason: String
+  status: ReviewStatus!
+}
+
+type Mutation {
+  _empty: String
+  addToCart(input: AddToCartInput!): CartItem!
+  addTrackingEvent(event: TrackingEventInput!, id: ID!): DeliveryTracking!
+  approveReview(id: ID!): Review!
+  archiveProduct(id: ID!): Product!
+  bulkModerateReviews(ids: [ID!]!, input: ModerateReviewInput!): [Review!]!
+  buyNow(input: CreateOrderInput!): Order!
+  cancelOrder(id: ID!, reason: String!): Order!
+  changePassword(input: ChangePasswordInput!): Boolean!
+  changeUserRole(id: ID!, role: UserRole!): User!
+  clearCart: Boolean!
+  clickNotification(id: ID!): Notification!
+  confirmOrder(id: ID!): Order!
+  createCategory(input: CreateCategoryInput!): Category!
+  createDeliveryOption(input: CreateDeliveryOptionInput!): DeliveryOption!
+  createDeliveryProvider(input: CreateDeliveryProviderInput!): DeliveryProvider!
+  createDeliveryTracking(input: CreateTrackingInput!): DeliveryTracking!
+  createDeliveryZone(input: CreateDeliveryZoneInput!): DeliveryZone!
+  createNotification(input: CreateNotificationInput!): Notification!
+  createNotificationTemplate(input: CreateTemplateInput!): NotificationTemplate!
+  createOrder(input: CreateOrderInput!): Order!
+  createProduct(input: CreateProductInput!): Product!
+  createProductVariant(input: CreateProductVariantInput!): ProductVariant!
+  createReview(input: CreateReviewInput!): Review!
+  deleteCategory(id: ID!): Boolean!
+  deleteDeliveryOption(id: ID!): Boolean!
+  deleteDeliveryProvider(id: ID!): Boolean!
+  deleteDeliveryZone(id: ID!): Boolean!
+  deleteNotificationTemplate(id: ID!): Boolean!
+  deleteProduct(id: ID!): Boolean!
+  deleteProductVariant(id: ID!): Boolean!
+  deleteReview(id: ID!): Boolean!
+  deleteReviewResponse(id: ID!): Boolean!
+  deleteUser(id: ID!): Boolean!
+  deliverOrder(id: ID!): Order!
+  disableTwoFactor: Boolean!
+  dismissNotification(id: ID!): Notification!
+  duplicateProduct(id: ID!): Product!
+  enableTwoFactor(input: Enable2FAInput!): Boolean!
+  forgotPassword(input: ForgotPasswordInput!): Boolean!
+  generateBackupCodes: [String!]!
+  hideReview(id: ID!): Review!
+  incrementProductView(id: ID!): Product!
+  linkSocialAccount(input: SocialSignInInput!): Boolean!
+  login(input: LoginInput!): AuthPayload!
+  logout: Boolean!
+  logoutAllDevices: Boolean!
+  markAllNotificationsAsRead: Int!
+  markAsDelivered(deliveredAt: String, trackingNumber: String!): DeliveryTracking!
+  markNotificationAsRead(id: ID!): Notification!
+  moderateReview(id: ID!, input: ModerateReviewInput!): Review!
+  processRefund(amount: Float, orderId: ID!): Order!
+  publishProduct(id: ID!): Product!
+  refreshDeviceToken(newToken: String!, oldToken: String!): DeviceToken!
+  refreshSession: AuthPayload!
+  register(input: RegisterInput!): AuthPayload!
+  registerDeviceToken(input: RegisterDeviceTokenInput!): DeviceToken!
+  rejectReview(id: ID!, reason: String!): Review!
+  removeFromCart(id: ID!): Boolean!
+  removeVote(reviewId: ID!): Review!
+  reportReview(input: ReportReviewInput!): ReviewReport!
+  requestRefund(orderId: ID!, reason: String!): Order!
+  resendVerificationEmail: EmailVerification!
+  resetPassword(input: ResetPasswordInput!): Boolean!
+  respondToReview(input: RespondToReviewInput!): ReviewResponse!
+  resubscribeToEmails(email: String!): Boolean!
+  revokeSession(sessionId: String!): Boolean!
+  schedulePickup(orderId: ID!): DeliveryTracking!
+  sendBulkNotification(input: BulkNotificationInput!): [Notification!]!
+  sendTestNotification(channels: [NotificationChannel!]!, type: NotificationType!, userId: ID!): [Notification!]!
+  sendVerificationEmail: EmailVerification!
+  setupTwoFactor: TwoFactorSetup!
+  shipOrder(estimatedDelivery: String, id: ID!, trackingNumber: String): Order!
+  socialSignIn(input: SocialSignInInput!): AuthPayload!
+  suspendUser(id: ID!, reason: String!): User!
+  toggleProductFavorite(id: ID!): Product!
+  unlinkSocialAccount(provider: SocialProvider!): Boolean!
+  unpublishProduct(id: ID!): Product!
+  unregisterDeviceToken(token: String!): Boolean!
+  unsubscribeFromEmails(token: String!): Boolean!
+  unsuspendUser(id: ID!): User!
+  updateCartItem(id: ID!, input: UpdateCartItemInput!): CartItem!
+  updateCategory(id: ID!, input: UpdateCategoryInput!): Category!
+  updateDeliveryOption(id: ID!, input: UpdateDeliveryOptionInput!): DeliveryOption!
+  updateDeliveryProvider(id: ID!, input: UpdateDeliveryProviderInput!): DeliveryProvider!
+  updateDeliveryStatus(status: DeliveryStatus!, trackingNumber: String!): DeliveryTracking!
+  updateDeliveryTracking(id: ID!, input: UpdateTrackingInput!): DeliveryTracking!
+  updateDeliveryZone(id: ID!, input: UpdateDeliveryZoneInput!): DeliveryZone!
+  updateNotificationPreferences(input: UpdateNotificationPreferencesInput!): NotificationPreferences!
+  updateNotificationTemplate(id: ID!, input: UpdateTemplateInput!): NotificationTemplate!
+  updateOrder(id: ID!, input: UpdateOrderInput!): Order!
+  updateProduct(id: ID!, input: UpdateProductInput!): Product!
+  updateProductVariant(id: ID!, input: UpdateProductVariantInput!): ProductVariant!
+  updateReview(id: ID!, input: UpdateReviewInput!): Review!
+  updateReviewResponse(content: String!, id: ID!): ReviewResponse!
+  updateUser(input: UpdateUserInput!): User!
+  updateUserProfile(input: UpdateUserProfileInput!): UserProfile!
+  verifyEmail(input: VerifyEmailInput!): Boolean!
+  verifyUserEmail(id: ID!): User!
+  voteOnReview(input: VoteOnReviewInput!): Review!
+}
+
+type Notification {
+  actionText: String
+  actionUrl: String
+  channel: NotificationChannel!
+  clickedAt: String
+  createdAt: String!
+  data: JSON
+  deliveredAt: String
+  dismissedAt: String
+  id: ID!
+  isDelivered: Boolean
+  isRead: Boolean!
+  isSent: Boolean!
+  message: String!
+  priority: NotificationPriority!
+  readAt: String
+  relatedEntity: NotificationEntity
+  relatedEntityId: ID
+  relatedEntityType: String
+  scheduledFor: String
+  sentAt: String
+  title: String!
+  type: NotificationType!
+  updatedAt: String!
+  user: User!
+  userId: ID!
+}
+
+enum NotificationChannel {
+  EMAIL
+  IN_APP
+  PUSH
+  SMS
+}
+
+type NotificationChannelCount {
+  channel: NotificationChannel!
+  count: Int!
+}
+
+type NotificationEdge {
+  cursor: String!
+  node: Notification!
+}
+
+union NotificationEntity = Order | Product | Review | User
+
+input NotificationFilter {
+  channel: NotificationChannel
+  dateFrom: String
+  dateTo: String
+  isRead: Boolean
+  priority: NotificationPriority
+  type: NotificationType
+}
+
+type NotificationPreferences {
+  createdAt: String!
+  emailFrequency: String!
+  emailNewsletter: Boolean!
+  emailOrderUpdates: Boolean!
+  emailPromotions: Boolean!
+  emailReviews: Boolean!
+  emailSecurity: Boolean!
+  id: ID!
+  inAppOrderUpdates: Boolean!
+  inAppPromotions: Boolean!
+  inAppReviews: Boolean!
+  inAppSecurity: Boolean!
+  pushOrderUpdates: Boolean!
+  pushPromotions: Boolean!
+  pushReviews: Boolean!
+  pushSecurity: Boolean!
+  quietHoursEnd: String!
+  quietHoursStart: String!
+  smsOrderUpdates: Boolean!
+  smsPromotions: Boolean!
+  smsSecurity: Boolean!
+  timezone: String!
+  updatedAt: String!
+  user: User!
+  userId: ID!
+}
+
+enum NotificationPriority {
+  HIGH
+  LOW
+  NORMAL
+  URGENT
+}
+
+type NotificationStats {
+  notificationsByChannel: [NotificationChannelCount!]!
+  notificationsByType: [NotificationTypeCount!]!
+  recentNotifications: [Notification!]!
+  totalNotifications: Int!
+  unreadNotifications: Int!
+}
+
+type NotificationTemplate {
+  actionTextTemplate: String
+  actionUrlTemplate: String
+  channel: NotificationChannel!
+  createdAt: String!
+  emailHtml: String
+  emailSubject: String
+  id: ID!
+  isActive: Boolean!
+  messageTemplate: String!
+  titleTemplate: String!
+  type: NotificationType!
+  updatedAt: String!
+  variables: JSON
+}
+
+enum NotificationType {
+  ACCOUNT_CREATED
+  CUSTOM
+  EMAIL_VERIFIED
+  NEW_REVIEW
+  ORDER_CANCELLED
+  ORDER_CONFIRMED
+  ORDER_CREATED
+  ORDER_DELIVERED
+  ORDER_SHIPPED
+  PASSWORD_CHANGED
+  PAYMENT_FAILED
+  PAYMENT_SUCCESS
+  PRODUCT_LOW_STOCK
+  PRODUCT_OUT_OF_STOCK
+  PROFILE_UPDATED
+  PROMOTION_ALERT
+  REVIEW_RESPONSE
+  SECURITY_ALERT
+  SYSTEM_MAINTENANCE
+}
+
+type NotificationTypeCount {
+  count: Int!
+  type: NotificationType!
+}
+
+type NotificationsConnection {
+  edges: [NotificationEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+  unreadCount: Int!
+}
+
+type Order {
+  actualDelivery: String
+  billingAddress: Address
+  buyer: User!
+  buyerId: ID!
+  cancelReason: String
+  cancelledAt: String
+  confirmedAt: String
+  createdAt: String!
+  currency: String!
+  deliveredAt: String
+  discountAmount: Float!
+  estimatedDelivery: String
+  id: ID!
+  itemCount: Int!
+  items: [OrderItem!]!
+  notes: String
+  orderNumber: String!
+  paymentMethod: PaymentMethod
+  paymentStatus: PaymentStatus!
+  refundReason: String
+  seller: User!
+  sellerId: ID!
+  shippedAt: String
+  shippingAddress: Address
+  shippingAmount: Float!
+  shippingMethod: String
+  status: OrderStatus!
+  subtotal: Float!
+  taxAmount: Float!
+  totalAmount: Float!
+  trackingNumber: String
+  updatedAt: String!
+}
+
+type OrderEdge {
+  cursor: String!
+  node: Order!
+}
+
+input OrderFilter {
+  buyerId: ID
+  dateFrom: String
+  dateTo: String
+  maxAmount: Float
+  minAmount: Float
+  paymentMethod: PaymentMethod
+  paymentStatus: PaymentStatus
+  sellerId: ID
+  status: OrderStatus
+}
+
+type OrderItem {
+  createdAt: String!
+  id: ID!
+  orderId: ID!
+  product: Product
+  productId: ID!
+  productImage: String
+  productName: String!
+  productSku: String
+  productVariant: ProductVariant
+  productVariantId: ID
+  quantity: Int!
+  totalPrice: Float!
+  unitPrice: Float!
+  updatedAt: String!
+  variantName: String
+  variantValue: String
+}
+
+input OrderItemInput {
+  productId: ID!
+  productVariantId: ID
+  quantity: Int!
+}
+
+type OrderStats {
+  averageOrderValue: Float!
+  cancelledOrders: Int!
+  confirmedOrders: Int!
+  deliveredOrders: Int!
+  ordersByStatus: [OrderStatusCount!]!
+  pendingOrders: Int!
+  recentOrders: [Order!]!
+  shippedOrders: Int!
+  totalOrders: Int!
+  totalRevenue: Float!
+}
+
+enum OrderStatus {
+  CANCELLED
+  CONFIRMED
+  DELIVERED
+  PENDING
+  PROCESSING
+  REFUNDED
+  SHIPPED
+}
+
+type OrderStatusCount {
+  count: Int!
+  status: OrderStatus!
+}
+
+type OrdersConnection {
+  edges: [OrderEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type PageInfo {
+  endCursor: String
+  hasNextPage: Boolean!
+  hasPreviousPage: Boolean!
+  startCursor: String
+}
+
+type PaginatedResponse {
+  hasMore: Boolean!
+  limit: Int!
+  offset: Int!
+  total: Int!
+}
+
+input PaginationInput {
+  limit: Int = 20
+  offset: Int = 0
+}
+
+enum PaymentMethod {
+  BANK_TRANSFER
+  CARD
+  CASH_ON_DELIVERY
+  MOBILE_MONEY
+  WALLET
+}
+
+enum PaymentStatus {
+  COMPLETED
+  FAILED
+  PARTIALLY_REFUNDED
+  PENDING
+  PROCESSING
+  REFUNDED
+}
+
+type Product {
+  allowReviews: Boolean!
+  averageRating: Float!
+  category: Category!
+  categoryId: ID!
+  condition: ProductCondition!
+  createdAt: String!
+  description: String
+  dimensions: String
+  favoriteCount: Int!
+  id: ID!
+  images: [String!]!
+  isDigital: Boolean!
+  maxOrderQuantity: Int
+  minOrderQuantity: Int
+  originalPrice: Float
+  price: Float!
+  publishedAt: String
+  reviewCount: Int!
+  reviews: [Review!]!
+  seller: User
+  sellerId: ID!
+  shippingRequired: Boolean!
+  shortDescription: String
+  sku: String
+  slug: String!
+  soldCount: Int!
+  status: ProductStatus!
+  stock: Int!
+  tags: [String!]!
+  title: String!
+  updatedAt: String!
+  variants: [ProductVariant!]!
+  viewCount: Int!
+  weight: Float
+}
+
+enum ProductCondition {
+  FAIR
+  GOOD
+  LIKE_NEW
+  NEW
+  POOR
+}
+
+type ProductEdge {
+  cursor: String!
+  node: Product!
+}
+
+input ProductFilter {
+  categoryId: ID
+  condition: ProductCondition
+  inStock: Boolean
+  isDigital: Boolean
+  priceMax: Float
+  priceMin: Float
+  search: String
+  sellerId: ID
+  status: ProductStatus
+}
+
+type ProductReviewSummary {
+  averageRating: Float!
+  productId: ID!
+  ratingDistribution: [RatingCount!]!
+  recentReviews: [Review!]!
+  topReviews: [Review!]!
+  totalReviews: Int!
+}
+
+type ProductStats {
+  activeProducts: Int!
+  archivedProducts: Int!
+  averagePrice: Float!
+  draftProducts: Int!
+  inactiveProducts: Int!
+  productsByCategory: [CategoryProductCount!]!
+  totalProducts: Int!
+  totalSales: Int!
+  totalViews: Int!
+}
+
+enum ProductStatus {
+  ACTIVE
+  ARCHIVED
+  DRAFT
+  INACTIVE
+}
+
+type ProductVariant {
+  createdAt: String!
+  id: ID!
+  image: String
+  isActive: Boolean!
+  name: String!
+  price: Float
+  productId: ID!
+  sku: String
+  sortOrder: Int!
+  stock: Int!
+  updatedAt: String!
+  value: String!
+}
+
+type ProductsConnection {
+  edges: [ProductEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type ProviderZone {
+  additionalCost: Float!
+  createdAt: String!
+  deliveryDaysModifier: Int!
+  id: ID!
+  isActive: Boolean!
+  provider: DeliveryProvider!
+  providerId: ID!
+  zone: DeliveryZone!
+  zoneId: ID!
+}
+
+type Query {
+  _empty: String
+  availableDeliveryOptions(input: DeliveryCalculationInput!): [DeliveryQuote!]!
+  calculateShipping(input: DeliveryCalculationInput!): [DeliveryQuote!]!
+  canReviewProduct(productId: ID!): Boolean!
+  categories(filter: CategoryFilter, pagination: PaginationInput): CategoriesConnection!
+  category(id: ID!): Category
+  categoryBySlug(slug: String!): Category
+  deliveryOption(id: ID!): DeliveryOption
+  deliveryOptions(providerId: ID): [DeliveryOption!]!
+  deliveryProvider(id: ID!): DeliveryProvider
+  deliveryProviders: [DeliveryProvider!]!
+  deliveryStats: DeliveryStats!
+  deliveryTracking(id: ID!): DeliveryTracking
+  deliveryZone(id: ID!): DeliveryZone
+  deliveryZones: [DeliveryZone!]!
+  featuredProducts(limit: Int): [Product!]!
+  me: User
+  myCart: Cart!
+  myDeviceTokens: [DeviceToken!]!
+  myNotificationPreferences: NotificationPreferences!
+  myNotifications(filter: NotificationFilter, pagination: PaginationInput): NotificationsConnection!
+  myOrders(pagination: PaginationInput): OrdersConnection!
+  myPurchases(pagination: PaginationInput): OrdersConnection!
+  myReviews(pagination: PaginationInput): ReviewsConnection!
+  mySales(pagination: PaginationInput): OrdersConnection!
+  myTransactions(pagination: PaginationInput): [WalletTransaction!]!
+  notification(id: ID!): Notification
+  notificationStats: NotificationStats!
+  notificationTemplate(id: ID!): NotificationTemplate
+  notificationTemplates: [NotificationTemplate!]!
+  order(id: ID!): Order
+  orderByNumber(orderNumber: String!): Order
+  orderStats: OrderStats!
+  orderTracking(orderId: ID!): DeliveryTracking
+  orders(filter: OrderFilter, pagination: PaginationInput): OrdersConnection!
+  pendingReviews(pagination: PaginationInput): ReviewsConnection!
+  popularProducts(limit: Int): [Product!]!
+  product(id: ID!): Product
+  productBySlug(slug: String!): Product
+  productReviewSummary(productId: ID!): ProductReviewSummary!
+  productReviews(pagination: PaginationInput, productId: ID!): ReviewsConnection!
+  productStats: ProductStats!
+  products(filter: ProductFilter, pagination: PaginationInput): ProductsConnection!
+  relatedProducts(limit: Int, productId: ID!): [Product!]!
+  reportedReviews(pagination: PaginationInput): ReviewsConnection!
+  review(id: ID!): Review
+  reviewStats: ReviewStats!
+  reviews(filter: ReviewFilter, pagination: PaginationInput): ReviewsConnection!
+  searchProducts(limit: Int, query: String!): [Product!]!
+  sessions: [Session!]!
+  trackDelivery(trackingNumber: String!): DeliveryTracking
+  twoFactorStatus: Boolean!
+  unreadNotificationCount: Int!
+  user(id: ID!): User
+  userReviews(pagination: PaginationInput, userId: ID!): ReviewsConnection!
+  userStats: UserStats!
+  users(filter: UsersFilterInput, pagination: PaginationInput): UserConnection!
+}
+
+type RatingCount {
+  count: Int!
+  percentage: Float!
+  rating: Int!
+}
+
+input RegisterDeviceTokenInput {
+  appVersion: String
+  deviceModel: String
+  deviceName: String
+  osVersion: String
+  platform: DevicePlatform!
+  token: String!
+}
+
+input RegisterInput {
+  email: String!
+  firstName: String!
+  inviteCode: String
+  lastName: String!
+  password: String!
+  phone: String
+  userType: UserRole = BUYER
+}
+
+enum ReportReason {
+  COPYRIGHT_VIOLATION
+  FAKE_REVIEW
+  INAPPROPRIATE_CONTENT
+  OFFENSIVE_LANGUAGE
+  OTHER
+  SPAM
+}
+
+input ReportReviewInput {
+  description: String
+  reason: ReportReason!
+  reviewId: ID!
+}
+
+input ResetPasswordInput {
+  password: String!
+  token: String!
+}
+
+input RespondToReviewInput {
+  content: String!
+  reviewId: ID!
+}
+
+type Review {
+  canDelete: Boolean!
+  canEdit: Boolean!
+  content: String
+  createdAt: String!
+  helpfulVotes: Int!
+  helpfulnessRatio: Float!
+  id: ID!
+  images: [String!]!
+  isAnonymous: Boolean!
+  isVerifiedPurchase: Boolean!
+  moderatedAt: String
+  moderatedBy: ID
+  moderationReason: String
+  moderator: User
+  order: Order
+  orderId: ID
+  orderItem: OrderItem
+  orderItemId: ID
+  product: Product!
+  productId: ID!
+  rating: Int!
+  reports: [ReviewReport!]!
+  responses: [ReviewResponse!]!
+  status: ReviewStatus!
+  title: String
+  totalVotes: Int!
+  updatedAt: String!
+  user: User!
+  userId: ID!
+  userVote: VoteType
+  votes: [ReviewVote!]!
+}
+
+type ReviewEdge {
+  cursor: String!
+  node: Review!
+}
+
+input ReviewFilter {
+  dateFrom: String
+  dateTo: String
+  hasImages: Boolean
+  isVerifiedPurchase: Boolean
+  productId: ID
+  rating: Int
+  status: ReviewStatus
+  userId: ID
+}
+
+type ReviewReport {
+  createdAt: String!
+  description: String
+  id: ID!
+  reason: ReportReason!
+  reporter: User!
+  reporterId: ID!
+  resolution: String
+  reviewId: ID!
+  reviewedAt: String
+  reviewedBy: ID
+  reviewer: User
+  status: String!
+}
+
+type ReviewResponse {
+  content: String!
+  createdAt: String!
+  id: ID!
+  reviewId: ID!
+  updatedAt: String!
+  user: User!
+  userId: ID!
+}
+
+type ReviewStats {
+  averageRating: Float!
+  pendingReviews: Int!
+  ratingDistribution: [RatingCount!]!
+  reportedReviews: Int!
+  totalReviews: Int!
+  verifiedPurchaseReviews: Int!
+}
+
+enum ReviewStatus {
+  APPROVED
+  HIDDEN
+  PENDING
+  REJECTED
+}
+
+type ReviewVote {
+  createdAt: String!
+  id: ID!
+  reviewId: ID!
+  user: User!
+  userId: ID!
+  voteType: VoteType!
+}
+
+type ReviewsConnection {
+  edges: [ReviewEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type Session {
+  expiresAt: DateTime!
+  id: String!
+  ipAddress: String
+  token: String!
+  userAgent: String
+  userId: String!
+}
+
+enum SocialProvider {
+  APPLE
+  FACEBOOK
+  GITHUB
+  GOOGLE
+}
+
+input SocialSignInInput {
+  code: String!
+  provider: SocialProvider!
+  redirectUri: String
+}
+
+type Subscription {
+  _empty: String
+  notificationReceived(userId: ID!): Notification!
+  notificationUpdated(userId: ID!): Notification!
+}
+
+type TrackingEvent {
+  description: String!
+  details: String
+  location: String
+  status: String!
+  timestamp: String!
+}
+
+input TrackingEventInput {
+  description: String!
+  details: String
+  location: String
+  status: String!
+  timestamp: String!
+}
+
+enum TransactionType {
+  BONUS
+  COMMISSION
+  DEPOSIT
+  PAYMENT
+  REFUND
+  WITHDRAWAL
+}
+
+type TwoFactorSetup {
+  backupCodes: [String!]!
+  qrCode: String!
+  secret: String!
+}
+
+input UpdateCartItemInput {
+  quantity: Int!
+}
+
+input UpdateCategoryInput {
+  description: String
+  imageUrl: String
+  isActive: Boolean
+  name: String
+  parentId: ID
+  slug: String
+  sortOrder: Int
+}
+
+input UpdateDeliveryOptionInput {
+  basePrice: Float
+  description: String
+  estimatedDays: Int
+  freeShippingThreshold: Float
+  isActive: Boolean
+  maxDays: Int
+  maxDimensions: String
+  maxWeight: Float
+  method: DeliveryMethod
+  name: String
+  pricePerKg: Float
+  sortOrder: Int
+}
+
+input UpdateDeliveryProviderInput {
+  apiBaseUrl: String
+  apiKey: String
+  contactEmail: String
+  contactPhone: String
+  coverageAreas: [String!]
+  description: String
+  isActive: Boolean
+  logo: String
+  name: String
+  status: DeliveryProviderStatus
+  supportsCOD: Boolean
+  supportsTracking: Boolean
+  trackingUrlPattern: String
+  website: String
+}
+
+input UpdateDeliveryZoneInput {
+  coordinates: String
+  isActive: Boolean
+  name: String
+  type: String
+  value: String
+}
+
+input UpdateNotificationPreferencesInput {
+  emailFrequency: String
+  emailNewsletter: Boolean
+  emailOrderUpdates: Boolean
+  emailPromotions: Boolean
+  emailReviews: Boolean
+  emailSecurity: Boolean
+  inAppOrderUpdates: Boolean
+  inAppPromotions: Boolean
+  inAppReviews: Boolean
+  inAppSecurity: Boolean
+  pushOrderUpdates: Boolean
+  pushPromotions: Boolean
+  pushReviews: Boolean
+  pushSecurity: Boolean
+  quietHoursEnd: String
+  quietHoursStart: String
+  smsOrderUpdates: Boolean
+  smsPromotions: Boolean
+  smsSecurity: Boolean
+  timezone: String
+}
+
+input UpdateOrderInput {
+  estimatedDelivery: String
+  internalNotes: String
+  notes: String
+  paymentStatus: PaymentStatus
+  shippingMethod: String
+  status: OrderStatus
+  trackingNumber: String
+}
+
+input UpdateProductInput {
+  allowReviews: Boolean
+  categoryId: ID
+  condition: ProductCondition
+  description: String
+  dimensions: String
+  images: [String!]
+  isDigital: Boolean
+  maxOrderQuantity: Int
+  minOrderQuantity: Int
+  originalPrice: Float
+  price: Float
+  shippingRequired: Boolean
+  shortDescription: String
+  sku: String
+  status: ProductStatus
+  stock: Int
+  tags: [String!]
+  title: String
+  weight: Float
+}
+
+input UpdateProductVariantInput {
+  image: String
+  isActive: Boolean
+  name: String
+  price: Float
+  sku: String
+  sortOrder: Int
+  stock: Int
+  value: String
+}
+
+input UpdateReviewInput {
+  content: String
+  images: [String!]
+  isAnonymous: Boolean
+  rating: Int
+  title: String
+}
+
+input UpdateTemplateInput {
+  actionTextTemplate: String
+  actionUrlTemplate: String
+  emailHtml: String
+  emailSubject: String
+  isActive: Boolean
+  messageTemplate: String
+  titleTemplate: String
+  variables: JSON
+}
+
+input UpdateTrackingInput {
+  actualDelivery: String
+  driverName: String
+  driverPhone: String
+  estimatedDelivery: String
+  notes: String
+  pickupDate: String
+  status: DeliveryStatus
+}
+
+input UpdateUserInput {
+  avatar: String
+  firstName: String
+  lastName: String
+  phone: String
+}
+
+input UpdateUserProfileInput {
+  address: String
+  bio: String
+  city: String
+  country: String
+  language: String
+  marketingEnabled: Boolean
+  notificationsEnabled: Boolean
+  timezone: String
+  zipCode: String
+}
+
+type User {
+  avatar: String
+  createdAt: DateTime!
+  email: String!
+  emailVerified: Boolean!
+  firstName: String!
+  id: ID!
+  lastLoginAt: DateTime
+  lastName: String!
+  phone: String
+  phoneVerified: Boolean!
+  profile: UserProfile
+  status: UserStatus!
+  updatedAt: DateTime!
+  userType: UserRole!
+  wallet: Wallet
+}
+
+type UserConnection {
+  edges: [UserEdge!]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+type UserEdge {
+  cursor: String!
+  node: User!
+}
+
+type UserProfile {
+  address: String
+  bio: String
+  city: String
+  country: String
+  createdAt: DateTime!
+  id: ID!
+  language: String!
+  marketingEnabled: Boolean!
+  notificationsEnabled: Boolean!
+  timezone: String
+  updatedAt: DateTime!
+  user: User!
+  userId: ID!
+  zipCode: String
+}
+
+enum UserRole {
+  ADMIN
+  BUYER
+  SELLER
+}
+
+type UserStats {
+  activeUsers: Int!
+  recentRegistrations: [User!]!
+  suspendedUsers: Int!
+  totalUsers: Int!
+  usersByType: [UserTypeCount!]!
+}
+
+enum UserStatus {
+  ACTIVE
+  PENDING_VERIFICATION
+  SUSPENDED
+}
+
+type UserTypeCount {
+  count: Int!
+  type: UserRole!
+}
+
+input UsersFilterInput {
+  createdAfter: DateTime
+  createdBefore: DateTime
+  emailVerified: Boolean
+  search: String
+  status: UserStatus
+  userType: UserRole
+}
+
+input VerifyEmailInput {
+  token: String!
+}
+
+input VoteOnReviewInput {
+  reviewId: ID!
+  voteType: VoteType!
+}
+
+enum VoteType {
+  HELPFUL
+  NOT_HELPFUL
+}
+
+type Wallet {
+  balance: Float!
+  createdAt: DateTime!
+  frozenBalance: Float!
+  id: ID!
+  totalEarnings: Float!
+  totalSpent: Float!
+  transactions: [WalletTransaction!]!
+  updatedAt: DateTime!
+  user: User!
+  userId: ID!
+}
+
+type WalletTransaction {
+  amount: Float!
+  balanceAfter: Float!
+  balanceBefore: Float!
+  createdAt: String!
+  currency: String!
+  description: String
+  id: ID!
+  order: Order
+  orderId: ID
+  reference: String
+  status: String!
+  type: TransactionType!
+  walletId: ID!
+}

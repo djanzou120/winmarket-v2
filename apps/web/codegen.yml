@@ -1,0 +1,25 @@
+overwrite: true
+schema: "http://localhost:4000/graphql"
+documents: "src/graphql/{queries,mutations,fragments}/*.graphql"
+generates:
+  src/graphql/generated.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+      - "typescript-react-apollo"
+    config:
+      withHooks: true
+      withHOC: false
+      withComponent: false
+      skipTypename: false
+      avoidOptionals: false
+      scalars:
+        DateTime: string
+        JSON: any
+      declarationKind: 'interface'
+      maybeValue: T | null | undefined
+      inputMaybeValue: T | null | undefined
+
+  src/graphql/schema.graphql:
+    plugins:
+      - "schema-ast"

@@ -1,0 +1,416 @@
+query MyOrders($pagination: PaginationInput) {
+  myOrders(pagination: $pagination) {
+    edges {
+      node {
+        id
+        orderNumber
+        status
+        paymentStatus
+        paymentMethod
+        subtotal
+        taxAmount
+        shippingAmount
+        discountAmount
+        totalAmount
+        currency
+        itemCount
+        seller {
+          id
+          firstName
+          lastName
+          avatar
+        }
+        items {
+          id
+          productName
+          productImage
+          productSku
+          unitPrice
+          quantity
+          totalPrice
+          variantName
+          variantValue
+        }
+        shippingAddress {
+          street
+          city
+          state
+          postalCode
+          country
+          phone
+          name
+        }
+        trackingNumber
+        estimatedDelivery
+        actualDelivery
+        createdAt
+        updatedAt
+        confirmedAt
+        shippedAt
+        deliveredAt
+      }
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    totalCount
+  }
+}
+
+query MyPurchases($pagination: PaginationInput) {
+  myPurchases(pagination: $pagination) {
+    edges {
+      node {
+        id
+        orderNumber
+        status
+        paymentStatus
+        totalAmount
+        currency
+        itemCount
+        seller {
+          id
+          firstName
+          lastName
+          avatar
+        }
+        items {
+          id
+          productName
+          productImage
+          quantity
+          unitPrice
+          totalPrice
+        }
+        createdAt
+        deliveredAt
+      }
+    }
+    totalCount
+  }
+}
+
+query MySales($pagination: PaginationInput) {
+  mySales(pagination: $pagination) {
+    edges {
+      node {
+        id
+        orderNumber
+        status
+        paymentStatus
+        totalAmount
+        currency
+        itemCount
+        buyer {
+          id
+          firstName
+          lastName
+          avatar
+        }
+        items {
+          id
+          productName
+          productImage
+          quantity
+          unitPrice
+          totalPrice
+        }
+        shippingAddress {
+          street
+          city
+          state
+          postalCode
+          country
+          phone
+          name
+        }
+        createdAt
+        confirmedAt
+        shippedAt
+      }
+    }
+    totalCount
+  }
+}
+
+query Order($id: ID!) {
+  order(id: $id) {
+    id
+    orderNumber
+    status
+    paymentStatus
+    paymentMethod
+    subtotal
+    taxAmount
+    shippingAmount
+    discountAmount
+    totalAmount
+    currency
+    buyer {
+      id
+      firstName
+      lastName
+      email
+      phone
+      avatar
+    }
+    seller {
+      id
+      firstName
+      lastName
+      email
+      phone
+      avatar
+    }
+    items {
+      id
+      productId
+      productVariantId
+      product {
+        id
+        title
+        slug
+        images
+      }
+      productVariant {
+        id
+        name
+        value
+      }
+      productName
+      productImage
+      productSku
+      unitPrice
+      quantity
+      totalPrice
+      variantName
+      variantValue
+    }
+    shippingAddress {
+      street
+      city
+      state
+      postalCode
+      country
+      phone
+      name
+    }
+    billingAddress {
+      street
+      city
+      state
+      postalCode
+      country
+      phone
+      name
+    }
+    shippingMethod
+    trackingNumber
+    estimatedDelivery
+    actualDelivery
+    notes
+    cancelReason
+    refundReason
+    createdAt
+    updatedAt
+    confirmedAt
+    shippedAt
+    deliveredAt
+    cancelledAt
+  }
+}
+
+query MyCart {
+  myCart {
+    items {
+      id
+      productId
+      productVariantId
+      product {
+        id
+        title
+        slug
+        price
+        originalPrice
+        stock
+        images
+        isDigital
+        shippingRequired
+        seller {
+          id
+          firstName
+          lastName
+        }
+        category {
+          id
+          name
+        }
+      }
+      productVariant {
+        id
+        name
+        value
+        price
+        stock
+        image
+      }
+      quantity
+      unitPrice
+      totalPrice
+      addedAt
+      updatedAt
+    }
+    itemCount
+    subtotal
+    currency
+    updatedAt
+  }
+}
+
+query MyTransactions($pagination: PaginationInput) {
+  myTransactions(pagination: $pagination) {
+    id
+    type
+    amount
+    currency
+    balanceBefore
+    balanceAfter
+    description
+    reference
+    status
+    order {
+      id
+      orderNumber
+    }
+    createdAt
+  }
+}
+
+mutation CreateOrder($input: CreateOrderInput!) {
+  createOrder(input: $input) {
+    id
+    orderNumber
+    status
+    paymentStatus
+    totalAmount
+    currency
+    seller {
+      id
+      firstName
+      lastName
+    }
+    items {
+      id
+      productName
+      quantity
+      unitPrice
+      totalPrice
+    }
+    createdAt
+  }
+}
+
+mutation UpdateOrder($id: ID!, $input: UpdateOrderInput!) {
+  updateOrder(id: $id, input: $input) {
+    id
+    orderNumber
+    status
+    paymentStatus
+    trackingNumber
+    estimatedDelivery
+    updatedAt
+  }
+}
+
+mutation CancelOrder($id: ID!, $reason: String!) {
+  cancelOrder(id: $id, reason: $reason) {
+    id
+    status
+    cancelReason
+    cancelledAt
+  }
+}
+
+mutation ConfirmOrder($id: ID!) {
+  confirmOrder(id: $id) {
+    id
+    status
+    paymentStatus
+    confirmedAt
+  }
+}
+
+mutation ShipOrder($id: ID!, $trackingNumber: String, $estimatedDelivery: String) {
+  shipOrder(id: $id, trackingNumber: $trackingNumber, estimatedDelivery: $estimatedDelivery) {
+    id
+    status
+    trackingNumber
+    estimatedDelivery
+    shippedAt
+  }
+}
+
+mutation DeliverOrder($id: ID!) {
+  deliverOrder(id: $id) {
+    id
+    status
+    actualDelivery
+    deliveredAt
+  }
+}
+
+mutation AddToCart($input: AddToCartInput!) {
+  addToCart(input: $input) {
+    id
+    productId
+    productVariantId
+    quantity
+    unitPrice
+    totalPrice
+    product {
+      id
+      title
+      images
+      stock
+    }
+    productVariant {
+      id
+      name
+      value
+      stock
+    }
+    addedAt
+  }
+}
+
+mutation UpdateCartItem($id: ID!, $input: UpdateCartItemInput!) {
+  updateCartItem(id: $id, input: $input) {
+    id
+    quantity
+    totalPrice
+    updatedAt
+  }
+}
+
+mutation RemoveFromCart($id: ID!) {
+  removeFromCart(id: $id)
+}
+
+mutation ClearCart {
+  clearCart
+}
+
+mutation BuyNow($input: CreateOrderInput!) {
+  buyNow(input: $input) {
+    id
+    orderNumber
+    status
+    paymentStatus
+    totalAmount
+    currency
+    createdAt
+  }
+}

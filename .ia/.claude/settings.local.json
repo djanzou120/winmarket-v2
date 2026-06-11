@@ -17,7 +17,9 @@
       "Bash(grep -v '^$')",
       "Bash(docker exec -it winmarket-postgres psql -d postgres)",
       "Bash(make status)",
-      "Bash(make test-all)"
+      "Bash(make test-all)",
+      "Bash(npm run graphql:generate)",
+      "Bash(bun run:*)"
     ],
     "deny": [],
     "ask": []

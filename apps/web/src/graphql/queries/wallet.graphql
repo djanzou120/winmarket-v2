@@ -1,0 +1,34 @@
+query MyWallet {
+  me {
+    wallet {
+      id
+      balance
+      frozenBalance
+      totalEarnings
+      totalSpent
+    }
+  }
+}
+
+query WalletTransactions($pagination: PaginationInput) {
+  myTransactions(pagination: $pagination) {
+    id
+    type
+    amount
+    currency
+    balanceBefore
+    balanceAfter
+    description
+    reference
+    status
+    order {
+      id
+      orderNumber
+      items {
+        productName
+        quantity
+      }
+    }
+    createdAt
+  }
+}

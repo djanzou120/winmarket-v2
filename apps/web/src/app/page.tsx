@@ -6,12 +6,16 @@ import { Footer } from '@/components/layout/footer';
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <div className="min-h-screen">
       <Navbar />
-      <Hero />
-      <Categories />
-      <FeaturedProducts />
+
+      <main id="main-content" role="main" className="focus:outline-none" tabIndex={-1}>
+        <Hero />
+        <Categories />
+        <FeaturedProducts />
+      </main>
+
       <Footer />
-    </main>
+    </div>
   );
 }

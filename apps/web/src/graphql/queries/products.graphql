@@ -1,0 +1,354 @@
+query Products($filter: ProductFilter, $pagination: PaginationInput) {
+  products(filter: $filter, pagination: $pagination) {
+    edges {
+      node {
+        id
+        title
+        slug
+        shortDescription
+        price
+        originalPrice
+        condition
+        status
+        stock
+        images
+        isDigital
+        shippingRequired
+        averageRating
+        reviewCount
+        soldCount
+        favoriteCount
+        viewCount
+        seller {
+          id
+          firstName
+          lastName
+          avatar
+        }
+        category {
+          id
+          name
+          slug
+        }
+        createdAt
+        publishedAt
+      }
+      cursor
+    }
+    pageInfo {
+      hasNextPage
+      hasPreviousPage
+      startCursor
+      endCursor
+    }
+    totalCount
+  }
+}
+
+query Product($id: ID!) {
+  product(id: $id) {
+    id
+    title
+    slug
+    description
+    shortDescription
+    price
+    originalPrice
+    condition
+    status
+    stock
+    minOrderQuantity
+    maxOrderQuantity
+    weight
+    dimensions
+    sku
+    tags
+    images
+    isDigital
+    shippingRequired
+    allowReviews
+    averageRating
+    reviewCount
+    soldCount
+    favoriteCount
+    viewCount
+    seller {
+      id
+      firstName
+      lastName
+      avatar
+      profile {
+        bio
+        address
+        city
+        country
+      }
+    }
+    category {
+      id
+      name
+      slug
+      parent {
+        id
+        name
+        slug
+      }
+    }
+    variants {
+      id
+      name
+      value
+      price
+      stock
+      sku
+      image
+      isActive
+    }
+    createdAt
+    updatedAt
+    publishedAt
+  }
+}
+
+query ProductBySlug($slug: String!) {
+  productBySlug(slug: $slug) {
+    id
+    title
+    slug
+    description
+    shortDescription
+    price
+    originalPrice
+    condition
+    status
+    stock
+    minOrderQuantity
+    maxOrderQuantity
+    weight
+    dimensions
+    sku
+    tags
+    images
+    isDigital
+    shippingRequired
+    allowReviews
+    averageRating
+    reviewCount
+    soldCount
+    favoriteCount
+    viewCount
+    seller {
+      id
+      firstName
+      lastName
+      avatar
+      profile {
+        bio
+        address
+        city
+        country
+      }
+    }
+    category {
+      id
+      name
+      slug
+      parent {
+        id
+        name
+        slug
+      }
+    }
+    variants {
+      id
+      name
+      value
+      price
+      stock
+      sku
+      image
+      isActive
+    }
+    createdAt
+    updatedAt
+    publishedAt
+  }
+}
+
+query Categories($filter: CategoryFilter, $pagination: PaginationInput) {
+  categories(filter: $filter, pagination: $pagination) {
+    edges {
+      node {
+        id
+        name
+        slug
+        description
+        imageUrl
+        isActive
+        productCount
+        parent {
+          id
+          name
+          slug
+        }
+        children {
+          id
+          name
+          slug
+          productCount
+        }
+      }
+    }
+    totalCount
+  }
+}
+
+query FeaturedProducts($limit: Int) {
+  featuredProducts(limit: $limit) {
+    id
+    title
+    slug
+    shortDescription
+    price
+    originalPrice
+    images
+    averageRating
+    reviewCount
+    seller {
+      id
+      firstName
+      lastName
+    }
+    category {
+      id
+      name
+    }
+  }
+}
+
+query PopularProducts($limit: Int) {
+  popularProducts(limit: $limit) {
+    id
+    title
+    slug
+    shortDescription
+    price
+    originalPrice
+    images
+    averageRating
+    reviewCount
+    soldCount
+    seller {
+      id
+      firstName
+      lastName
+    }
+    category {
+      id
+      name
+    }
+  }
+}
+
+query SearchProducts($query: String!, $limit: Int) {
+  searchProducts(query: $query, limit: $limit) {
+    id
+    title
+    slug
+    shortDescription
+    price
+    originalPrice
+    images
+    averageRating
+    reviewCount
+    seller {
+      id
+      firstName
+      lastName
+    }
+    category {
+      id
+      name
+    }
+  }
+}
+
+query RelatedProducts($productId: ID!, $limit: Int) {
+  relatedProducts(productId: $productId, limit: $limit) {
+    id
+    title
+    slug
+    shortDescription
+    price
+    originalPrice
+    images
+    averageRating
+    reviewCount
+    seller {
+      id
+      firstName
+      lastName
+    }
+    category {
+      id
+      name
+    }
+  }
+}
+
+mutation CreateProduct($input: CreateProductInput!) {
+  createProduct(input: $input) {
+    id
+    title
+    slug
+    status
+    price
+    stock
+    images
+  }
+}
+
+mutation UpdateProduct($id: ID!, $input: UpdateProductInput!) {
+  updateProduct(id: $id, input: $input) {
+    id
+    title
+    slug
+    status
+    price
+    stock
+    images
+  }
+}
+
+mutation DeleteProduct($id: ID!) {
+  deleteProduct(id: $id)
+}
+
+mutation PublishProduct($id: ID!) {
+  publishProduct(id: $id) {
+    id
+    status
+    publishedAt
+  }
+}
+
+mutation UnpublishProduct($id: ID!) {
+  unpublishProduct(id: $id) {
+    id
+    status
+  }
+}
+
+mutation IncrementProductView($id: ID!) {
+  incrementProductView(id: $id) {
+    id
+    viewCount
+  }
+}
+
+mutation ToggleProductFavorite($id: ID!) {
+  toggleProductFavorite(id: $id) {
+    id
+    favoriteCount
+  }
+}
